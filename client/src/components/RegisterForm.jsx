@@ -1,4 +1,5 @@
 // Form for registration
+import Button from './Button';
 
 function RegisterForm (props) {
 
@@ -23,7 +24,8 @@ function RegisterForm (props) {
       <input className='password' type='password' placeholder='Password' />
       <input className='password' type='password' placeholder='Confirm Password' />
 
-      <button type='submit'>Register</button>
+      {/* <button type='submit'>Register</button> */}
+      <Button register>Register</Button>
 
     </form>
   )

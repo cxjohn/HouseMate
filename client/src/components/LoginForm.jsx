@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Button from './Button';
 
 function LoginForm (props) {
 
@@ -31,7 +32,10 @@ function LoginForm (props) {
     // value={state.password}
     // onChange={handleChange} 
     />
-    <button type='submit'>Login</button>
+    {/* <button type='submit'>Login</button> */}
+    {/* on clicking login, we want to receive email and password */}
+    {/* and the do something with it */}
+    <Button login>Login</Button>
     </form>
 </div>
   )

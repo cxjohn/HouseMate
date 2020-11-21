@@ -11,23 +11,29 @@ import RegisterForm from './components/RegisterForm';
 
 function App() {
 
-  let [loginForm, setLoginForm] = useState(null); 
+  let [loginForm, setLoginForm] = useState(null);
 
-  const displayForm = () => {
+  // on clicking register button we want to display register form
+  // on clicking login button we want to display login form
+  const displayForm = (event) => {
     console.log("clicked")
-    setLoginForm("anything")
-    // return (
-        {/* <LoginForm/> */}
-    // )
+    // check if event.target contains Login text
+    if (event.target.innerHTML === 'Login')
+      setLoginForm("login")
+    else if (event.target.innerHTML === 'Register')
+      setLoginForm("register")
+    // check if event.target contains Register text
   };
 
   const display = () => {
-    if (loginForm) {
+    if (loginForm === 'login') {
       return <LoginForm />
+    } else if (loginForm === 'register') {
+      return <RegisterForm />
     } else {
       return <>
-              <AuthBar login onClick={() => displayForm()}>Login</AuthBar>
-              <AuthBar register onClick={displayForm}>Register</AuthBar>
+              <AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
+              <AuthBar register onClick={(event) => displayForm(event)}>Register</AuthBar>
              </>
     }
     
@@ -35,7 +41,7 @@ function App() {
 
 
   return (
-    <div>
+    <>
     <header>
       <h1>HouseMate</h1>
     </header>
@@ -49,7 +55,7 @@ function App() {
     </main>
     </body>
 
-    </div>
+    </>
   )
 
 };
