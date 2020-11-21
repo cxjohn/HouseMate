@@ -1,15 +1,27 @@
-button {
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
 
-  border-radius: 2px;
-  background-color: #E97272;
-  color: white;
+
+  .button {
+    border-radius: 3px;
+    color: #ffffff;
+    width: 75px;
+  }
   
   .button_login {
     background-color: #E97272;
   }
 
+  // .button .button_register
   .button_register {
-    background-color: #A17DED;
+    background-color: #A17DED
+  }
+
+  .button_back {
+    background-color: #93C193
   }
   
 }

@@ -11,25 +11,28 @@ import RegisterForm from './components/RegisterForm';
 
 function App() {
 
-  let [loginForm, setLoginForm] = useState(null);
+  let [form, setForm] = useState(null);
 
   // on clicking register button we want to display register form
   // on clicking login button we want to display login form
   const displayForm = (event) => {
-    console.log("clicked")
+    // console.log("clicked")
     // check if event.target contains Login text
     if (event.target.innerHTML === 'Login')
-      setLoginForm("login")
+      setForm("login")
     else if (event.target.innerHTML === 'Register')
-      setLoginForm("register")
+      setForm("register")
     // check if event.target contains Register text
+    else if (event.target.innerHTML === 'Back') {
+      setForm(null)
+    }
   };
 
   const display = () => {
-    if (loginForm === 'login') {
-      return <LoginForm />
-    } else if (loginForm === 'register') {
-      return <RegisterForm />
+    if (form === 'login') {
+      return <LoginForm displayForm={displayForm}/>
+    } else if (form === 'register') {
+      return <RegisterForm displayForm={displayForm}/>
     } else {
       return <>
               <AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>

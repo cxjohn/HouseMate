@@ -17,7 +17,7 @@ function RegisterForm (props) {
     // <div></div>
     // <h3>Register Form</h3>
     
-    <form>
+    <form onSubmit={(event) => event.target.preventDefault}>
       <input className='firstName' placeholder='First Name' />
       <input className='lastName' placeholder='Last Name' />
       <input className='email' type='email' placeholder='Email' />
@@ -26,6 +26,7 @@ function RegisterForm (props) {
 
       {/* <button type='submit'>Register</button> */}
       <Button register>Register</Button>
+      <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
 
     </form>
   )
