@@ -1,0 +1,17 @@
+.auth_bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: white;
+
+  
+  .auth_bar_login {
+    background-color: #E97272
+  }
+
+  .auth_bar_register {
+    background-color: #A17DED
+  }
+}
+

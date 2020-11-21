@@ -1,37 +1,63 @@
 import { useState, useEffect } from 'react'
 import './App.css';
-import Message from './components/Message'
+// import Message from './component/Message'
+import AuthBar from './components/AuthBar';
+import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
 // hardcoded data
 // const msg = "Hey Chris!";
 // const anothermsg ="Hey Sean!";
 
 function App() {
-  let [msg, setMsg] = useState("Hey Chris!");
-  let [count, setCount] = useState(0); // initialize count = 0
 
-  useEffect(() => {
-    setCount(prev => prev + 1)
-    console.log("running effect")
-  }, [msg]); // has dependency on state of msg
-  
-  function changeMessage() {
-    if (count % 2 !== 0) {
-      setMsg("Hey Sean!") 
-      // setCount(prev => prev + 1
-    } else { 
-      setMsg("Hey Chris!") 
-      // setCount(prev => prev + 1)
-    }
+  let [loginForm, setLoginForm] = useState(null); 
 
+  const displayForm = () => {
+    console.log("clicked")
+    setLoginForm("anything")
+    // return (
+        {/* <LoginForm/> */}
+    // )
   };
+
+  const display = () => {
+    if (loginForm) {
+      return <LoginForm />
+    } else {
+      return <>
+              <AuthBar login onClick={() => displayForm()}>Login</AuthBar>
+              <AuthBar register onClick={displayForm}>Register</AuthBar>
+             </>
+    }
+    
+  }
+
 
   return (
     <div>
-    <h1>HouseMate</h1>
-    <Message text1={msg} sean={changeMessage}/>
+    <header>
+      <h1>HouseMate</h1>
+    </header>
+    <body>
+    
+    <main>
+      {/* {loginForm && <LoginForm /> } */}
+      {/* <AuthBar login onClick={() => displayForm()}>Login</AuthBar> */}
+      {/* <AuthBar register onClick={displayForm}>Register</AuthBar> */}
+      {display()}
+    </main>
+    </body>
+
     </div>
-)
+  )
+
 };
 
 export default App;
+
+// let [count, setCount] = useState(0); // initialize count = 0
+// let [msg, setMsg] = useState("Hey Chris!");
+// {/* <Message text1={msg} sean={changeMessage}/> */}
+// {/*  */}
+
