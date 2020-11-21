@@ -3,28 +3,38 @@ import Button from './Button';
 
 function RegisterForm (props) {
 
-//   const handleSubmitClick = (e) => {
-//     e.preventDefault();
-//     if(state.password === state.confirmPassword) {
-//         sendDetailsToServer()    
-//     } else {
-//         props.showError('Passwords do not match');
-//     }
-// }
+  const handleSubmit= (event) => {
+    event.preventDefault();
+    // if(state.password === state.confirmPassword) {
+    //     sendDetailsToServer()    
+    // } else {
+    //     props.showError('Passwords do not match');
+    // }
+    userData = {
+      firstName,
+      lastName,
+      email,
+      password,
+      password_confirmation
+    }
+    props.register(userData)
+}
 
 
   return(
     // <div></div>
     // <h3>Register Form</h3>
     
-    <form onSubmit={(event) => event.target.preventDefault}>
+    <form onSubmit={handleSubmit}>
       <input className='firstName' placeholder='First Name' />
       <input className='lastName' placeholder='Last Name' />
       <input className='email' type='email' placeholder='Email' />
       <input className='password' type='password' placeholder='Password' />
       <input className='password' type='password' placeholder='Confirm Password' />
 
+  
       {/* <button type='submit'>Register</button> */}
+      {/* on click we want to send data to the server using axios call*/}
       <Button register>Register</Button>
       <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
 
