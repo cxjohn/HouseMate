@@ -8,8 +8,9 @@ import axios from 'axios';
 import useApplicationData from "../hooks/useApplicationData";
 import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
+import Status from "./Status"
 
-
+const SAVING = "SAVING";
 // hardcoded data
 // const msg = "Hey Chris!";
 // const anothermsg ="Hey Sean!";
@@ -27,6 +28,8 @@ function App() {
     // cancelInterview
   } = useApplicationData();
 
+  const { mode, transition, history } = useVisualMode();
+
   function displayForm (event) {
     // console.log("clicked")
     // check if event.target contains Login text
@@ -40,12 +43,17 @@ function App() {
     }
   };
 
+
   function display () {
     if (state.form === 'login') {
       return <LoginForm displayForm={displayForm} />
     } else if (state.form === 'register') {
-        return <RegisterForm displayForm={displayForm} register={register}/>
-    } else {
+        return <RegisterForm 
+          displayForm={displayForm}
+          // register={register}
+          onRegister={register}
+          />
+    } else if (state.form === "none") {
       return <>
               <AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
               <AuthBar register onClick={(event) => displayForm(event)}>Register</AuthBar>
@@ -54,12 +62,14 @@ function App() {
   };
 
   const register = (userData) => {
+    transition(SAVING)
     axios({
       method: 'POST',
-      url: '/api/users',
+      url: 'http://localhost:3000/api/users',
       // send user data required to register a new user in the db
       data: userData
-    }).then(() => {
+    }).then((data) => {
+      console.log("USER ADDED: ", data)
       // update state at the front end like we did for scheduler?
       // console.log('data: ', data[0])
       // setData(data)
@@ -84,7 +94,7 @@ function App() {
       {display()}
     </main>
     </body>
-
+    {mode === SAVING && <Status message={"Saving"}/>}
     </>
   )
   

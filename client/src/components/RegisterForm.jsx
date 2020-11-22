@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import Button from './Button';
 
+
 function RegisterForm (props) {
   // const [firstName, setFirstName] = useState(props.name || "")
   const [formState, setFormState] = useState({
@@ -15,14 +16,33 @@ function RegisterForm (props) {
 
   const handleSubmit= (event) => {
     event.preventDefault();
-    console.log("first name: ", formState.firstName);
+    // console.log("first name: ", formState.firstName);
   // check if password matches password confirm and show error if not
   // ensure fields are not empty
   // send this data to the server
+  // show a loading bar/animation while waiting for server's response
   // recieve a JWT - log in user
-
-
 }
+
+function register () {
+
+  if (formState.password !== formState.passwordConfirmation) {
+  // show errors on the page 
+    console.log("ERROR!")
+  } else {
+    const userData = {
+      first_name: formState.firstName,
+      last_name: formState.lastName,
+      email: formState.email,
+      password_digest: formState.password
+      //password_confirmation: formState.passwordConfirmation
+    }
+    console.log("user!" , userData);
+    
+    return props.onRegister(userData)
+  }
+}
+
 
 
   return(
@@ -71,7 +91,7 @@ function RegisterForm (props) {
   
       {/* <button type='submit'>Register</button> */}
       {/* on click we want to send data to the server using axios call*/}
-      <Button register>Register</Button>
+      <Button register onClick={register}>Register</Button>
       <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
 
     </form>
