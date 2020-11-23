@@ -3,7 +3,6 @@ import './Footer.scss';
 function Footer() {
   return (
     <span>FOOTER</span>
-  
   )
 }
 

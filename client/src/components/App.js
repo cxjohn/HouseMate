@@ -10,6 +10,7 @@ import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import Status from "./Status"
 import Header from "./Dashboard/Header"
+import Footer from "./Dashboard/Footer"
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";
@@ -93,7 +94,7 @@ function App() {
       // url: 'http://localhost:3000/api/users',
       url: '/api/users',
       // send user data required to register a new user in the db
-      data: userData
+      data: {user: userData}
     }).then(({data}) => {
       console.log("USER ADDED: ", data)
       // store token
@@ -146,7 +147,7 @@ function App() {
           />}
       {mode === LOGIN && <LoginForm displayForm={displayForm} onLogin={login}/>}
       {mode === SAVING && <Status message={"Saving"}/>}
-      {mode === DASHBOARD && <Header />}
+      {mode === DASHBOARD && <><Header /><Footer /></>}
 
       {/* {display()} */}
     </main>

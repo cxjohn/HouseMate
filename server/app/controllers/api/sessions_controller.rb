@@ -3,8 +3,7 @@ class Api::SessionsController < ApplicationController
 
   def login
     user  = User.find_by(email: params[:email])
-    # if user && user.authenticate(params[:password_digest])
-    if user && user.password_digest == params[:password_digest]
+    if user && user.authenticate(params[:password_digest])
       payload = {user_id: user.id}
       token = encode_token(payload)
       render json: {user: user, jwt: token, success: "Welcome back #{user.first_name}"}

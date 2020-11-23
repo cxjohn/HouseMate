@@ -35,8 +35,8 @@ function register () {
       last_name: formState.lastName,
       email: formState.email,
       // password_digest: formState.password
-      password: formState.password
-      // password_confirmation: formState.passwordConfirmation
+      password: formState.password,
+      password_confirmation: formState.passwordConfirmation
     }
     // console.log("user!" , userData);
     
