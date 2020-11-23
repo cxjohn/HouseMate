@@ -28,25 +28,23 @@ $col-sean-lavender-darker: darken($col-sean-lavender, 100%);
     padding: 0.907rem 1rem;
 
     i.fa {
-      opacity: 0.8;
+      // opacity: 0.8;
       margin-right: rem-calc(10);
       font-size: rem-calc(24);
       vertical-align: middle;
     }
 
-    &:focus,
-    &:active {
-      color: $col-sean-lavender-darker;
-    }
+    // &:focus,
+    // &:active {
+    //   color: $col-sean-lavender-darker;
+    // }
   }
 
-  // .footer-text {
-  //   position: relative;
-  //   top: 2px;
-  //   font-weight: bold;
-  //   font-size: rem-calc(14);
-  //   color: $col-sean-lavender-darker;
-  // }
+//   .footer-text {
+//     position: relative;
+//     top: 2px;
+//     font-weight: bold;
+//     font-size: rem-calc(14);
+//     color: $col-sean-lavender-darker;
+//   }
 }
-
-

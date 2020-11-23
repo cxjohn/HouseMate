@@ -7,7 +7,7 @@ function Footer(props) {
         <i class="fa fa-home"></i>
       </a>
       <a href="#" class="footer-link">
-      <i class="fa fa-plus-square"></i>
+        <i class="fa fa-plus-square"></i>
       </a>
       <a href="#" class="footer-link">
         <i class="fa fa-sign-out"></i> 
