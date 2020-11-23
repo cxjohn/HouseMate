@@ -1,3 +1,5 @@
+@import '../sass/_variables';
+
 form {
   display: flex;
   flex-direction: column;
@@ -12,12 +14,12 @@ form {
   }
   
   .button_login {
-    background-color: #E97272;
+    background-color: $col-sean-red;
   }
 
   // .button .button_register
   .button_register {
-    background-color: #A17DED
+    background-color: $col-sean-purple;
   }
 
   .button_back {

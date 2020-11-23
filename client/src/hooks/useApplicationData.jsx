@@ -19,7 +19,7 @@ function useApplicationData() {
   })
 
   useEffect(() => {
-
+    
     axios({
       method: 'GET',
       url: '/api/users',

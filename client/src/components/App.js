@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react'
+import { Fragment, useEffect } from 'react';
 import './App.scss';
 // import Message from './component/Message'
 import AuthBar from './AuthBar';
@@ -9,59 +9,81 @@ import useApplicationData from "../hooks/useApplicationData";
 import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import Status from "./Status"
+import Header from "./Dashboard/Header"
 
+const HOME = "HOME";
+const LOGIN = "LOGIN";
+const REGISTER = "REGISTER";
 const SAVING = "SAVING";
+const DASHBOARD = "DASHBOARD";
 // hardcoded data
-// const msg = "Hey Chris!";
-// const anothermsg ="Hey Sean!";
 
 function App() {
 
   // let [form, setForm] = useState(null);
   // let [data, setData] = useState([])
-
+  
   const {
     state, 
     setState
-    // setDay,
-    // bookInterview,
-    // cancelInterview
   } = useApplicationData();
+  
+  
+  const { mode, transition, history } = useVisualMode(
+    // localStorage.getItem("token") ? DASHBOARD : HOME
+    );
 
-  const { mode, transition, history } = useVisualMode();
-
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      transition(DASHBOARD);
+    } else {
+      transition(HOME);
+    }
+  },[])
+  
   function displayForm (event) {
     // console.log("clicked")
     // check if event.target contains Login text
-    if (event.target.innerHTML === 'Login')
-      setState({ ...state, form: "login" })
-    else if (event.target.innerHTML === 'Register')
-      setState({ ...state, form: "register" })
-    // check if event.target contains Register text
-    else if (event.target.innerHTML === 'Back') {
-      setState({ ...state, form: "none" })
+    if (event.target.innerHTML === 'Login') {
+      // setState({ ...state, form: "login" })
+      transition(LOGIN)
+    } else if (event.target.innerHTML === 'Register') {
+      // setState({ ...state, form: "register" })
+      transition(REGISTER)
+      // check if event.target contains Register text
+    } else if (event.target.innerHTML === 'Back') {
+      // setState({ ...state, form: "none" })
+      transition(HOME)
     }
   };
-
-
+  
+  
   function display () {
-    if (state.form === 'login') {
-      return <LoginForm 
-        displayForm={displayForm}
-        onLogin={login}
-        />
-    } else if (state.form === 'register') {
-        return <RegisterForm 
-          displayForm={displayForm}
-          // register={register}
-          onRegister={register}
-          />
-    } else if (state.form === "none") {
-      return <>
-              <AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
-              <AuthBar register onClick={(event) => displayForm(event)}>Register</AuthBar>
-             </>
-    }
+    
+    // transition(HOME);
+    // if (state.form === 'login') {
+    // if (mode === LOGIN) {
+    //     return <LoginForm 
+    //     displayForm={displayForm}
+    //     onLogin={login}
+    //     />
+    // } else if (mode === REGISTER) {
+    //     return <RegisterForm 
+    //       displayForm={displayForm}
+    //       // register={register}
+    //       onRegister={register}
+    //       />
+    // } else if (mode === HOME) {
+    //   return <>
+    //           <AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
+    //           <AuthBar register onClick={(event) => displayForm(event)}>Register</AuthBar>
+    //          </>
+    // } else if (mode === SAVING) {
+    //   return <Status message={"Saving"}/>
+    // } else if (mode === DASHBOARD) {
+    //   return <Header />
+    // }  
+
   };
 
   const register = (userData) => {
@@ -84,7 +106,7 @@ function App() {
   }
 
   const login = (userData) => {
-    transition(SAVING)
+    transition(SAVING);
     axios({
       method: 'POST',
       url: 'http://localhost:3000/api/login',
@@ -97,6 +119,7 @@ function App() {
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
       // transition to user dashboard
+      transition(DASHBOARD);
 
       // update state at the front end like we did for scheduler?
     }).catch(error => console.log(error))
@@ -104,22 +127,33 @@ function App() {
 
 
   return (
-    <>
+    <Fragment>
+
     <header>
       <h1>HouseMate</h1>
       <h2>{state.data[0] && state.data[0].last_name}</h2>
     </header>
     <body>
-    
     <main>
-      {/* {loginForm && <LoginForm /> } */}
-      {/* <AuthBar login onClick={() => displayForm()}>Login</AuthBar> */}
-      {/* <AuthBar register onClick={displayForm}>Register</AuthBar> */}
-      {display()}
+      {mode === HOME && <><AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
+                <AuthBar register onClick={(event) => displayForm(event)}>
+                  Register
+                </AuthBar></>}
+      {mode === REGISTER && <RegisterForm 
+          displayForm={displayForm}
+          // register={register}
+          onRegister={register}
+          />}
+      {mode === LOGIN && <LoginForm displayForm={displayForm} onLogin={login}/>}
+      {mode === SAVING && <Status message={"Saving"}/>}
+      {mode === DASHBOARD && <Header />}
+
+      {/* {display()} */}
     </main>
     </body>
-    {mode === SAVING && <Status message={"Saving"}/>}
-    </>
+    {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
+
+    </Fragment>
   )
   
 };
