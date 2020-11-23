@@ -33,12 +33,14 @@ function LoginForm(props) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+      <h1>Login</h1><br/>
         <input
           className='email'
           type='email'
           placeholder='Email'
           value={formState.email}
           onChange={event => setFormState({ ...formState, email: event.target.value })}
+          autoFocus
           required
         />
         <input

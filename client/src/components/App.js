@@ -9,8 +9,11 @@ import useApplicationData from "../hooks/useApplicationData";
 import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import Status from "./Status"
+import Button from "./Button"
 import Header from "./Dashboard/Header"
 import Footer from "./Dashboard/Footer"
+import Summary from "./Dashboard/Summary"
+import Activity from "./Dashboard/Activity"
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";
@@ -52,7 +55,7 @@ function App() {
       // setState({ ...state, form: "register" })
       transition(REGISTER)
       // check if event.target contains Register text
-    } else if (event.target.innerHTML === 'Back') {
+    } else if (event.target.classList.contains("fa-angle-left")) {
       // setState({ ...state, form: "none" })
       transition(HOME)
     }
@@ -60,30 +63,6 @@ function App() {
   
   
   function display () {
-    
-    // transition(HOME);
-    // if (state.form === 'login') {
-    // if (mode === LOGIN) {
-    //     return <LoginForm 
-    //     displayForm={displayForm}
-    //     onLogin={login}
-    //     />
-    // } else if (mode === REGISTER) {
-    //     return <RegisterForm 
-    //       displayForm={displayForm}
-    //       // register={register}
-    //       onRegister={register}
-    //       />
-    // } else if (mode === HOME) {
-    //   return <>
-    //           <AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
-    //           <AuthBar register onClick={(event) => displayForm(event)}>Register</AuthBar>
-    //          </>
-    // } else if (mode === SAVING) {
-    //   return <Status message={"Saving"}/>
-    // } else if (mode === DASHBOARD) {
-    //   return <Header />
-    // }  
 
   };
 
@@ -130,13 +109,17 @@ function App() {
   return (
     <Fragment>
 
-    <header>
-      <h1>HouseMate</h1>
-      <h2>{state.data[0] && state.data[0].last_name}</h2>
+    <header className="header">
+      {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
+      {mode === DASHBOARD && <Header />}
+      {/* {mode === REGISTER && (
+        <div>
+          <Button back onClick={(event) => displayForm(event)}></Button>
+        </div>
+        )} */}
     </header>
-    <body>
     <main>
-      {mode === HOME && <><AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
+      {mode === HOME && <><h1>HouseMate</h1><AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
                 <AuthBar register onClick={(event) => displayForm(event)}>
                   Register
                 </AuthBar></>}
@@ -147,11 +130,13 @@ function App() {
           />}
       {mode === LOGIN && <LoginForm displayForm={displayForm} onLogin={login}/>}
       {mode === SAVING && <Status message={"Saving"}/>}
-      {mode === DASHBOARD && <><Header /><Footer /></>}
-
+      <section className="dashboard">
+        {mode === DASHBOARD && <Summary />}
+        {mode === DASHBOARD && <Activity />}
+      </section>
       {/* {display()} */}
+      {mode === DASHBOARD && <Footer />}
     </main>
-    </body>
     {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
 
     </Fragment>

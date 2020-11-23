@@ -9,6 +9,153 @@
 
 require('faker')
 
-3.times do
-  User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password_digest: Faker::Internet.password)
+10.times do
+  # User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password_digest: Faker::Internet.password)
+  User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email: Faker::Internet.email, password: "123", password_confirmation: "123")
 end
+
+3.times do
+  Group.create(name: Faker::Kpop.iii_groups)
+end
+
+group1 = Group.find_by! id: 1;
+group2 = Group.find_by! id: 2;
+group3 = Group.find_by! id: 3;
+
+Transaction.destroy_all
+
+group1.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 10,
+  user_id: 1
+})
+
+group1.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 30,
+  is_expense: false,
+  user_id: 2
+})
+
+group1.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 50,
+  user_id: 1
+})
+
+group1.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 40,
+  user_id: 3
+})
+
+group1.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 100,
+  user_id: 1
+})
+
+group2.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 40,
+  user_id: 1
+})
+
+group2.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 60,
+  is_expense: false,
+  user_id: 2
+})
+
+group2.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 560,
+  user_id: 1
+})
+
+group2.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 90,
+  user_id: 3
+})
+
+group2.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 145,
+  user_id: 1
+})
+
+group3.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 650,
+  user_id: 1
+})
+
+group3.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 23,
+  is_expense: false,
+  user_id: 2
+})
+
+group3.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 34,
+  is_expense: false,
+  user_id: 1
+})
+
+group3.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 98,
+  user_id: 3
+})
+
+group3.transactions.create!({
+  description: Faker::Lorem.sentence(word_count: 5),
+  amount: 200,
+  user_id: 1
+})
+
+Membership.destroy_all
+
+group1.memberships.create!({
+  user_id: 1
+})
+
+group1.memberships.create!({
+  user_id: 2
+})
+
+group1.memberships.create!({
+  user_id: 3
+})
+
+group1.memberships.create!({
+  user_id: 4
+})
+
+group2.memberships.create!({
+  user_id: 5
+})
+
+group2.memberships.create!({
+  user_id: 6
+})
+
+group2.memberships.create!({
+  user_id: 7
+})
+
+group3.memberships.create!({
+  user_id: 8
+})
+
+group3.memberships.create!({
+  user_id: 9
+})
+
+group3.memberships.create!({
+  user_id: 10
+})

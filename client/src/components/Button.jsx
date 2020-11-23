@@ -1,6 +1,8 @@
 import './Button.scss';
 import classnames from 'classnames';
 
+{/* <i class="fa fa-angle-left"></i> */}
+{/* <i class="fa fa-arrow-circle-o-right"></i> */}
 
 function Button(props) {
   const buttonClass = classnames(
@@ -10,16 +12,43 @@ function Button(props) {
       'button_register': props.register,
       'button_back': props.back
     }
- )
+  )
     
+  const icon = () => {
+    if (props.register || props.login) {
+      return (
+  
+        <i 
+          class="fa fa-arrow-circle-o-right form_icon"
+          onClick={props.onClick} 
+          >
+        </i>
+
+        )
+    } else if (props.back) {
+      return (
+        <i 
+          class="fa fa-angle-left form_icon"
+          onClick={props.onClick}
+        >
+        </i>
+        )
+    }
+
+  }
+
     return (
-      <button
-        className={buttonClass}
-        onClick={props.onClick}
-      >
-        {props.children}
-      </button>
+
+      icon()
     )
+      // if(props.register) 
+      
+      // <button
+      //   className={buttonClass}
+      //   onClick={props.onClick}
+      // >
+      //   {props.children}
+      // </button>
 };
 
 export default Button;

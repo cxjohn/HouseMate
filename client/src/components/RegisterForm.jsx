@@ -1,6 +1,7 @@
 // Form for registration
 import { useState } from 'react';
 import Button from './Button';
+import './RegisterForm.scss';
 
 
 function RegisterForm (props) {
@@ -51,20 +52,32 @@ function register () {
     // <h3>Register Form</h3>
     
     <form onSubmit={handleSubmit}>
-      <input 
+      <div>
+        <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
+        <h1>Sign up</h1>
+      </div>
+      <span class="input"></span>
+      <input
         className='firstName' 
-        placeholder='First Name' 
+        placeholder='First Name'
         value={formState.firstName}
         onChange={event => setFormState({...formState, firstName: event.target.value })}
         required
+        autoFocus
+        autocomplete="off"
+        // pattern="^\w+\s\w+$"
       />
+      <span class="input"></span>
       <input 
         className='lastName' 
         placeholder='Last Name'
         value={formState.lastName}
         onChange={event => setFormState({...formState, lastName: event.target.value })}
         required
+        autocomplete="off"
+        // pattern="^\w+\s\w+$"
       />
+      <span class="input"></span>
       <input 
         className='email'
         type='email'
@@ -73,32 +86,40 @@ function register () {
         onChange={event => setFormState({...formState, email: event.target.value })}
         required
       />
+      <span id="passwordMeter"></span>
       <input 
         className='password' 
         type='password' 
         placeholder='Password'
+        id='password'
         value={formState.password}
         onChange={event => setFormState({...formState, password: event.target.value })}
         required
       />
-      <input 
-        className='password' 
+      <span id="passwordMeter"></span>
+      <input
+        className='password'
         type='password' 
         placeholder='Confirm Password'
         value={formState.passwordConfirmation}
         onChange={event => setFormState({...formState, passwordConfirmation: event.target.value })}
         required
+        title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
       />
   
       {/* <button type='submit'>Register</button> */}
       {/* on click we want to send data to the server using axios call*/}
-      <Button register onClick={register}>Register</Button>
-      <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
+      {/* type="submit" value="Sign Up"  */}
+      {/* title="Submit form" class="icon-arrow-right" */}
+      <Button register onClick={register}>
+      
+      </Button>
 
-    </form>
+</form>
   )
-
+  
 };
 
+{/* <Button back onClick={(event) => props.displayForm(event)}>Back</Button> */}
 export default RegisterForm;
 
