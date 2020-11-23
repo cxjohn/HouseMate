@@ -26,26 +26,42 @@ function App() {
 
   // let [form, setForm] = useState(null);
   // let [data, setData] = useState([])
-  
+
   const {
-    state, 
+    state,
     setState
   } = useApplicationData();
-  
-  
+
+
   const { mode, transition, history } = useVisualMode(
     // localStorage.getItem("token") ? DASHBOARD : HOME
-    );
+  );
 
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      transition(DASHBOARD);
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios({
+        method: 'GET',
+        // url: 'http://localhost:3000/api/users',
+        url: 'http://localhost:3000/api/auto_login',
+        // send user data required to register a new user in the db
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(({ data }) => {
+        console.log("USER FOUND: ", data)
+        // store token
+        // localStorage.setItem("token", data.jwt)
+        // do anything with user data?
+        // transition to user dashboard
+        setState({ ...state, user: data })
+        // update state at the front end like we did for scheduler?
+        transition(DASHBOARD);
+      }).catch(error => console.log(error))
     } else {
       transition(HOME);
     }
-  },[])
-  
-  function displayForm (event) {
+  }, [])
+
+  function displayForm(event) {
     // console.log("clicked")
     // check if event.target contains Login text
     if (event.target.innerHTML === 'Login') {
@@ -60,9 +76,9 @@ function App() {
       transition(HOME)
     }
   };
-  
-  
-  function display () {
+
+
+  function display() {
 
   };
 
@@ -73,14 +89,14 @@ function App() {
       // url: 'http://localhost:3000/api/users',
       url: '/api/users',
       // send user data required to register a new user in the db
-      data: {user: userData}
-    }).then(({data}) => {
+      data: { user: userData }
+    }).then(({ data }) => {
       console.log("USER ADDED: ", data)
       // store token
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
       // transition to user dashboard
-
+      setState({ ...state, user: data.user })
       // update state at the front end like we did for scheduler?
     }).catch(error => console.log(error))
   }
@@ -93,11 +109,13 @@ function App() {
       //url: '/login',
       // send user data required to register a new user in the db
       data: userData
-    }).then(({data}) => {
+    }).then(({ data }) => {
       console.log("USER Logged In: ", data)
       // store token
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
+      setState({ ...state, user: data.user })
+
       // transition to user dashboard
       transition(DASHBOARD);
 
@@ -109,39 +127,40 @@ function App() {
   return (
     <Fragment>
 
-    <header className="header">
-      {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
-      {mode === DASHBOARD && <Header />}
-      {/* {mode === REGISTER && (
+      <header className="header">
+        {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
+        {mode === DASHBOARD && <Header />}
+        <h2>{state.user && state.user.first_name}</h2>
+        {/* {mode === REGISTER && (
         <div>
           <Button back onClick={(event) => displayForm(event)}></Button>
         </div>
         )} */}
-    </header>
-    <main>
-      {mode === HOME && <><h1>HouseMate</h1><AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
-                <AuthBar register onClick={(event) => displayForm(event)}>
-                  Register
+      </header>
+      <main>
+        {mode === HOME && <><h1>HouseMate</h1><AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
+          <AuthBar register onClick={(event) => displayForm(event)}>
+            Register
                 </AuthBar></>}
-      {mode === REGISTER && <RegisterForm 
+        {mode === REGISTER && <RegisterForm
           displayForm={displayForm}
           // register={register}
           onRegister={register}
-          />}
-      {mode === LOGIN && <LoginForm displayForm={displayForm} onLogin={login}/>}
-      {mode === SAVING && <Status message={"Saving"}/>}
-      <section className="dashboard">
-        {mode === DASHBOARD && <Summary />}
-        {mode === DASHBOARD && <Activity />}
-      </section>
-      {/* {display()} */}
-      {mode === DASHBOARD && <Footer />}
-    </main>
-    {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
+        />}
+        {mode === LOGIN && <LoginForm displayForm={displayForm} onLogin={login} />}
+        {mode === SAVING && <Status message={"Saving"} />}
+        <section className="dashboard">
+          {mode === DASHBOARD && <Summary />}
+          {mode === DASHBOARD && <Activity />}
+        </section>
+        {/* {display()} */}
+        {mode === DASHBOARD && <Footer />}
+      </main>
+      {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
 
     </Fragment>
   )
-  
+
 };
 
 export default App;
