@@ -46,7 +46,10 @@ function App() {
 
   function display () {
     if (state.form === 'login') {
-      return <LoginForm displayForm={displayForm} />
+      return <LoginForm 
+        displayForm={displayForm}
+        onLogin={login}
+        />
     } else if (state.form === 'register') {
         return <RegisterForm 
           displayForm={displayForm}
@@ -65,18 +68,39 @@ function App() {
     transition(SAVING)
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/users',
+      // url: 'http://localhost:3000/api/users',
+      url: '/api/users',
       // send user data required to register a new user in the db
       data: userData
-    }).then((data) => {
+    }).then(({data}) => {
       console.log("USER ADDED: ", data)
+      // store token
+      localStorage.setItem("token", data.jwt)
+      // do anything with user data?
+      // transition to user dashboard
+
       // update state at the front end like we did for scheduler?
-      // console.log('data: ', data[0])
-      // setData(data)
     }).catch(error => console.log(error))
   }
 
- 
+  const login = (userData) => {
+    transition(SAVING)
+    axios({
+      method: 'POST',
+      url: 'http://localhost:3000/api/login',
+      //url: '/login',
+      // send user data required to register a new user in the db
+      data: userData
+    }).then(({data}) => {
+      console.log("USER Logged In: ", data)
+      // store token
+      localStorage.setItem("token", data.jwt)
+      // do anything with user data?
+      // transition to user dashboard
+
+      // update state at the front end like we did for scheduler?
+    }).catch(error => console.log(error))
+  }
 
 
   return (

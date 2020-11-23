@@ -5,14 +5,16 @@ class Api::UsersController < ApplicationController
   end
 
   def create
-    puts "params: #{user_params}"
+    # puts "params: #{user_params}"
+    # puts "user in server : #{user.inspect}"
     user = User.new(user_params)
-    puts "user in server : #{user.inspect}"
     if user.save
-      render json: user
+      payload = {user_id: user.id}
+      token = encode_token(payload)
+      render json: {user: user, jwt: token}
     else
-      error = "USER NOT SAVED"
-      render json: error
+      # error = "USER NOT SAVED"
+      render json: {errors: user.errors.full_messages}, status: :not_acceptable
     end
   end
   # byebug
@@ -23,7 +25,8 @@ class Api::UsersController < ApplicationController
       :first_name,
       :last_name,
       :email,
-      :password_digest
+      :password
+      # :password_confirmation
       )
   end
 end

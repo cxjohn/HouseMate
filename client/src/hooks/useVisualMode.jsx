@@ -10,7 +10,7 @@ export default function useVisualMode(initial) {
     }
     setMode(() => newMode);
   }
-  
+
   function back() {
     if (history[history.length - 1] !== initial) {
       history.pop();

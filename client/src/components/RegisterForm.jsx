@@ -34,10 +34,11 @@ function register () {
       first_name: formState.firstName,
       last_name: formState.lastName,
       email: formState.email,
-      password_digest: formState.password
-      //password_confirmation: formState.passwordConfirmation
+      // password_digest: formState.password
+      password: formState.password
+      // password_confirmation: formState.passwordConfirmation
     }
-    console.log("user!" , userData);
+    // console.log("user!" , userData);
     
     return props.onRegister(userData)
   }

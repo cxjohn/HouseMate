@@ -24,7 +24,7 @@ function useApplicationData() {
       method: 'GET',
       url: '/api/users',
     }).then(({data}) => {
-      console.log('data: ', data[0])
+      // console.log('data: ', data[0])
       setState({...state, data})
     }).catch(error => console.log(error))
 
