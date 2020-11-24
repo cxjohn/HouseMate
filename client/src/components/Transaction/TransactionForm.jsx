@@ -23,10 +23,10 @@ function TransactionForm(props) {
     // console.log("value array:", values)
     const users = [props.user.id];
     for (const value of values) {
-      console.log("name: ", value.innerText)
-      console.log("id: ", value.attributes.value.value)
-      console.log("desc ", formState.description)
-      console.log("amount ", formState.amount)
+      // console.log("name: ", value.innerText)
+      // console.log("id: ", value.attributes.value.value)
+      // console.log("desc ", formState.description)
+      // console.log("amount ", formState.amount)
       users.push(Number(value.attributes.value.value))
     }
 

@@ -22,101 +22,6 @@ group1 = Group.find_by! id: 1;
 group2 = Group.find_by! id: 2;
 group3 = Group.find_by! id: 3;
 
-Transaction.destroy_all
-
-group1.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 10,
-  user_id: 1
-})
-
-group1.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 30,
-  is_expense: false,
-  user_id: 2
-})
-
-group1.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 50,
-  user_id: 1
-})
-
-group1.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 40,
-  user_id: 3
-})
-
-group1.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 100,
-  user_id: 1
-})
-
-group2.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 40,
-  user_id: 1
-})
-
-group2.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 60,
-  is_expense: false,
-  user_id: 2
-})
-
-group2.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 560,
-  user_id: 1
-})
-
-group2.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 90,
-  user_id: 3
-})
-
-group2.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 145,
-  user_id: 1
-})
-
-group3.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 650,
-  user_id: 1
-})
-
-group3.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 23,
-  is_expense: false,
-  user_id: 2
-})
-
-group3.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 34,
-  is_expense: false,
-  user_id: 1
-})
-
-group3.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 98,
-  user_id: 3
-})
-
-group3.transactions.create!({
-  description: Faker::Lorem.sentence(word_count: 5),
-  amount: 200,
-  user_id: 1
-})
 
 Membership.destroy_all
 
@@ -159,3 +64,4 @@ group3.memberships.create!({
 group3.memberships.create!({
   user_id: 10
 })
+
