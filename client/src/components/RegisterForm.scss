@@ -100,9 +100,9 @@ form {
 }
 
 // removes default autocomplete yellow bg
-input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px white inset;
-}
+// input:-webkit-autofill {
+//  -webkit-box-shadow: 0 0 0px 1000px white inset;
+//}
 
 // styles the input field. Strip from default styling and add borders
 input {

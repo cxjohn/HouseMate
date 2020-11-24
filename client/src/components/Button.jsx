@@ -11,7 +11,7 @@ function Button(props) {
       'button_login': props.login, 
       'button_register': props.register,
       'button_back': props.back,
-      'button-_split': props.split
+      'button_split': props.split
     }
   )
     

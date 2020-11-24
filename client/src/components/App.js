@@ -81,6 +81,28 @@ function App() {
     }
   };
 
+  const split = (splitData) => {
+    transition(SAVING)
+    Promise.all([
+      axios({
+      method: 'POST',
+      // url: 'http://localhost:3000/api/users',
+      url: '/api/transactions',
+      // send user data required to register a new user in the db
+      data: { transaction: splitData }
+      }),
+      axios({
+        method: 'POST',
+        // url: 'http://localhost:3000/api/users',
+        url: '/api/shares',
+        // send user data required to register a new user in the db
+        data: { share: splitData }
+        })
+    ])
+    .then((all) => {
+      console.log("transaction ADDED: ", all)
+    }).catch(error => console.log(error))
+  }
 
   const register = (userData) => {
     transition(SAVING)
@@ -153,7 +175,7 @@ function App() {
         <section className="dashboard">
           {mode === DASHBOARD && <Summary />}
           {mode === DASHBOARD && <Activity />}
-          {mode === ADD && <TransactionForm />}
+          {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
         </section>
         {/* {display()} */}
         {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
