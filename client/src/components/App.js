@@ -54,7 +54,7 @@ function App() {
         // localStorage.setItem("token", data.jwt)
         // do anything with user data?
         // transition to user dashboard
-        setState({ ...state, user: data })
+        setState({ ...state, user: data.user, history: data.history })
         // update state at the front end like we did for scheduler?
         transition(DASHBOARD);
       }).catch(error => console.log(error))
@@ -140,7 +140,9 @@ function App() {
       // store token
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
-      setState({ ...state, user: data.user })
+      setState({ ...state, user: data.user, history: data.history })
+
+      // recieve recent activity data from the server and update state
 
       // transition to user dashboard
       transition(DASHBOARD);
@@ -178,7 +180,7 @@ function App() {
         {mode === SAVING && <Status message={"Saving"} />}
         <section className="dashboard">
           {mode === DASHBOARD && <Summary />}
-          {mode === DASHBOARD && <Activity />}
+          {mode === DASHBOARD && <Activity history={state.history}/>}
           {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
         </section>
         {/* {display()} */}

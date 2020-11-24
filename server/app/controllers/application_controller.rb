@@ -38,4 +38,31 @@ class ApplicationController < ActionController::API
   #   render json: {message: 'Please Login'}, status: :unauthorized unless logged_in?
   # end
 
+  # recent activity data
+  def recent_activity
+    # we have access to user.id
+    # user_id = session_user.id
+    user_id = 3
+    # go to shares table for this user.id
+    shares = Share.where(user_id: user_id).order(created_at: :desc)
+    activities = [];
+    # and get activity_id
+    # and get amount_owed 
+    # and get created_at
+    shares.each do |share|
+      activities.push([share.activity_id, share.amount_owed, share.created_at])
+    end
+    # use that activity_id and go to activities table
+    history = activities.map(&:clone)
+    activities.each_with_index do |activity, index|
+      transaction = Activity.find(activity[0])
+      # and get description
+      history[index].push(transaction.description)
+      # and get the user_id who charged/paid
+      history[index].push(transaction.user_id)
+    end
+    # order by most recent
+    history
+  end
+  
 end

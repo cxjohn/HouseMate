@@ -22,6 +22,8 @@ class Api::ActivitiesController < ApplicationController
     end
   end
 
+  #  add here
+
   private
   def activity_params
     params.require(:activity).permit(

@@ -6,7 +6,12 @@ class Api::SessionsController < ApplicationController
     if user && user.authenticate(params[:password_digest])
       payload = {user_id: user.id}
       token = encode_token(payload)
-      render json: {user: user, jwt: token, success: "Welcome back #{user.first_name}"}
+      render json: {
+        user: user,
+        jwt: token,
+        history: recent_activity,
+        success: "Welcome back #{user.first_name}"
+      }
     else
       render json: {failure: "Log in failed! Email or password invalid!"}
     end
@@ -14,7 +19,10 @@ class Api::SessionsController < ApplicationController
 
   def auto_login
     if session_user
-      render json: session_user
+      # call recent_activity
+
+      render json: {user: session_user, history: recent_activity} # also send recent activity data
+      # render json: session_user # also send recent activity data
     else
       render json: {errors: "No User Logged In"}
     end

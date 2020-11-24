@@ -15,7 +15,8 @@ function useApplicationData() {
  // state is an object with two keys from and data
   const [state, setState] = useState({
     form: "none",
-    user: {}
+    user: {},
+    history: {}
   })
 
   // useEffect(() => {
