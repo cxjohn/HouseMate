@@ -3,13 +3,13 @@ import './Footer.scss';
 function Footer(props) {
   return (
     <footer class="mobile-bottom-bar">
-      <a href="#" class="footer-link">
+      <a class="footer-link">
         <i class="fa fa-home"></i>
       </a>
-      <a href="#" class="footer-link">
-        <i class="fa fa-plus-square"></i>
+      <a class="footer-link">
+        <i class="fa fa-plus-square" onClick={props.onClick}></i>
       </a>
-      <a href="#" class="footer-link">
+      <a class="footer-link">
         <i class="fa fa-sign-out"></i> 
         {/* <span class='footer-text'></span> */}
       </a>

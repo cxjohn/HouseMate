@@ -14,12 +14,14 @@ import Header from "./Dashboard/Header"
 import Footer from "./Dashboard/Footer"
 import Summary from "./Dashboard/Summary"
 import Activity from "./Dashboard/Activity"
+import TransactionForm from "./Transaction/TransactionForm"
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";
 const REGISTER = "REGISTER";
 const SAVING = "SAVING";
 const DASHBOARD = "DASHBOARD";
+const ADD = "ADD";
 // hardcoded data
 
 function App() {
@@ -61,7 +63,7 @@ function App() {
     }
   }, [])
 
-  function displayForm(event) {
+  function display(event) {
     // console.log("clicked")
     // check if event.target contains Login text
     if (event.target.innerHTML === 'Login') {
@@ -74,13 +76,11 @@ function App() {
     } else if (event.target.classList.contains("fa-angle-left")) {
       // setState({ ...state, form: "none" })
       transition(HOME)
+    } else if (event.target.classList.contains("fa-plus-square")) {
+      transition(ADD)
     }
   };
 
-
-  function display() {
-
-  };
 
   const register = (userData) => {
     transition(SAVING)
@@ -130,31 +130,34 @@ function App() {
       <header className="header">
         {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
         {mode === DASHBOARD && <Header />}
+        {mode === ADD && <Header />}
         <h2>{state.user && state.user.first_name}</h2>
         {/* {mode === REGISTER && (
         <div>
-          <Button back onClick={(event) => displayForm(event)}></Button>
+          <Button back onClick={(event) => display(event)}></Button>
         </div>
         )} */}
       </header>
       <main>
-        {mode === HOME && <><h1>HouseMate</h1><AuthBar login onClick={(event) => displayForm(event)}>Login</AuthBar>
-          <AuthBar register onClick={(event) => displayForm(event)}>
+        {mode === HOME && <><h1>HouseMate</h1><AuthBar login onClick={(event) => display(event)}>Login</AuthBar>
+          <AuthBar register onClick={(event) => display(event)}>
             Register
                 </AuthBar></>}
         {mode === REGISTER && <RegisterForm
-          displayForm={displayForm}
+          display={display}
           // register={register}
           onRegister={register}
         />}
-        {mode === LOGIN && <LoginForm displayForm={displayForm} onLogin={login} />}
+        {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
         {mode === SAVING && <Status message={"Saving"} />}
         <section className="dashboard">
           {mode === DASHBOARD && <Summary />}
           {mode === DASHBOARD && <Activity />}
+          {mode === ADD && <TransactionForm />}
         </section>
         {/* {display()} */}
-        {mode === DASHBOARD && <Footer />}
+        {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
+        {mode === ADD && <Footer onClick={event => display(event)}/>}
       </main>
       {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
 

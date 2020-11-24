@@ -18,17 +18,17 @@ function useApplicationData() {
     user: {}
   })
 
-  useEffect(() => {
+  // useEffect(() => {
     
-    axios({
-      method: 'GET',
-      url: '/api/users',
-    }).then(({data}) => {
-      // console.log('data: ', data[0])
-      setState({...state, data})
-    }).catch(error => console.log(error))
+  //   axios({
+  //     method: 'GET',
+  //     url: '/api/users',
+  //   }).then(({data}) => {
+  //     // console.log('data: ', data[0])
+  //     setState({...state, data})
+  //   }).catch(error => console.log(error))
 
-  }, [])
+  // }, [])
 
   return { state, setState }
 

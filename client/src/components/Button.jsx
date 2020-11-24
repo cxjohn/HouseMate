@@ -10,7 +10,8 @@ function Button(props) {
     { 
       'button_login': props.login, 
       'button_register': props.register,
-      'button_back': props.back
+      'button_back': props.back,
+      'button-_split': props.split
     }
   )
     
@@ -33,8 +34,9 @@ function Button(props) {
         >
         </i>
         )
+    } else if (props.split) {
+      return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
     }
-
   }
 
     return (
@@ -43,12 +45,6 @@ function Button(props) {
     )
       // if(props.register) 
       
-      // <button
-      //   className={buttonClass}
-      //   onClick={props.onClick}
-      // >
-      //   {props.children}
-      // </button>
 };
 
 export default Button;
