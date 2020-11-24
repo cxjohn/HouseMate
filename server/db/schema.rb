@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_24_002019) do
+ActiveRecord::Schema.define(version: 2020_11_24_202951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string "description"
+    t.boolean "is_expense", default: true
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "USD", null: false
+    t.index ["group_id"], name: "index_activities_on_group_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "friends", force: :cascade do |t|
     t.bigint "user_id"
@@ -40,11 +53,12 @@ ActiveRecord::Schema.define(version: 2020_11_24_002019) do
 
   create_table "shares", force: :cascade do |t|
     t.bigint "user_id"
-    t.bigint "transaction_id"
-    t.integer "amount_owed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["transaction_id"], name: "index_shares_on_transaction_id"
+    t.bigint "activity_id"
+    t.integer "amount_owed_cents", default: 0, null: false
+    t.string "amount_owed_currency", default: "USD", null: false
+    t.index ["activity_id"], name: "index_shares_on_activity_id"
     t.index ["user_id"], name: "index_shares_on_user_id"
   end
 
@@ -73,10 +87,12 @@ ActiveRecord::Schema.define(version: 2020_11_24_002019) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "activities", "groups"
+  add_foreign_key "activities", "users"
   add_foreign_key "friends", "users"
   add_foreign_key "memberships", "groups"
   add_foreign_key "memberships", "users"
-  add_foreign_key "shares", "transactions"
+  add_foreign_key "shares", "activities"
   add_foreign_key "shares", "users"
   add_foreign_key "transactions", "groups"
   add_foreign_key "transactions", "users"

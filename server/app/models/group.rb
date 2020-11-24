@@ -1,4 +1,4 @@
 class Group < ApplicationRecord
-  has_many :transactions
+  has_many :activities
   has_many :memberships
 end

@@ -87,10 +87,10 @@ function App() {
       axios({
       method: 'POST',
       // url: 'http://localhost:3000/api/users',
-      url: '/api/transactions',
+      url: '/api/activities',
       // send user data required to register a new user in the db
       data: { 
-        transaction: splitData,
+        activity: splitData,
         share: splitData
         }
       })
