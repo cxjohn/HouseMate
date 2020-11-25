@@ -56,7 +56,7 @@ function register () {
         <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
         <h1>Sign up</h1>
       </div>
-      <span class="input"></span>
+      <span className="input"></span>
       <input
         className='firstName' 
         placeholder='First Name'
@@ -67,7 +67,7 @@ function register () {
         autocomplete="off"
         // pattern="^\w+\s\w+$"
       />
-      <span class="input"></span>
+      <span className="input"></span>
       <input 
         className='lastName' 
         placeholder='Last Name'
@@ -77,7 +77,7 @@ function register () {
         autocomplete="off"
         // pattern="^\w+\s\w+$"
       />
-      <span class="input"></span>
+      <span className="input"></span>
       <input 
         className='email'
         type='email'

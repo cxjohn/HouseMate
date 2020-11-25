@@ -2,6 +2,7 @@ import './Summary.scss';
 import { Button, Card, Image } from 'semantic-ui-react'
 
 
+
 function Summary(props) {
 
   function status () {
@@ -10,7 +11,7 @@ function Summary(props) {
                 <p className="money_green"> ${-props.summary / 100}</p>
               </p>
     } else if (props.summary === 0) {
-      return <p>Worry is like interest paid in advance on a debt that never comes due.`</p>
+      return <p>Worry is like interest paid in advance on a debt that never comes due.</p>
     } else {
       return <p>
                 <p className="money_red">You owe ${-props.summary / 100}</p>

@@ -5,7 +5,7 @@ function Header(props) {
  
     
     return (
-     <section className="header">
+     <section>
          HouseMate
      </section>
     )

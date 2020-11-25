@@ -15,6 +15,7 @@ import Footer from "./Dashboard/Footer"
 import Summary from "./Dashboard/Summary"
 import Activity from "./Dashboard/Activity"
 import TransactionForm from "./Transaction/TransactionForm"
+import SettlementForm from "./Settlement/SettlementForm"
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";
@@ -22,6 +23,7 @@ const REGISTER = "REGISTER";
 const SAVING = "SAVING";
 const DASHBOARD = "DASHBOARD";
 const ADD = "ADD";
+const SETTLE = "SETTLE";
 // hardcoded data
 
 function App() {
@@ -54,12 +56,12 @@ function App() {
         // localStorage.setItem("token", data.jwt)
         // do anything with user data?
         // transition to user dashboard
-        setState({
-          ...state,
+        setState(prev => ({ 
+          ...prev,
           user: data.user,
           history: data.history,
           summary: data.summary
-        })
+        }))
         // update state at the front end like we did for scheduler?
         transition(DASHBOARD);
       }).catch(error => console.log(error))
@@ -83,6 +85,8 @@ function App() {
       transition(HOME)
     } else if (event.target.classList.contains("fa-plus-square")) {
       transition(ADD)
+    } else if (event.target.classList.contains("fa-handshake-o")) {
+      transition(SETTLE)
     }
   };
 
@@ -129,15 +133,23 @@ function App() {
       url: '/api/users',
       // send user data required to register a new user in the db
       data: { user: userData }
-    }).then(({ data }) => {
+    })
+    .then(({ data }) => {
       console.log("USER ADDED: ", data)
       // store token
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
-      // transition to user dashboard
-      setState({ ...state, user: data.user })
+      setState(prev => ({ 
+        ...prev,
+        user: data.user,
+        history: data.history,
+        summary: data.summary
+      }))
+    })
+    .then(() => transition(DASHBOARD))
       // update state at the front end like we did for scheduler?
-    }).catch(error => console.log(error))
+      // transition to user dashboard
+    .catch(error => console.log(error))
   }
 
   const login = (userData) => {
@@ -153,12 +165,12 @@ function App() {
       // store token
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
-      setState({ 
-        ...state,
+      setState(prev => ({ 
+        ...prev,
         user: data.user,
         history: data.history,
         summary: data.summary
-      })
+      }))
 
       // recieve recent activity data from the server and update state
 
@@ -177,6 +189,7 @@ function App() {
         {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
         {mode === DASHBOARD && <Header />}
         {mode === ADD && <Header />}
+        {mode === SETTLE && <Header />}
         {/* <h2>{state.user && state.user.first_name}</h2> */}
         {/* {mode === REGISTER && (
         <div>
@@ -200,10 +213,12 @@ function App() {
           {mode === DASHBOARD && <Summary summary={state.summary}/>}
           {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
           {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
+          {mode === SETTLE && <SettlementForm user={state.user}/>}
         </section>
         {/* {display()} */}
         {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
         {mode === ADD && <Footer onClick={event => display(event)}/>}
+        {mode === SETTLE && <Footer onClick={event => display(event)}/>}
       </main>
       {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
 

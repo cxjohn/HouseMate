@@ -20,7 +20,7 @@ class Api::ActivitiesController < ApplicationController
         # add positive amount for people who owe 
         activity.shares.create(
           user_id: user,
-          amount_owed: shares[:amount_owed]
+          amount_owed: shares[:amount_owed] 
           # test += user.to_s
         )
       end

@@ -39,9 +39,9 @@ class ApplicationController < ActionController::API
   # end
 
   # recent activity data
-  def recent_activity
+  def recent_activity (new_user_id)
     # we have access to user.id
-    user_id = session_user.id
+    user_id = new_user_id || session_user.id
     # user_id = 3
     # go to shares table for this user.id
     shares = Share.where(user_id: user_id).order(created_at: :desc)
@@ -78,11 +78,54 @@ class ApplicationController < ActionController::API
   # for each share with user_id === activity.user_id && isExp, sum
   # net sums, if positive net amount owed, and vice versa
   
-  def user_summary
-    user_id = session_user.id
+  def user_summary (new_user_id)
+    user_id = new_user_id || session_user.id
+    # user_id = session_user.id
     # shares = Share.where(user_id: user_id) can we sum
     total = Share.where(user_id: user_id).sum(:amount_owed_cents)
     total
+  end
+
+  def settlement (new_user_id)
+    user_id = new_user_id || session_user.id
+    debt_array = Share.where("user_id = ? AND amount_owed_cents > ?", user_id, 0)
+    owing = {}
+    # owing = { person1: 50, person2: 77 }
+    debt_array.each do |debt|
+      #  each debt has debt.amount_owed_cents and debt.activity_id
+      owe_to = Activity.find(debt.activity_id)
+      # owe.user_id is the person who paid
+      # add a key of user id = owe_to.user_id
+      # check if it already exists
+      # if yes, add to the value, if not then initialize key
+      if (owing[owe_to.user_id])
+        owing[owe_to.user_id] += debt.amount_owed_cents
+      else 
+        owing[owe_to.user_id] = debt.amount_owed_cents
+      end
+end 
+    
+# search shares.user_id === user.id 
+# look in activity, add shares.amount to activity.user_id
+    lend_array = Share.where("user_id = ? AND amount_owed_cents < ?", user_id, 0)
+    lend_array.each do |lend|
+    # use lend.activity_id and find other user_ids with that particular activity_id
+      people_loaned_money_to_array = Share.where(activity_id: lend.activity_id)
+      # another loop on people array
+      people_loaned_money_to_array.each do |row|
+        if (row.user_id != user_id)
+          if (owing[row.user_id])
+            owing[row.user_id] -= row.amount_owed_cents
+          else 
+            owing[row.user_id] = -row.amount_owed_cents
+          end
+        end
+      end
+    end
+    owing
+# owed
+# search shares.user_id === user.id
+# 
   end
 
 end

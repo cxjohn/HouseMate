@@ -5,25 +5,40 @@ form {
   // flex-direction: column;
   // align-items: center;
   // align-content: space-between;
-
-
   .button {
-    border-radius: 3px;
-    color: #ffffff;
-    width: 75px;
-  }
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid green;
+    border-radius: 0.6em;
+    color: green;
+    cursor: pointer;
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    margin: 20px;
+    padding: 1.2em 2.8em;
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
   
-  .button_login {
-    background-color: $col-sean-red;
+    // &:hover,
+    // &:focus {
+    //   color: #fff;
+    //   outline: 0;
+    // }
   }
 
-  // .button .button_register
-  .button_register {
-    background-color: $col-sean-purple;
-  }
-
-  .button_back {
-    background-color: #93C193
-  }
   
+
+  // .button_split {
+  //   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  //   &:hover {
+  //     box-shadow: 0 0 40px 40px green inset;
+  //   }
+  // }
 }

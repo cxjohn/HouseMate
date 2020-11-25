@@ -9,8 +9,8 @@ class Api::SessionsController < ApplicationController
       render json: {
         user: user,
         jwt: token,
-        history: recent_activity,
-        summary: user_summary,
+        history: recent_activity(user.id),
+        summary: user_summary(user.id),
         success: "Welcome back #{user.first_name}"
       }
     else
@@ -24,8 +24,9 @@ class Api::SessionsController < ApplicationController
 
       render json: {
         user: session_user,
-        history: recent_activity,
-        summary: user_summary
+        history: recent_activity(nil),
+        summary: user_summary(nil),
+        settle: settlement(nil)
       }
       # render json: session_user # also send recent activity data
     else
