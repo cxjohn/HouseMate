@@ -1,0 +1,35 @@
+.dashboard_activity{
+  display: flex;
+  justify-content: center;
+  // background-color: pink;
+  width: 100%;
+
+  // .ui .card>.content>.header {
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+
+  // }
+
+  .activity_block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: 450;
+  }
+  
+  .content .summary p {
+    display: flex;
+
+    .money_green {
+    color: green;
+    margin-left: 5px;
+    }
+
+    .money_red {
+    color: red;
+    margin-left: 5px;
+    }
+  }
+
+}

@@ -10,6 +10,7 @@ class Api::SessionsController < ApplicationController
         user: user,
         jwt: token,
         history: recent_activity,
+        summary: user_summary,
         success: "Welcome back #{user.first_name}"
       }
     else
@@ -21,7 +22,11 @@ class Api::SessionsController < ApplicationController
     if session_user
       # call recent_activity
 
-      render json: {user: session_user, history: recent_activity} # also send recent activity data
+      render json: {
+        user: session_user,
+        history: recent_activity,
+        summary: user_summary
+      }
       # render json: session_user # also send recent activity data
     else
       render json: {errors: "No User Logged In"}

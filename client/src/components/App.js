@@ -54,7 +54,12 @@ function App() {
         // localStorage.setItem("token", data.jwt)
         // do anything with user data?
         // transition to user dashboard
-        setState({ ...state, user: data.user, history: data.history })
+        setState({
+          ...state,
+          user: data.user,
+          history: data.history,
+          summary: data.summary
+        })
         // update state at the front end like we did for scheduler?
         transition(DASHBOARD);
       }).catch(error => console.log(error))
@@ -102,8 +107,16 @@ function App() {
     //     data: { share: splitData }
     //     })
     // ])
-    .then((all) => {
-      console.log("transaction ADDED: ", all)
+    .then((data) => {
+      console.log("transaction ADDED: ", data)
+
+      // setState({ 
+      //   ...state,
+      //   user: data.user,
+      //   history: data.history,
+      //   summary: data.summary
+      // })
+
       transition(DASHBOARD)
     }).catch(error => console.log(error))
   }
@@ -140,7 +153,12 @@ function App() {
       // store token
       localStorage.setItem("token", data.jwt)
       // do anything with user data?
-      setState({ ...state, user: data.user, history: data.history })
+      setState({ 
+        ...state,
+        user: data.user,
+        history: data.history,
+        summary: data.summary
+      })
 
       // recieve recent activity data from the server and update state
 
@@ -155,11 +173,11 @@ function App() {
   return (
     <Fragment>
 
-      <header className="header">
+      <header className="dashboard_header">
         {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
         {mode === DASHBOARD && <Header />}
         {mode === ADD && <Header />}
-        <h2>{state.user && state.user.first_name}</h2>
+        {/* <h2>{state.user && state.user.first_name}</h2> */}
         {/* {mode === REGISTER && (
         <div>
           <Button back onClick={(event) => display(event)}></Button>
@@ -179,8 +197,8 @@ function App() {
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
         {mode === SAVING && <Status message={"Saving"} />}
         <section className="dashboard">
-          {mode === DASHBOARD && <Summary />}
-          {mode === DASHBOARD && <Activity history={state.history}/>}
+          {mode === DASHBOARD && <Summary summary={state.summary}/>}
+          {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
           {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
         </section>
         {/* {display()} */}

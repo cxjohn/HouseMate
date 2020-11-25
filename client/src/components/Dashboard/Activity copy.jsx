@@ -1,14 +1,16 @@
 import './Activity.scss'
 import ActivityListItem from './ActivityListItem'
-import { Card, Feed } from 'semantic-ui-react'
 
-const Activity = (props) => (
-  <Card>
-    <Card.Content>
-      <Card.Header>Recent Activity</Card.Header>
-    </Card.Content>
-    <Card.Content>
-      <Feed>
+function Activity (props) {
+
+  // loop through props.history
+  // add in list
+
+  
+  return (
+    <section className="dashboard_activity">
+      <h2>Activity</h2>
+      <ul>
         {
           props.history.map(data =>
           <ActivityListItem
@@ -22,9 +24,14 @@ const Activity = (props) => (
           />
           )
         }
-      </Feed>
-    </Card.Content>
-  </Card>
-)
+      </ul>    
+    </section>
+    // recent activity of logged in user
+    // get use activity data from props
+    // loop through it and display here
 
-export default Activity
+  )
+
+};
+
+export default Activity;

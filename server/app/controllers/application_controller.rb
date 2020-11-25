@@ -41,8 +41,8 @@ class ApplicationController < ActionController::API
   # recent activity data
   def recent_activity
     # we have access to user.id
-    # user_id = session_user.id
-    user_id = 3
+    user_id = session_user.id
+    # user_id = 3
     # go to shares table for this user.id
     shares = Share.where(user_id: user_id).order(created_at: :desc)
     activities = [];
@@ -59,10 +59,41 @@ class ApplicationController < ActionController::API
       # and get description
       history[index].push(transaction.description)
       # and get the user_id who charged/paid
+      first_name = User.find(transaction.user_id).first_name
+      last_name = User.find(transaction.user_id).last_name
+      history[index].push(first_name)
+      history[index].push(last_name)
       history[index].push(transaction.user_id)
     end
     # order by most recent
+    # user id is history[index][4]
     history
   end
   
+  # recent activity data
+  # we have access to user.id
+  # go to shares table with this user.id
+  
+  # sum all amount owed with user in user_id
+  # for each share with user_id === activity.user_id && isExp, sum
+  # net sums, if positive net amount owed, and vice versa
+  
+  def user_summary
+    user_id = session_user.id
+    # shares = Share.where(user_id: user_id) can we sum
+    total = Share.where(user_id: user_id).sum(:amount_owed_cents)
+    total
+  end
+
 end
+
+# let's u1 had an expense for $100
+# shared between u1, u2, u3, u4
+# u2 amount_owed 25
+# u3 amount_owed 25
+# u4 amount_owed 25
+# u1 amount_owed -75
+
+
+# settlement algo
+# 

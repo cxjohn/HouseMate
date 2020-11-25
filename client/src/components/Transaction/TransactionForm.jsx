@@ -6,7 +6,9 @@ import { Dropdown } from 'semantic-ui-react';
 const friends = [
   { key: 5, text: 'Chris John', value: 5 },
   { key: 3, text: 'Raj Ghatore', value: 3 },
-  { key: 4, text: 'Sean Kim', value: 4 }
+  { key: 4, text: 'Sean Kim', value: 4 },
+  { key: 2, text: 'Hobart', value: 2 },
+  { key: 1, text: 'Bobert', value: 1 }
 ]
 
 

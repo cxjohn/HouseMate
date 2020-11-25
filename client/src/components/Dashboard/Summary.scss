@@ -1,1 +1,23 @@
+.dashboard_summary {
 
+  // background-color: pink;
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
+
+  .content .description p {
+    display: flex;
+    font-weight: 450;
+
+    .money_green {
+    color: green;
+    margin-left: 5px;
+    }
+
+    .money_red {
+    color: red;
+    margin-left: 5px;
+    }
+  }
+
+}
