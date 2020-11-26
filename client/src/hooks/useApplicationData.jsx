@@ -18,7 +18,8 @@ function useApplicationData() {
     user: {},
     history: [],
     summary: {},
-    settle: {}
+    settle: {},
+    friends_list: []
   })
 
   // useEffect(() => {

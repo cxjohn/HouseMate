@@ -13,7 +13,8 @@ function Button(props) {
       'button_back': props.back,
       'button_split': props.split,
       'button_settle': props.settle,
-      'button_notify': props.notify
+      'button_notify': props.notify,
+      'button_friend': props.friend
     }
   )
       
@@ -40,7 +41,9 @@ function Button(props) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
     } else if (props.notify) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
-    }   
+    } else if (props.friend) {
+      return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
+    }    
   }
 
     return icon()

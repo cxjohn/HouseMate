@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :users
     resources :activities
     resources :shares
+    resources :friends
     post "login", to: "sessions#login"
     get "auto_login", to: "sessions#auto_login"
     get "user_is_authed", to: "sessions#user_is_authed"

@@ -23,7 +23,7 @@ function Footer(props) {
           <i className="fa fa-group" onClick={props.onClick}></i>
         </span>
         <span className="footer-link">
-          <i className="fa fa-user-plus"></i> 
+          <i className="fa fa-user-plus" onClick={props.onClick}></i> 
           {/* <span className='footer-text' 	fa fa-user-plus></span> */}
         </span>
       </span>

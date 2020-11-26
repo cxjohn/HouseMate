@@ -10,6 +10,7 @@ import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
 import Status from "./Status"
 import Button from "./Button"
+import Friend from "./Friend"
 import Header from "./Dashboard/Header"
 import Footer from "./Dashboard/Footer"
 import Summary from "./Dashboard/Summary"
@@ -24,6 +25,7 @@ const SAVING = "SAVING";
 const DASHBOARD = "DASHBOARD";
 const ADD = "ADD";
 const SETTLE = "SETTLE";
+const FRIEND = "FRIEND";
 // hardcoded data
 
 function App() {
@@ -61,7 +63,8 @@ function App() {
           user: data.user,
           history: data.history,
           summary: data.summary,
-          settle: data.settle
+          settle: data.settle,
+          friends_list: data.friends_list
         }))
         // update state at the front end like we did for scheduler?
         
@@ -90,6 +93,8 @@ function App() {
       transition(ADD)
     } else if (event.target.classList.contains("fa-handshake-o")) {
       transition(SETTLE)
+    } else if (event.target.classList.contains("fa-user-plus")) {
+      transition(FRIEND)
     }
   };
 
@@ -109,7 +114,7 @@ function App() {
     .then(({ data }) => {
       console.log("transaction ADDED: ", data)
 
-      setState(prev => ({ 
+      setState(prev => ({
         ...prev,
         // user: data.user,
         history: data.history,
@@ -146,6 +151,30 @@ function App() {
         settle: data.settle
       }))
 
+    })
+    .then(()=> transition(DASHBOARD))
+    .catch(error => console.log(error))
+  }
+
+  const friend = (friendData) => {
+    transition(SAVING)
+    // Promise.all([
+      axios({
+      method: 'POST',
+      // url: 'http://localhost:3000/api/users',
+      url: '/api/friends',
+      // send user data required to register a new user in the db
+      data: { 
+        friend: friendData
+        }
+      })
+    .then(({ data }) => {
+      console.log("friend ADDED: ", data)
+
+      setState(prev => ({ 
+        ...prev,
+        friends_list: data.friends_list
+      }))
     })
     .then(()=> transition(DASHBOARD))
     .catch(error => console.log(error))
@@ -197,12 +226,11 @@ function App() {
         user: data.user,
         history: data.history,
         summary: data.summary,
-        settle: data.settle
+        settle: data.settle,
+        friends_list: data.friends_list
       }))
 
-
       // recieve recent activity data from the server and update state
-
       // transition to user dashboard
       // update state at the front end like we did for scheduler?
     })
@@ -219,6 +247,7 @@ function App() {
         {mode === DASHBOARD && <Header />}
         {mode === ADD && <Header />}
         {mode === SETTLE && <Header />}
+        {mode === FRIEND && <Header />}
         {/* <h2>{state.user && state.user.first_name}</h2> */}
         {/* {mode === REGISTER && (
         <div>
@@ -243,11 +272,13 @@ function App() {
           {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
           {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
           {mode === SETTLE && <SettlementForm user={state.user} settle={state.settle} onSettle={settle}/>}
+          {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
         </section>
         {/* {display()} */}
         {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
         {mode === ADD && <Footer onClick={event => display(event)}/>}
         {mode === SETTLE && <Footer onClick={event => display(event)}/>}
+        {mode === FRIEND && <Footer onClick={event => display(event)}/>}
       </main>
       {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
 
