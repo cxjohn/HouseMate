@@ -3,16 +3,35 @@ import Button from '../Button';
 import './TransactionForm.scss';
 import { Dropdown } from 'semantic-ui-react';
 
-const friends = [
-  { key: 5, text: 'Chris John', value: 5 },
-  { key: 3, text: 'Raj Ghatore', value: 3 },
-  { key: 4, text: 'Sean Kim', value: 4 },
-  { key: 2, text: 'Hobart', value: 2 },
-  { key: 1, text: 'Bobert', value: 1 }
-]
+// const friends = [
+//   { key: 5, text: 'Chris John', value: 5 },
+//   { key: 3, text: 'Raj Ghatore', value: 3 },
+//   { key: 4, text: 'Sean Kim', value: 4 },
+//   { key: 2, text: 'Hobart', value: 2 },
+//   { key: 1, text: 'Bobert', value: 1 }
+// ]
+
+// friends_list looks like [
+// [user_id, "first_name", "last_name"],
+// [user_id, "first_name", "last_name"]]
+
+
 
 
 function TransactionForm(props) {
+  
+  const friends = []
+  props.friends_list.map((friend) => {
+
+    const friend_object = {
+      key: friend[0],
+      text: `${friend[1]} ${friend[2]}`,
+      value: friend[0]
+    };
+  
+    friends.push(friend_object)
+    
+  })
 
   const [formState, setFormState] = useState({
     description: props.description || "",

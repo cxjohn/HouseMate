@@ -270,7 +270,13 @@ function App() {
         <section className="dashboard">
           {mode === DASHBOARD && <Summary summary={state.summary}/>}
           {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
-          {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
+          {
+            mode === ADD && <TransactionForm 
+              user={state.user} 
+              onSplit={split}
+              friends_list={state.friends_list}
+              />
+          }
           {mode === SETTLE && <SettlementForm user={state.user} settle={state.settle} onSettle={settle}/>}
           {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
         </section>
