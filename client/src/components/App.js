@@ -11,6 +11,7 @@ import useVisualMode from "../hooks/useVisualMode";
 import Status from "./Status"
 import Button from "./Button"
 import Friend from "./Friend"
+import Profile from "./Profile"
 import Header from "./Dashboard/Header"
 import Footer from "./Dashboard/Footer"
 import Summary from "./Dashboard/Summary"
@@ -26,6 +27,7 @@ const DASHBOARD = "DASHBOARD";
 const ADD = "ADD";
 const SETTLE = "SETTLE";
 const FRIEND = "FRIEND";
+const PROFILE = "PROFILE";
 // hardcoded data
 
 function App() {
@@ -95,6 +97,8 @@ function App() {
       transition(SETTLE)
     } else if (event.target.classList.contains("fa-user-plus")) {
       transition(FRIEND)
+    } else if (event.target.classList.contains("fa-user-circle-o")) {
+      transition(PROFILE)
     }
   };
 
@@ -154,6 +158,23 @@ function App() {
     })
     .then(()=> transition(DASHBOARD))
     .catch(error => console.log(error))
+  }
+
+  const notify = () => {
+    transition(SAVING)
+
+    axios({
+      method: 'POST',
+      url: '/api/mails'
+    })
+    .then(({ data }) => {
+
+      console.log("email: ", data)
+
+    })
+    .then(()=> transition(DASHBOARD))
+    .catch(error => console.log(error))
+
   }
 
   const friend = (friendData) => {
@@ -248,6 +269,7 @@ function App() {
         {mode === ADD && <Header />}
         {mode === SETTLE && <Header />}
         {mode === FRIEND && <Header />}
+        {mode === PROFILE && <Header />}
         {/* <h2>{state.user && state.user.first_name}</h2> */}
         {/* {mode === REGISTER && (
         <div>
@@ -277,14 +299,23 @@ function App() {
               friends_list={state.friends_list}
               />
           }
-          {mode === SETTLE && <SettlementForm user={state.user} settle={state.settle} onSettle={settle}/>}
+          {
+            mode === SETTLE && <SettlementForm 
+              user={state.user}
+              settle={state.settle}
+              onSettle={settle}
+              onNotify={notify}
+              />
+          }
           {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
+          {mode === PROFILE && <Profile user={state.user}/>}
         </section>
         {/* {display()} */}
         {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
         {mode === ADD && <Footer onClick={event => display(event)}/>}
         {mode === SETTLE && <Footer onClick={event => display(event)}/>}
         {mode === FRIEND && <Footer onClick={event => display(event)}/>}
+        {mode === PROFILE && <Footer onClick={event => display(event)}/>}
       </main>
       {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
 

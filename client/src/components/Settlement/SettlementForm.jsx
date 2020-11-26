@@ -13,27 +13,6 @@ function SettlementForm(props) {
     amount: props.amount || "",
   })
 
-  // function settle() {
-  //   const values = document.getElementsByClassName('ui label');
-  //   console.log("splitzies")
-  //   // console.log("value array:", values)
-  //   const users = [props.user.id];
-  //   for (const value of values) {
-  //     users.push(Number(value.attributes.value.value))
-  //   }
-
-  //   const splitData = {
-  //     users,
-  //     description: formState.description,
-  //     amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
-  //     amount: formState.amount,
-  //     user_id: props.user.id
-  //   }
-  //   console.log('vegan', splitData)
-
-  //   return props.onSplit(splitData)
-  // }
-
   return (
   <>
     <Card.Group className="settlement">
@@ -50,6 +29,7 @@ function SettlementForm(props) {
           last_name={data[3]}
           logged_user_id={props.user.id}
           onSettle={props.onSettle}
+          onNotify={props.onNotify}
         />
       )
     }

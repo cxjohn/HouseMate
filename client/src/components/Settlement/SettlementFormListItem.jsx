@@ -11,8 +11,14 @@ function SettlementFormListItem(props) {
     if (props.amount > 0) {
       return <Button settle onClick={settle}>Settle</Button>
     } else {
-      return <Button notify>Notify</Button>
+      return <Button notify onClick={notify}>Notify</Button>
     }
+  }
+
+  function notify () {
+
+    return props.onNotify()
+
   }
 
   function settle () {
@@ -32,8 +38,7 @@ function SettlementFormListItem(props) {
   }
 
   return (
-  <>
- 
+    <>
       <Card.Content>
         {/* <Image
           floated='right'
@@ -52,9 +57,7 @@ function SettlementFormListItem(props) {
           {/* Steve wants to add you to the group <strong>best friends</strong> */}
         </Card.Description>
       </Card.Content>
-
-   </>
-
+    </>
   )
 };
 export default SettlementFormListItem;

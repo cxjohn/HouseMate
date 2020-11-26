@@ -30,8 +30,13 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-
   config.action_mailer.perform_caching = false
+  
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: '9be81ade51009f96467f7c280438b56b-360a0b2c-fad9516c',
+    domain: 'sandbox5936258f758a44bf90dd8cb139b03838.mailgun.org',
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -50,3 +55,4 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 end
+
