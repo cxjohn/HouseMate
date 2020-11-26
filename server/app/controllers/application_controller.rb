@@ -90,6 +90,7 @@ class ApplicationController < ActionController::API
     user_id = new_user_id || session_user.id
     debt_array = Share.where("user_id = ? AND amount_owed_cents > ?", user_id, 0)
     owing = {}
+    # owing = []
     # owing = { person1: 50, person2: 77 }
     debt_array.each do |debt|
       #  each debt has debt.amount_owed_cents and debt.activity_id
@@ -98,12 +99,17 @@ class ApplicationController < ActionController::API
       # add a key of user id = owe_to.user_id
       # check if it already exists
       # if yes, add to the value, if not then initialize key
+      
       if (owing[owe_to.user_id])
-        owing[owe_to.user_id] += debt.amount_owed_cents
-      else 
-        owing[owe_to.user_id] = debt.amount_owed_cents
+        owing[owe_to.user_id][0] += debt.amount_owed_cents
+      else
+        owing[owe_to.user_id] = [debt.amount_owed_cents]
+        first_name = User.find(owe_to.user_id).first_name
+        last_name = User.find(owe_to.user_id).last_name
+        owing[owe_to.user_id].push(first_name)
+        owing[owe_to.user_id].push(last_name)
       end
-end 
+    end
     
 # search shares.user_id === user.id 
 # look in activity, add shares.amount to activity.user_id
@@ -115,28 +121,26 @@ end
       people_loaned_money_to_array.each do |row|
         if (row.user_id != user_id)
           if (owing[row.user_id])
-            owing[row.user_id] -= row.amount_owed_cents
+            owing[row.user_id][0] -= row.amount_owed_cents
           else 
-            owing[row.user_id] = -row.amount_owed_cents
+            owing[row.user_id] = [-row.amount_owed_cents]
+            first_name = User.find(row.user_id).first_name
+            last_name = User.find(row.user_id).last_name
+            owing[row.user_id].push(first_name)
+            owing[row.user_id].push(last_name)
           end
         end
       end
     end
-    owing
-# owed
-# search shares.user_id === user.id
-# 
-  end
+    # owing
+    owing_array = []
+    owing.each do | key, value |
+      value.unshift(key)
+      
+    owing_array.push(value)
+    end
+
+  owing_array
 
 end
-
-# let's u1 had an expense for $100
-# shared between u1, u2, u3, u4
-# u2 amount_owed 25
-# u3 amount_owed 25
-# u4 amount_owed 25
-# u1 amount_owed -75
-
-
-# settlement algo
-# 
+end

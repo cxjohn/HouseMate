@@ -11,7 +11,8 @@ class Api::SessionsController < ApplicationController
         jwt: token,
         history: recent_activity(user.id),
         summary: user_summary(user.id),
-        success: "Welcome back #{user.first_name}"
+        settle: settlement(user.id)
+        # success: "Welcome back #{user.first_name}"
       }
     else
       render json: {failure: "Log in failed! Email or password invalid!"}

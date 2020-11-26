@@ -64,7 +64,7 @@ function register () {
         onChange={event => setFormState({...formState, firstName: event.target.value })}
         required
         autoFocus
-        autocomplete="off"
+        autoComplete="off"
         // pattern="^\w+\s\w+$"
       />
       <span className="input"></span>
@@ -74,7 +74,7 @@ function register () {
         value={formState.lastName}
         onChange={event => setFormState({...formState, lastName: event.target.value })}
         required
-        autocomplete="off"
+        autoComplete="off"
         // pattern="^\w+\s\w+$"
       />
       <span className="input"></span>

@@ -8,6 +8,7 @@ function Header(props) {
      <section>
          HouseMate
      </section>
+     
     )
 };
 

@@ -60,11 +60,14 @@ function App() {
           ...prev,
           user: data.user,
           history: data.history,
-          summary: data.summary
+          summary: data.summary,
+          settle: data.settle
         }))
         // update state at the front end like we did for scheduler?
-        transition(DASHBOARD);
-      }).catch(error => console.log(error))
+        
+      })
+      .then(() => transition(DASHBOARD))
+      .catch(error => console.log(error))
     } else {
       transition(HOME);
     }
@@ -103,26 +106,49 @@ function App() {
         share: splitData
         }
       })
-    //   axios({
-    //     method: 'POST',
-    //     // url: 'http://localhost:3000/api/users',
-    //     url: '/api/shares',
-    //     // send user data required to register a new user in the db
-    //     data: { share: splitData }
-    //     })
-    // ])
-    .then((data) => {
+    .then(({ data }) => {
       console.log("transaction ADDED: ", data)
 
-      // setState({ 
-      //   ...state,
-      //   user: data.user,
-      //   history: data.history,
-      //   summary: data.summary
-      // })
+      setState(prev => ({ 
+        ...prev,
+        // user: data.user,
+        history: data.history,
+        summary: data.summary,
+        settle: data.settle
+      }))
+      
+    })
+    .then(() => transition(DASHBOARD))
+    .catch(error => console.log(error))
+  }
 
-      transition(DASHBOARD)
-    }).catch(error => console.log(error))
+  const settle = (settleData) => {
+    transition(SAVING)
+    // Promise.all([
+      axios({
+      method: 'POST',
+      // url: 'http://localhost:3000/api/users',
+      url: '/api/activities',
+      // send user data required to register a new user in the db
+      data: { 
+        activity: settleData,
+        share: settleData
+        }
+      })
+    .then(({ data }) => {
+      console.log("settlement ADDED: ", data)
+
+      setState(prev => ({ 
+        ...prev,
+        // user: data.user,
+        history: data.history,
+        summary: data.summary,
+        settle: data.settle
+      }))
+
+    })
+    .then(()=> transition(DASHBOARD))
+    .catch(error => console.log(error))
   }
 
   const register = (userData) => {
@@ -143,7 +169,8 @@ function App() {
         ...prev,
         user: data.user,
         history: data.history,
-        summary: data.summary
+        summary: data.summary,
+        settle: data.settle
       }))
     })
     .then(() => transition(DASHBOARD))
@@ -169,16 +196,18 @@ function App() {
         ...prev,
         user: data.user,
         history: data.history,
-        summary: data.summary
+        summary: data.summary,
+        settle: data.settle
       }))
+
 
       // recieve recent activity data from the server and update state
 
       // transition to user dashboard
-      transition(DASHBOARD);
-
       // update state at the front end like we did for scheduler?
-    }).catch(error => console.log(error))
+    })
+    .then(() => transition(DASHBOARD))
+    .catch(error => console.log(error))
   }
 
 
@@ -213,7 +242,7 @@ function App() {
           {mode === DASHBOARD && <Summary summary={state.summary}/>}
           {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
           {mode === ADD && <TransactionForm user={state.user} onSplit={split}/>}
-          {mode === SETTLE && <SettlementForm user={state.user}/>}
+          {mode === SETTLE && <SettlementForm user={state.user} settle={state.settle} onSettle={settle}/>}
         </section>
         {/* {display()} */}
         {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}

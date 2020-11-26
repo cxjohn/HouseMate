@@ -16,8 +16,9 @@ function useApplicationData() {
   const [state, setState] = useState({
     form: "none",
     user: {},
-    history: {},
-    summary: {}
+    history: [],
+    summary: {},
+    settle: {}
   })
 
   // useEffect(() => {

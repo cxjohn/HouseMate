@@ -11,20 +11,20 @@ function Button(props) {
       'button_login': props.login, 
       'button_register': props.register,
       'button_back': props.back,
-      'button_split': props.split
+      'button_split': props.split,
+      'button_settle': props.settle,
+      'button_notify': props.notify
     }
   )
       
   const icon = () => {
     if (props.register || props.login) {
       return (
-  
         <i 
           className="fa fa-arrow-circle-o-right form_icon"
           onClick={props.onClick} 
           >
         </i>
-
         )
     } else if (props.back) {
       return (
@@ -36,13 +36,14 @@ function Button(props) {
         )
     } else if (props.split) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
-    } 
+    } else if (props.settle) {
+      return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
+    } else if (props.notify) {
+      return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
+    }   
   }
 
-    return (
-
-      icon()
-    )
+    return icon()
       // if(props.register) 
       
 };

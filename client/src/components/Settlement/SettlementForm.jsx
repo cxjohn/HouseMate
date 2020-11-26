@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import './SettlementForm.scss';
+import SettlementFormListItem from './SettlementFormListItem';
 import { Card, Image } from 'semantic-ui-react';
 import Button from '../Button';
+
 
 
 function SettlementForm(props) {
@@ -11,52 +13,46 @@ function SettlementForm(props) {
     amount: props.amount || "",
   })
 
-  function split() {
-    const values = document.getElementsByClassName('ui label');
-    console.log("splitzies")
-    // console.log("value array:", values)
-    const users = [props.user.id];
-    for (const value of values) {
-      // console.log("name: ", value.innerText)
-      // console.log("id: ", value.attributes.value.value)
-      // console.log("desc ", formState.description)
-      // console.log("amount ", formState.amount)
-      users.push(Number(value.attributes.value.value))
-    }
+  // function settle() {
+  //   const values = document.getElementsByClassName('ui label');
+  //   console.log("splitzies")
+  //   // console.log("value array:", values)
+  //   const users = [props.user.id];
+  //   for (const value of values) {
+  //     users.push(Number(value.attributes.value.value))
+  //   }
 
-    const splitData = {
-      users,
-      description: formState.description,
-      amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
-      amount: formState.amount,
-      user_id: props.user.id
-    }
-    console.log('vegan', splitData)
+  //   const splitData = {
+  //     users,
+  //     description: formState.description,
+  //     amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
+  //     amount: formState.amount,
+  //     user_id: props.user.id
+  //   }
+  //   console.log('vegan', splitData)
 
-    return props.onSplit(splitData)
-  }
+  //   return props.onSplit(splitData)
+  // }
 
   return (
   <>
     <Card.Group className="settlement">
     <Card>
-      <Card.Content>
-        {/* <Image
-          floated='right'
-          size='mini'
-          src='images/logo192.png'
-        /> */}
-        <Button split className=".button_test"></Button>
-        <Card.Header>
-          LOGGED IN USERNAME
-          {/* <Button split className=".button_test"></Button> */}
-        </Card.Header>
-        {/* <Card.Meta>Total balance of:</Card.Meta> */}
-        <Card.Description>
-          {/* {status()} */}
-          {/* Steve wants to add you to the group <strong>best friends</strong> */}
-        </Card.Description>
-      </Card.Content>
+    {/* loop over props.settle */}
+    {
+      props.settle.map(data => 
+                
+        <SettlementFormListItem 
+          key={data[0]}
+          user_id={data[0]}
+          amount={data[1]}
+          first_name={data[2]}
+          last_name={data[3]}
+          logged_user_id={props.user.id}
+          onSettle={props.onSettle}
+        />
+      )
+    }
     </Card>
   </Card.Group>
    </>

@@ -37,7 +37,8 @@ function TransactionForm(props) {
       description: formState.description,
       amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
       amount: formState.amount,
-      user_id: props.user.id
+      user_id: props.user.id,
+      is_expense: true
     }
     console.log('vegan', splitData)
 
@@ -50,7 +51,7 @@ function TransactionForm(props) {
       <form onSubmit={event => event.target.preventDefault} className="form_transaction">
         <Dropdown placeholder='Mates' fluid multiple selection options={friends} />
 
-        <span class="input"></span>
+        <span className="input"></span>
         <input
           className='description'
           placeholder='Description'
@@ -58,9 +59,9 @@ function TransactionForm(props) {
           onChange={event => setFormState({ ...formState, description: event.target.value })}
           required
           autoFocus
-          autocomplete="off"
+          autoComplete="off"
         />
-        <span class="input"></span>
+        <span className="input"></span>
         <input
           className='amount'
           type='number'
@@ -70,7 +71,7 @@ function TransactionForm(props) {
           value={formState.amount}
           onChange={event => setFormState({ ...formState, amount: event.target.value })}
           required
-          autocomplete="off"
+          autoComplete="off"
         />
         <Button split onClick={split} >Splitzies</Button>
       </form>

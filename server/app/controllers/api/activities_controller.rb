@@ -28,6 +28,11 @@ class Api::ActivitiesController < ApplicationController
       # render json: {msg: shares}
       render json: {
         msg: "Raj is vegan",
+        # user: user,
+        history: recent_activity(user_paid),
+        summary: user_summary(user_paid),
+        settle: settlement(user_paid)
+
         # history: recent_activity,
         # summary: user_summary
       }
@@ -43,7 +48,8 @@ class Api::ActivitiesController < ApplicationController
     params.require(:activity).permit(
       :description,
       :amount,
-      :user_id
+      :user_id,
+      :is_expense
       )
   end
 end

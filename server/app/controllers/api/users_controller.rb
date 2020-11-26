@@ -17,7 +17,8 @@ class Api::UsersController < ApplicationController
         jwt: token,
         user_id: new_user_id,
         history: recent_activity(new_user_id),
-        summary: user_summary(new_user_id)
+        summary: user_summary(new_user_id),
+        settle: settlement(user.id)
       }
     else
       # error = "USER NOT SAVED"
