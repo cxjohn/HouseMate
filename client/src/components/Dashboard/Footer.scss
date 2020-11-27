@@ -7,19 +7,24 @@
 //   color: white;
 // }
 
-$col-sean-lavender-darker: darken($col-sean-lavender, 100%);
+$sean-theme-background-darker: darken($sean-theme-background, 100%);
+$sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
 
 .dashboard_footer {
 
   display: flex;
   flex-direction: column;
   height: 5rem;
-
+  background: $sean-theme-background-slightly-dark;
+  border-top: 2px solid lightgrey;
+  position: sticky;
+  bottom: 0px;
+  width: 100%;
+  margin-bottom: 0px;
 
   .mobile-bottom-bar {
     width: 100%;
     height: 2.5rem;
-    background: $col-sean-lavender;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,22 +34,55 @@ $col-sean-lavender-darker: darken($col-sean-lavender, 100%);
     .footer-link {
       flex: 1 1 auto;
       text-align: center;
-      color: $col-sean-lavender-darker;
+      color: $sean-theme-background-darker;
       text-transform: uppercase;
       font-size: rem-calc(13);
       font-weight: bold;
-      padding: 0.907rem 1rem;
+      // padding: 0.907rem 1rem;
 
       i.fa {
         // opacity: 0.8;
         margin-right: rem-calc(10);
-        font-size: rem-calc(24);
+        margin-bottom: 5px;
+        // font-size: rem-calc(24);
+        font-size: 1.75em;
         vertical-align: middle;
+
+      }
+      i.fa.add_selected {
+        color: $col-sean-red;
+        // font-size: 2.5em;
+        // shadow
+        
+      }
+      i.fa.home_selected {
+        color: $col-sean-red;
+        // font-size: 2.5em;
+        // shadow
+        
+      }
+      i.fa.settle_selected {
+        color: $col-sean-red;
+        // font-size: 2.5em;
+        // shadow
+        
+      }
+      i.fa.profile_selected {
+        color: $col-sean-red;
+        // font-size: 2.5em;
+        // shadow
+        
+      }
+      i.fa.friend_selected {
+        color: $col-sean-red;
+        // font-size: 2.5em;
+        // shadow
+        
       }
 
       // &:focus,
       // &:active {
-      //   color: $col-sean-lavender-darker;
+      //   color: $col-sean-red-darker;
       // }
     }
 
@@ -53,7 +91,7 @@ $col-sean-lavender-darker: darken($col-sean-lavender, 100%);
   //     top: 2px;
   //     font-weight: bold;
   //     font-size: rem-calc(14);
-  //     color: $col-sean-lavender-darker;
+  //     color: $col-sean-red-darker;
   //   }
   }
 }

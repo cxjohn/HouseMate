@@ -1,6 +1,6 @@
 import './Activity.scss'
 import ActivityListItem from './ActivityListItem'
-import { Card, Feed } from 'semantic-ui-react'
+import { Card, Divider, Feed } from 'semantic-ui-react'
 
 const Activity = (props) => (
   <Card>
@@ -14,6 +14,7 @@ const Activity = (props) => (
           <ActivityListItem
             key={data[0]}
             amount={data[1].cents}
+            date={data[2]}
             description={data[3]}
             first_name={data[4]}
             last_name={data[5]}
@@ -23,6 +24,7 @@ const Activity = (props) => (
           )
         }
       </Feed>
+    {/* <Divider /> */}
     </Card.Content>
   </Card>
 )

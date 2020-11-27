@@ -13,8 +13,8 @@ function Summary(props) {
     } else if (props.summary === 0) {
       return <p>Worry is like interest paid in advance on a debt that never comes due.</p>
     } else {
-      return <p>
-                <p className="money_red">You owe ${-props.summary / 100}</p>
+      return <p>You owe
+                <p className="money_red"> ${props.summary / 100}</p>
               </p>
     }
   }

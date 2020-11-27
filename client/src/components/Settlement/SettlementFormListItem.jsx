@@ -9,9 +9,9 @@ function SettlementFormListItem(props) {
   function button () {
 
     if (props.amount > 0) {
-      return <Button settle onClick={settle}>Settle</Button>
+      return <p>You owe {props.first_name} {props.last_name} ${props.amount} <Button settle onClick={settle}>Settle</Button></p>
     } else {
-      return <Button notify onClick={notify}>Notify</Button>
+      return <p>{props.first_name} {props.last_name} owes you ${-props.amount} <Button notify onClick={notify}>Notify</Button></p>
     }
   }
 
@@ -27,14 +27,12 @@ function SettlementFormListItem(props) {
 
     const settleData = {
       users,
-      amount_owed: props.amount / 100,
+      amount_owed: props.amount,
       description: "settled",
       user_id: props.logged_user_id,
       is_expense: false
     }
-
     return props.onSettle(settleData)
-    
   }
 
   return (
@@ -47,7 +45,7 @@ function SettlementFormListItem(props) {
         /> */}
         {/* <Button split className=".button_test"></Button> */}
         <Card.Header>
-          TEST {props.first_name}
+          {/* {props.first_name} */}
           {button()}
           {/* <Button split className=".button_test"></Button> */}
         </Card.Header>

@@ -18,6 +18,13 @@
     font-weight: 450;
   }
   
+  .content time {
+    font-weight: 400;
+    font-size: 1em;
+    font-style: normal;
+    color: rgba(0,0,0,.4);
+  }
+
   .content .summary p {
     display: flex;
 
@@ -30,6 +37,10 @@
     color: red;
     margin-left: 5px;
     }
+  }
+
+  .activiy_owe_name {
+    margin-left: 5px;
   }
 
 }

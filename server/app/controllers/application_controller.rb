@@ -150,7 +150,7 @@ class ApplicationController < ActionController::API
     friends = Friend.find_by(user_id: user_id)
   # now our friends list array in stored in friends.friends_list
     friends_list = []
-    friends.friends_list.each do |friend|
+    friends && friends.friends_list.each do |friend|
   #  we want first_name and last_name from User table where user_id = friend
       first_name = User.find(friend).first_name
       last_name = User.find(friend).last_name

@@ -1,5 +1,7 @@
 import './ActivityListItem.scss';
-import { Card, Feed } from 'semantic-ui-react'
+import { Card, Feed, Divider } from 'semantic-ui-react'
+// import React from 'react';
+import  Moment  from 'react-moment';
 
 function ActivityListItem (props) {
 
@@ -9,22 +11,21 @@ function ActivityListItem (props) {
       
       if (props.amount < 0) {
       return <span className='activity_block'>
-              <p> You paid for <b>{props.description}</b> </p>
+              <p> You paid for {props.description} </p>
               <p>{props.first_name} {props.last_name} owes you 
                 <p className='money_green'>${-props.amount/100}</p>
               </p>
              </span>
       } else {
       return <span className='activity_block'>
-              {props.first_name} {props.last_name} paid for <b>{props.description}</b>
-                <p>You owe <strong>{props.first_name} {props.last_name}</strong> 
-                  <p className='money_red'>${props.amount/100}</p>
+              <div className="payment">{props.first_name} {props.last_name} paid for <b>{props.description}</b></div>
+                <p>You owe <p className='money_red'>${props.amount/100}</p>
                 </p>
              </span>
       }
     } else {
        return <span className='activity_block'>
-                You paid for <b>{props.description}</b>
+                <div className="payment">You paid for <b>{props.description}</b></div>
                 <p>You are owed 
                   <p className='money_green'>${-props.amount/100}</p>
                 </p>
@@ -34,17 +35,18 @@ function ActivityListItem (props) {
 
 
   return (
-  
+        <>
         <Feed.Event className="dashboard_activity">
           <Feed.Label image='images/logo192.png' />
           <Feed.Content>
-            <Feed.Date content='STRETCH: 1 day ago' />
+            <Moment fromNow>{props.date}</Moment>
             <Feed.Summary>
-              {activity()}
-              {/* You added <a>Jenny Hess</a> to your <a>coworker</a> group. */}
+              {activity()}      
             </Feed.Summary>
           </Feed.Content>
         </Feed.Event>
+        <Divider />
+        </>
 
   )
 }

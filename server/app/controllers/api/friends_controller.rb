@@ -16,7 +16,7 @@ class Api::FriendsController < ApplicationController
           friend.friends_list.push(new_friend.id)
         end
 
-        if user.save || friend.save
+        if user && user.save || friend.save
           render json: {
             friends_list: friends_list(friendship[:user_id])
           }

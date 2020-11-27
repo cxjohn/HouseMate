@@ -273,13 +273,13 @@ function App() {
         {mode === FRIEND && <Header />}
         {mode === PROFILE && <Header />}
         {/* <h2>{state.user && state.user.first_name}</h2> */}
-        {/* {mode === REGISTER && (
+        {/* {mode === REGISTER && ( images/housematewhite.png
         <div>
-          <Button back onClick={(event) => display(event)}></Button>
+          <Button back onClick={(event)  => display(event)}></Button>
         )} */}
       </header>
       <main>
-        {mode === HOME && <img id="logo" src="images/housematewhite.png" width={150}></img>}
+        {mode === HOME && <img id="logo" src="https://i.imgur.com/5HK16TW.png" width={150}></img>}
         {mode === REGISTER && <RegisterForm
           display={display}
           // register={register}
@@ -312,15 +312,15 @@ function App() {
       </main>
       {/* <footer> */}
       {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
-      {mode === HOME && <><AuthBar login onClick={(event) => display(event)}>Login</AuthBar>
+      {mode === HOME && <div><AuthBar login onClick={(event) => display(event)}>Login</AuthBar>
           <AuthBar register onClick={(event) => display(event)}>
             Register
-                </AuthBar></>}
-      {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
-      {mode === ADD && <Footer onClick={event => display(event)}/>}
-      {mode === SETTLE && <Footer onClick={event => display(event)}/>}
-      {mode === FRIEND && <Footer onClick={event => display(event)}/>}
-      {mode === PROFILE && <Footer onClick={event => display(event)}/>}
+                </AuthBar></div>}
+      {mode === DASHBOARD && <Footer home onClick={event => display(event)}/>}
+      {mode === ADD && <Footer add onClick={event => display(event)}/>}
+      {mode === SETTLE && <Footer settle onClick={event => display(event)}/>}
+      {mode === FRIEND && <Footer friend onClick={event => display(event)}/>}
+      {mode === PROFILE && <Footer profile onClick={event => display(event)}/>}
       {/* </footer> */}
     </Fragment>
   )

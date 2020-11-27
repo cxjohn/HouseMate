@@ -24,7 +24,7 @@ function SettlementForm(props) {
         <SettlementFormListItem 
           key={data[0]}
           user_id={data[0]}
-          amount={data[1]}
+          amount={data[1]/100}
           first_name={data[2]}
           last_name={data[3]}
           logged_user_id={props.user.id}
