@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import './SettlementForm.scss';
+import './SettlementFormListItem.scss';
 import { Card, Image } from 'semantic-ui-react';
 import Button from '../Button';
+import '../Button.scss';
 
 
 function SettlementFormListItem(props) {
@@ -9,11 +10,13 @@ function SettlementFormListItem(props) {
   function button () {
 
     if (props.amount > 0) {
-      return <p>You owe {props.first_name} {props.last_name} ${props.amount} <Button settle onClick={settle}>Settle</Button></p>
-    } else {
-      return <p>{props.first_name} {props.last_name} owes you ${-props.amount} <Button notify onClick={notify}>Notify</Button></p>
+      return <p>You owe {props.first_name} {props.last_name} <p className='money_red'>${props.amount}</p> <Button settle onClick={settle}>Settle</Button></p>
+    } else if (props.amount === 0) {
+      return null
+    } else
+      return <p>{props.first_name} {props.last_name} owes you <p className='money_green'>${-props.amount}</p> <Button notify onClick={notify}>Notify</Button></p>
     }
-  }
+
 
   function notify () {
 

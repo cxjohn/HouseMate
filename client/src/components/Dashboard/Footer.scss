@@ -18,9 +18,21 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
   background: $sean-theme-background-slightly-dark;
   border-top: 2px solid lightgrey;
   position: sticky;
-  bottom: 0px;
+  bottom: -2.5em;
   width: 100%;
-  margin-bottom: 0px;
+  margin-bottom: -2.5em;
+
+  #upper_footer {
+    visibility: visible;
+  }
+
+  #bottom_footer .hidden{
+    visibility: hidden;
+  }
+
+  #bottom_footer .visible{
+    visibility: visible;
+  }
 
   .mobile-bottom-bar {
     width: 100%;

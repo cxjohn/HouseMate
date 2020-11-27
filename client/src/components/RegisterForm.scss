@@ -159,8 +159,8 @@ input:focus {
   position: relative;
   width: .25em;
   height: 3em;
-  // background: #fff;
   background: $sean-theme-background;
+  // background: $col-sean-red;
   margin: 0% 0 -2em;
   z-index: 1;
 }
@@ -172,8 +172,8 @@ input:focus {
   height: 100%;
   position: absolute;
   right: -19.5em; // eyeball the number
-  // background: #fff;
   background: $sean-theme-background;
+  // background: $col-sean-red;
 }
 
 // styles placeholder colour

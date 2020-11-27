@@ -25,20 +25,91 @@ form {
     text-align: center;
     font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
     font-weight: 600;
-  
+
+    
     // &:hover,
     // &:focus {
     //   color: #fff;
     //   outline: 0;
     // }
   }
-
   
+  
+  .button.button_update {
+    color: $col-sean-purple;
+    border: 1.2px solid $col-sean-purple;
+    border-radius: 0.25em;
+    box-shadow: 0px 0px 2px $col-sean-purple;
+  }
 
-  // .button_split {
-  //   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  //   &:hover {
-  //     box-shadow: 0 0 40px 40px green inset;
-  //   }
-  // }
+}
+
+.button.button_logout {
+
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 1.2px solid $col-sean-red;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px $col-sean-red;
+  color: $col-sean-red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 0.8em 2em;
+  text-decoration: none;
+  text-align: center;
+  font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+}
+
+.button.button_settle {
+
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 1.2px solid $col-sean-red;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px $col-sean-red;
+  color: $col-sean-red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  padding: 0.2em 0.5em;
+  text-decoration: none;
+  text-align: center;
+  font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+}
+.button.button_notify {
+
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 1.2px solid $col-sean-red;
+  border-radius: 0.25em;
+  box-shadow: 0px 0px 2px $col-sean-red;
+  color: $col-sean-red;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+  margin: 20px;
+  width: 5em;
+  padding: 0.2em;
+  text-decoration: none;
+  text-align: center;
+  font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 600;
 }

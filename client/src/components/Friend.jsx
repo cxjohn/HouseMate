@@ -25,10 +25,11 @@ function Friend(props) {
     <div>
       {/* <Button className='back-arrow' back onClick={(event) => props.displayForm(event)}>Back</Button> */}
       <form onSubmit={event => event.preventDefault()}>
+        <span className="input"></span>
         <input
           className='email'
           type='email'
-          placeholder='Enter Friends Email...'
+          placeholder="Enter Friends's Email..."
           value={formState.email}
           onChange={event => setFormState({ ...formState, email: event.target.value })}
           autoFocus

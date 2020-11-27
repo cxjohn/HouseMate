@@ -1,16 +1,18 @@
 // loading status
+import './Status.scss';
 
 function Status (props) {
 
   return (
     // <main className="status">
-    <img
-      className="status-image"
-      src="images/loading.png"
-      // src="images/housematewhite.png"
-      alt="Loading"
-    />
-    // <div class="full granimate"></div>
+    // <img
+    //   className="full granimate"
+    //   // src="images/loading.png"
+    //   src="https://i.imgur.com/4Qx0TNt.gifv"
+    //   alt="Loading"
+    // />
+    <a href="https://imgur.com/4Qx0TNt"><img src="https://i.imgur.com/4Qx0TNt.gif" title="source: imgur.com" /></a>
+    // <section class="full granimate"></section>
     )
   }
   // {/* </main> */}

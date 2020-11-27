@@ -15,6 +15,7 @@ function SettlementForm(props) {
 
   return (
   <>
+  <h2 className='settle_text'>Settle Here</h2>
     <Card.Group className="settlement">
     <Card>
     {/* loop over props.settle */}

@@ -263,8 +263,8 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("token")
-    transition(HOME);
-    // transition(SAVING);
+    // transition(HOME);
+    transition(SAVING);
     // recieve recent activity data from the server and update state
     // transition to user dashboard
     // update state at the front end like we did for scheduler?

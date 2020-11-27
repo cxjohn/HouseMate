@@ -183,10 +183,11 @@ class ApplicationController < ActionController::API
           # render json: {
           #   friends_list: friends_list(logged_user_id)
           # }
-          {friends_list: friends_list(logged_user_id)}
+          list_of_friends = friends_list(logged_user_id)
         else
           # render json: {errors: friend.errors.full_messages}, status: :not_acceptable
-          {errors: friend.errors.full_messages}
+          # {errors: friend.errors.full_messages}
+          nil
         end
       # else
       #   render json: {error: message}, status: :not_acceptable

@@ -5,8 +5,9 @@ import './Profile.scss'
 function Profile(props) {
 
   const [formState, setFormState] = useState({
-    email: props.email || "",
-    password: "",
+    first_name: props.user.first_name || "",
+    last_name: props.user.last_name || "",
+    email: props.user.email || ""
   })
 
   function login() {
@@ -23,24 +24,54 @@ function Profile(props) {
     return props.onLogout();
   }
 
+  function update() {
+    if (props.user.first_name !== formState.first_name) {
+      return <Button update onClick={update}>Update</Button>
+    } else if (props.user.last_name !== formState.last_name) {
+      return <Button update onClick={update}>Update</Button>
+    } else if (props.user.email !== formState.email) {
+      return <Button update onClick={update}>Update</Button>
+    }
+    
 
-  const handleSubmit= (event) => {
+  }
+
+  const handleSubmit = (event) => {
     event.preventDefault();
   }
 
-  return (
-    <div>
-      <img className='profile_pic' src="images/logo192.png"></img>
+  // const form_first_name = () => {
+  //   console.log("first name clicked!")
+  //   return (
+  //     <form onSubmit={handleSubmit}>
+  //       <span className="input"></span>
+  //       <input
+  //         className='firstName'
+  //         // placeholder='First Name'
+  //         value={formState.first_name}
+  //         onChange={event => setFormState({...formState, first_name: event.target.value })}
+  //         required
+  //         autoFocus
+  //         autoComplete="off"
+  //       />
+  //     </form>
+  //   )
+    
+  // }
 
-      <form onSubmit={handleSubmit}>
+
+  return (
+    <div className="user_profile">
       <h1>Profile</h1><br/>
+      <img className='profile_pic' src="images/logo192.png" width={100}></img>
+      <form onSubmit={handleSubmit}>
 
       <span className="input"></span>
       <input
         className='firstName'
-        placeholder='First Name'
-        value={formState.firstName}
-        onChange={event => setFormState({...formState, firstName: event.target.value })}
+        // placeholder='First Name'
+        value={formState.first_name}
+        onChange={event => setFormState({...formState, first_name: event.target.value })}
         required
         autoFocus
         autoComplete="off"
@@ -48,9 +79,9 @@ function Profile(props) {
       <span className="input"></span>
       <input 
         className='lastName'
-        placeholder='Last Name'
-        value={formState.lastName}
-        onChange={event => setFormState({...formState, lastName: event.target.value })}
+        // placeholder='Last Name'
+        value={formState.last_name}
+        onChange={event => setFormState({...formState, last_name: event.target.value })}
         required
         autoComplete="off"
       />
@@ -58,22 +89,29 @@ function Profile(props) {
         <input
           className='email'
           type='email'
-          placeholder='Email'
+          // placeholder='Email'
           value={formState.email}
           onChange={event => setFormState({ ...formState, email: event.target.value })}
-          autoFocus
           required
         />
-
-      <Button logout onClick={logout}>Logout</Button>
-
+        
+      {/* { (props.user.first_name !== formState.first_name) &&
+      <Button update onClick={update}>Update</Button>}
+     {(props.user.last_name !== formState.last_name) &&
+      <Button update onClick={update}>Update</Button>}
+     {(props.user.email !== formState.email) &&
+      <Button update onClick={update}>Update</Button>}  */}
+      { update() }
         {/* on clicking login, we want to receive email and password */}
         {/* and the do something with it */}
         {/* <Button update onClick={update}>Update</Button>
         <Button logout onClick={logout}>Logout</Button> */}
         {/* on clicking back, we should go to the previous visual state */}
         {/* <Button back onClick={(event) => props.displayForm(event)}>Back</Button> */}
-      </form>
+      </form> 
+        <Button logout onClick={logout}>Logout</Button>
+
+
     </div>
   )
 };

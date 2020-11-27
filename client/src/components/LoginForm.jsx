@@ -38,6 +38,7 @@ function LoginForm(props) {
           <Button back onClick={(event) => props.display(event)}>Back</Button>
           <h1>Log In</h1>
         </div>
+        <span className="input"></span>
         <input
           className='email'
           type='email'
@@ -47,6 +48,7 @@ function LoginForm(props) {
           autoFocus
           required
         />
+        <span className="input"></span>
         <input
           className='password'
           type='password'

@@ -5,13 +5,18 @@ class Api::FriendsController < ApplicationController
     friendship = params.require(:friend).permit(:user_id, :friends_list)
     new_friend = User.find_by(email: friendship[:friends_list])
     if new_friend
-      add_friend(friendship[:user_id], new_friend)
+      list = add_friend(friendship[:user_id], new_friend)
       if new_friend.id != friendship[:user_id]
         id = new_friend.id
         new_friend = User.find(friendship[:user_id])
         add_friend(id, new_friend)
-
-        render json: {message: "works"}
+# send an array back of friends list
+        unless list 
+          render json: {friends_list: list}
+        else
+          render json: {message: "works"}
+        end
+          
       else
         message = "You cannot add your own e-mail!"
         render json: {error: message}, status: :not_acceptable
