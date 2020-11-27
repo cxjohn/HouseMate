@@ -11,7 +11,7 @@ class Api::FriendsController < ApplicationController
         new_friend = User.find(friendship[:user_id])
         add_friend(id, new_friend)
 # send an array back of friends list
-        unless list 
+        if list 
           render json: {friends_list: list}
         else
           render json: {message: "works"}
