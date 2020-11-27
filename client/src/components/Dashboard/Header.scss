@@ -1,16 +1,23 @@
 @import '../../sass/_variables';
 
-.dashboard_header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: $col-sean-lavender;
-  color: white;
-  height: 4rem;
-  font-size: 1.5rem;
-  font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-  font-weight: 600;
+
+  .dashboard_header {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    background-color: $sean-theme-background;
+    height: 4rem;
+    font-size: 1.5rem;
+    font-family: "Avenir Next", Avenir, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    font-weight: 600;
 
 
-}
+    #header_text {
+      margin-top: 11px;
+      margin-bottom: 0;
+      margin-left: 5px;
+    }
+    
+  }

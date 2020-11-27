@@ -2,17 +2,32 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  // align-items: center;
   text-align: center;
   color: white;
 
 
+
   
   .auth_bar_login {
-    background-color: #E97272
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #6874E8;
+    height: 4rem;
+    font-size: 200%;
+    font-weight: 500%;
+
+    
   }
 
   .auth_bar_register {
-    background-color: #A17DED
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DA4167;
+    height: 4rem;
+    font-size: 200%;
+    font-weight: 500%;
   }
 }
-

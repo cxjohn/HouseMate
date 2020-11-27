@@ -5,7 +5,7 @@ function Footer(props) {
     <footer className="dashboard_footer">
       <span className="mobile-bottom-bar">
         <span className="footer-link">
-          <i className="fa fa-home"></i>
+          <i className="fa fa-home" onClick={props.onClick}></i>
         </span>
         <span className="footer-link">
           <i className="fa fa-plus-square" onClick={props.onClick}></i>

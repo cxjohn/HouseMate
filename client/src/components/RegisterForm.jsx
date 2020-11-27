@@ -50,12 +50,12 @@ function register () {
   return(
     // <div></div>
     // <h3>Register Form</h3>
-    
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
-        <h1>Sign up</h1>
+    <>
+      <div className='back'>
+        <Button back onClick={(event) => props.display(event)}>Back</Button>
+        <h1>Sign Up</h1>
       </div>
+    <form onSubmit={handleSubmit}>
       <span className="input"></span>
       <input
         className='firstName' 
@@ -86,17 +86,17 @@ function register () {
         onChange={event => setFormState({...formState, email: event.target.value })}
         required
       />
-      <span id="passwordMeter"></span>
+      <span className="input"></span>
       <input 
         className='password' 
         type='password' 
         placeholder='Password'
-        id='password'
+        // id='password'
         value={formState.password}
         onChange={event => setFormState({...formState, password: event.target.value })}
         required
       />
-      <span id="passwordMeter"></span>
+      <span className="input"></span>
       <input
         className='password'
         type='password' 
@@ -116,6 +116,7 @@ function register () {
       </Button>
 
 </form>
+</>  
   )
   
 };

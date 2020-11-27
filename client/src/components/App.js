@@ -99,6 +99,8 @@ function App() {
       transition(FRIEND)
     } else if (event.target.classList.contains("fa-user-circle-o")) {
       transition(PROFILE)
+    } else if (event.target.classList.contains("fa-home")) {
+      transition(DASHBOARD)
     }
   };
 
@@ -263,7 +265,7 @@ function App() {
   return (
     <Fragment>
 
-      <header className="dashboard_header">
+      <header>
         {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
         {mode === DASHBOARD && <Header />}
         {mode === ADD && <Header />}
@@ -274,14 +276,10 @@ function App() {
         {/* {mode === REGISTER && (
         <div>
           <Button back onClick={(event) => display(event)}></Button>
-        </div>
         )} */}
       </header>
       <main>
-        {mode === HOME && <><h1>HouseMate</h1><AuthBar login onClick={(event) => display(event)}>Login</AuthBar>
-          <AuthBar register onClick={(event) => display(event)}>
-            Register
-                </AuthBar></>}
+        {mode === HOME && <img id="logo" src="images/housematewhite.png" width={150}></img>}
         {mode === REGISTER && <RegisterForm
           display={display}
           // register={register}
@@ -289,8 +287,8 @@ function App() {
         />}
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
         {mode === SAVING && <Status message={"Saving"} />}
-        <section className="dashboard">
-          {mode === DASHBOARD && <Summary summary={state.summary}/>}
+        {/* <section className="dashboard"> */}
+          {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
           {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
           {
             mode === ADD && <TransactionForm 
@@ -309,16 +307,21 @@ function App() {
           }
           {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
           {mode === PROFILE && <Profile user={state.user}/>}
-        </section>
+        {/* </section> */}
         {/* {display()} */}
-        {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
-        {mode === ADD && <Footer onClick={event => display(event)}/>}
-        {mode === SETTLE && <Footer onClick={event => display(event)}/>}
-        {mode === FRIEND && <Footer onClick={event => display(event)}/>}
-        {mode === PROFILE && <Footer onClick={event => display(event)}/>}
       </main>
+      {/* <footer> */}
       {/* {mode === DASHBOARD && <Header message={"Saving"}/>} */}
-
+      {mode === HOME && <><AuthBar login onClick={(event) => display(event)}>Login</AuthBar>
+          <AuthBar register onClick={(event) => display(event)}>
+            Register
+                </AuthBar></>}
+      {mode === DASHBOARD && <Footer onClick={event => display(event)}/>}
+      {mode === ADD && <Footer onClick={event => display(event)}/>}
+      {mode === SETTLE && <Footer onClick={event => display(event)}/>}
+      {mode === FRIEND && <Footer onClick={event => display(event)}/>}
+      {mode === PROFILE && <Footer onClick={event => display(event)}/>}
+      {/* </footer> */}
     </Fragment>
   )
 

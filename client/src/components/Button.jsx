@@ -6,30 +6,30 @@ import classnames from 'classnames';
 
 function Button(props) {
   const buttonClass = classnames(
-    'button',
+    // 'button',
     { 
-      'button_login': props.login, 
-      'button_register': props.register,
-      'button_back': props.back,
-      'button_split': props.split,
-      'button_settle': props.settle,
-      'button_notify': props.notify,
-      'button_friend': props.friend
+      'icon_login': props.login, 
+      'icon_register': props.register,
+      'button button_back': props.back,
+      'button button_split': props.split,
+      'button button_settle': props.settle,
+      'button button_notify': props.notify,
+      'button button_friend': props.friend
     }
   )
       
   const icon = () => {
     if (props.register || props.login) {
       return (
-        <i 
-          className="fa fa-arrow-circle-o-right form_icon"
+        <i
+          className={`fa fa-arrow-circle-o-right form_icon ${buttonClass}`}
           onClick={props.onClick} 
           >
         </i>
         )
     } else if (props.back) {
       return (
-        <i 
+        <i
           className="fa fa-angle-left form_icon"
           onClick={props.onClick}
         >

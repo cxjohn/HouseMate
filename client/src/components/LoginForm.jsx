@@ -33,7 +33,10 @@ function LoginForm(props) {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-      <h1>Login</h1><br/>
+        <div>
+          <Button back onClick={(event) => props.display(event)}>Back</Button>
+          <h1>Log In</h1>
+        </div>
         <input
           className='email'
           type='email'
@@ -56,7 +59,7 @@ function LoginForm(props) {
         {/* and the do something with it */}
         <Button login onClick={login}>Login</Button>
         {/* on clicking back, we should go to the previous visual state */}
-        <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
+        
       </form>
     </div>
   )

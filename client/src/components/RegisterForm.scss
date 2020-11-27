@@ -52,9 +52,9 @@ body, input {
 }
 
 body {
-  line-height: 1.6;
+  // line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  background: #fff;
+  // background: #fff;
   color: #111;
 }
 
@@ -156,7 +156,7 @@ input:focus {
   position: relative;
   width: .25em;
   height: 3em;
-  background: #fff;
+  // background: #fff;
   margin: 0% 0 -2em;
   z-index: 1;
 }
@@ -168,7 +168,7 @@ input:focus {
   height: 100%;
   position: absolute;
   right: -19.5em; // eyeball the number
-  background: #fff;
+  // background: #fff;
 }
 
 // styles placeholder colour
@@ -286,6 +286,23 @@ input:focus::-ms-input-placeholder {
 // button {
 // fa-arrow-circle-o-right
 // fa-angle-left
+.fa-arrow-circle-o-right
+ {
+  outline: none;
+  -webkit-appearance: none; // mobile Safari
+  border: none;
+  background: transparent;
+  color: #bbb;
+  font-size: 2.05em;
+  padding: 3% 7%;
+  cursor: pointer;
+  position: absolute;
+  // right: -6%; // slight overlap with custom rectangle that hides border
+  right: 0; // slight overlap with custom rectangle that hides border
+  bottom: 10px;
+  @include animation;
+}
+
 .fa-arrow-circle-o-right {
   outline: none;
   -webkit-appearance: none; // mobile Safari
@@ -297,10 +314,9 @@ input:focus::-ms-input-placeholder {
   cursor: pointer;
   position: absolute;
   // right: -6%; // slight overlap with custom rectangle that hides border
-  right: -5%; // slight overlap with custom rectangle that hides border
+  right: 0; // slight overlap with custom rectangle that hides border
   bottom: 0%;
   @include animation;
-  
 }
 
 .fa-angle-left {
@@ -310,11 +326,15 @@ input:focus::-ms-input-placeholder {
   background: transparent;
   color: #bbb;
   font-size: 2.05em;
-  padding: 3% 7%;
+  // padding: 3% 7%;
+  padding: 1.5%;
+  // padding-bottom: 50px;
+  // margin-bottom: 50px;
   cursor: pointer;
   position: absolute;
+  top: 0;
   left: 6%;
-  bottom: 0%;
+  // bottom: 0%;
   @include animation;
 }
 
@@ -333,7 +353,7 @@ input:focus::-ms-input-placeholder {
 }
 
 div {
-  margin: 15% auto 0;
+  // margin: 15% auto 0;
   max-width: 32em;
   -webkit-animation: moveDown .3s;
   -moz-animation: moveDown .3s;
@@ -365,4 +385,13 @@ p {
 .twitter-share-button {
   vertical-align: -15%;
   margin-right: -25px !important;
+}
+
+.back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  // height: 300px;
 }

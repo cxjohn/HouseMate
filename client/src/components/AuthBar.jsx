@@ -14,10 +14,10 @@ function AuthBar(props) {
 
   console.log(props)
   return (
-  <section className="auth_bar" onClick={props.onClick}>
+  <footer className="auth_bar" onClick={props.onClick}>
     {/* <span className={`auth_bar_${props.name.toLowerCase()}`}>{props.name}</span> */}
     <span className={authClass}>{props.children}</span>
-  </section>
+  </footer>
   )
 };
 
