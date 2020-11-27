@@ -18,6 +18,12 @@ function Profile(props) {
     return props.onLogin(userData);
   }
 
+  function logout() {
+
+    return props.onLogout();
+  }
+
+
   const handleSubmit= (event) => {
     event.preventDefault();
   }
@@ -58,12 +64,15 @@ function Profile(props) {
           autoFocus
           required
         />
+
+      <Button logout onClick={logout}>Logout</Button>
+
         {/* on clicking login, we want to receive email and password */}
         {/* and the do something with it */}
         {/* <Button update onClick={update}>Update</Button>
         <Button logout onClick={logout}>Logout</Button> */}
         {/* on clicking back, we should go to the previous visual state */}
-        <Button back onClick={(event) => props.displayForm(event)}>Back</Button>
+        {/* <Button back onClick={(event) => props.displayForm(event)}>Back</Button> */}
       </form>
     </div>
   )

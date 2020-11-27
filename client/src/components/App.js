@@ -261,6 +261,14 @@ function App() {
     .catch(error => console.log(error))
   }
 
+  const logout = () => {
+    localStorage.removeItem("token")
+    transition(HOME);
+    // transition(SAVING);
+    // recieve recent activity data from the server and update state
+    // transition to user dashboard
+    // update state at the front end like we did for scheduler?
+  }
 
   return (
     <Fragment>
@@ -306,7 +314,7 @@ function App() {
               />
           }
           {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
-          {mode === PROFILE && <Profile user={state.user}/>}
+          {mode === PROFILE && <Profile onLogout={logout} user={state.user}/>}
         {/* </section> */}
         {/* {display()} */}
       </main>

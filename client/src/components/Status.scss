@@ -1,0 +1,40 @@
+.granimate {
+  background-color: #2ecc71;
+  animation: hue 11s linear 0s infinite reverse;
+}
+.granimate::before {
+  background: linear-gradient(105deg, rgba(255, 190, 0, 0), #ffbe00);
+  animation: hue 12s linear 1s infinite;
+}
+
+@keyframes hue {
+  to {
+    filter: hue-rotate(1turn);
+  }
+}
+
+.full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  font-family: system-ui;
+  font-size: 48px;
+}
+.full::before {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+.full::after {
+  content: 'Hue hue hue';
+  position: relative;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+}

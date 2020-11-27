@@ -1,3 +1,6 @@
+@import '../sass/_variables';
+
+
 * {
   margin: 0;
   padding: 0;
@@ -120,7 +123,7 @@ input {
   background: transparent;
   display: block;
   height: 2em;
-  width: 12em;
+  width: auto;
   margin-bottom: 5%;
   padding: 0 3%;
   position: relative;
@@ -157,6 +160,7 @@ input:focus {
   width: .25em;
   height: 3em;
   // background: #fff;
+  background: $sean-theme-background;
   margin: 0% 0 -2em;
   z-index: 1;
 }
@@ -169,6 +173,7 @@ input:focus {
   position: absolute;
   right: -19.5em; // eyeball the number
   // background: #fff;
+  background: $sean-theme-background;
 }
 
 // styles placeholder colour

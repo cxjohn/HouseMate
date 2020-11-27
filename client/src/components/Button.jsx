@@ -14,7 +14,8 @@ function Button(props) {
       'button button_split': props.split,
       'button button_settle': props.settle,
       'button button_notify': props.notify,
-      'button button_friend': props.friend
+      'button button_friend': props.friend,
+      'button button_logout': props.logout
     }
   )
       
@@ -43,7 +44,9 @@ function Button(props) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
     } else if (props.friend) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
-    }    
+    } else if (props.logout) {
+      return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
+    }        
   }
 
     return icon()

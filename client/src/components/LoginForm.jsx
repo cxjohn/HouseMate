@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Button from './Button';
+import './RegisterForm.scss';
 
 function LoginForm(props) {
 

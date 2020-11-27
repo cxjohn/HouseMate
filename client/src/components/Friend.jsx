@@ -23,7 +23,7 @@ function Friend(props) {
 
   return (
     <div>
-      <Button className='back-arrow' back onClick={(event) => props.displayForm(event)}>Back</Button>
+      {/* <Button className='back-arrow' back onClick={(event) => props.displayForm(event)}>Back</Button> */}
       <form onSubmit={event => event.preventDefault()}>
         <input
           className='email'
