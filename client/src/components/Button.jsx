@@ -16,7 +16,8 @@ function Button(props) {
       'button button_notify': props.notify,
       'button button_friend': props.friend,
       'button button_logout': props.logout,
-      'button button_update': props.update
+      'button button_update': props.update,
+      'button button_group': props.group,
     }
   )
       
@@ -49,7 +50,9 @@ function Button(props) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
     } else if (props.update) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
-    }        
+    } else if (props.group) {
+      return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
+    }         
   }
 
     return icon()

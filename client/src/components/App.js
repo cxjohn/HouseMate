@@ -8,16 +8,17 @@ import axios from 'axios';
 import useApplicationData from "../hooks/useApplicationData";
 import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
-import Status from "./Status"
-import Button from "./Button"
-import Friend from "./Friend"
-import Profile from "./Profile"
-import Header from "./Dashboard/Header"
-import Footer from "./Dashboard/Footer"
-import Summary from "./Dashboard/Summary"
-import Activity from "./Dashboard/Activity"
-import TransactionForm from "./Transaction/TransactionForm"
-import SettlementForm from "./Settlement/SettlementForm"
+import Status from "./Status";
+import Button from "./Button";
+import Friend from "./Friend";
+import Profile from "./Profile";
+import Header from "./Dashboard/Header";
+import Footer from "./Dashboard/Footer";
+import Summary from "./Dashboard/Summary";
+import Activity from "./Dashboard/Activity";
+import TransactionForm from "./Transaction/TransactionForm";
+import SettlementForm from "./Settlement/SettlementForm";
+import GroupForm from "./Group/GroupForm";
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";
@@ -28,6 +29,7 @@ const ADD = "ADD";
 const SETTLE = "SETTLE";
 const FRIEND = "FRIEND";
 const PROFILE = "PROFILE";
+const GROUP = "GROUP";
 // hardcoded data
 
 function App() {
@@ -101,6 +103,8 @@ function App() {
       transition(PROFILE)
     } else if (event.target.classList.contains("fa-home")) {
       transition(DASHBOARD)
+    } else if (event.target.classList.contains("fa-group")) {
+      transition(GROUP)
     }
   };
 
@@ -270,6 +274,36 @@ function App() {
     // update state at the front end like we did for scheduler?
   }
 
+  const group = (groupData) => {
+    console.log(`group data:`,groupData);
+    transition(SAVING)
+    // Promise.all([
+      axios({
+      method: 'POST',
+      // url: 'http://localhost:3000/api/users',
+      url: '/api/groups',
+      // send user data required to register a new user in the db
+      data: { 
+        group: groupData,
+        membership: groupData
+        }
+      })
+    .then(({ data }) => {
+      console.log("group ADDED: ", data)
+
+      // setState(prev => ({
+      //   ...prev,
+      //   // user: data.user,
+      //   history: data.history,
+      //   summary: data.summary,
+      //   settle: data.settle
+      // }))
+      
+    })
+    .then(() => transition(DASHBOARD))
+    .catch(error => console.log(error))
+  }
+
   return (
     <Fragment>
 
@@ -315,6 +349,13 @@ function App() {
           }
           {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
           {mode === PROFILE && <Profile onLogout={logout} user={state.user}/>}
+          {
+            mode === GROUP && <GroupForm
+              friends_list={state.friends_list}
+              user={state.user}
+              onGroup={group}
+              />
+          }
         {/* </section> */}
         {/* {display()} */}
       </main>

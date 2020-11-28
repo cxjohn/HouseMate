@@ -11,7 +11,10 @@ function Status (props) {
     //   src="https://i.imgur.com/4Qx0TNt.gifv"
     //   alt="Loading"
     // />
-    <a href="https://imgur.com/4Qx0TNt"><img src="https://i.imgur.com/4Qx0TNt.gif" title="source: imgur.com" /></a>
+    // <a href="https://imgur.com/4Qx0TNt"><img src="https://i.imgur.com/4Qx0TNt.gif" title="source: imgur.com" /></a>
+    <>
+    <iframe src="https://giphy.com/embed/mEtSQlxqBtWWA" width="480" height="284" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/sweet-penguin-penguins-mEtSQlxqBtWWA">via GIPHY</a></p>
+    </>
     // <section class="full granimate"></section>
     )
   }
