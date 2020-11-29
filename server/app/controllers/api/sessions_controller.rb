@@ -29,7 +29,8 @@ class Api::SessionsController < ApplicationController
         history: recent_activity(nil),
         summary: user_summary(nil),
         settle: settlement(nil),
-        friends_list: friends_list(nil)
+        friends_list: friends_list(nil),
+        groups_list: group_list(nil)
       }
       # render json: session_user # also send recent activity data
     else

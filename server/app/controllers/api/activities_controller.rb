@@ -3,39 +3,74 @@ class Api::ActivitiesController < ApplicationController
     activity = Activity.new(activity_params)
     if activity.save
       # add shares
-      shares = params.require(:share).permit(:amount_owed, users: [])
-      # shares[:users] will give us an array of users
-      # we will loop through this array and add a share
-      # test = 'users: '
-      # user who paid is the first in the array
-      user_paid = shares[:users].shift
+      # check if it's from groups or friends
+      group = params.require(:group).permit(:group_id, :amount, :user_id)
 
-      activity.shares.create(
-        user_id: user_paid,
-        amount_owed: -shares[:amount_owed] * shares[:users].length
-      )
+      if group[:group_id]
+        # we have the group id
+        # we want to get members in that group
+        # look into membership table
+        # Math.round((formState.amount / users.length) * 10000) / 10000
+        members = Membership.where(group_id: group[:group_id])
+        # now we have the members array
+        # amount_owed = (group[:amount].to_i / members.length).round(2);
+        amount_owed = group[:amount].to_f / members.length
+        # we loop through members and add shares
+        members.each do |member|
+          activity.shares.create(
+            user_id: member.user_id,
+            amount_owed: amount_owed
+          )
+        end
+        
+        user_paid = group[:user_id]
 
-      shares[:users].each do |user|
-        # if user paid for it, then add a negative amount
-        # add positive amount for people who owe 
+        render json: {
+          msg: "group transaction was successful",
+          # user: user,
+          history: recent_activity(user_paid),
+          summary: user_summary(user_paid),
+          settle: settlement(user_paid)
+
+          # history: recent_activity,
+          # summary: user_summary
+        }
+
+      else
+        shares = params.require(:share).permit(:amount_owed, users: [])
+        # shares[:users] will give us an array of users
+        # we will loop through this array and add a share
+        # test = 'users: '
+        # user who paid is the first in the array
+        user_paid = shares[:users].shift
+
         activity.shares.create(
-          user_id: user,
-          amount_owed: shares[:amount_owed] 
-          # test += user.to_s
+          user_id: user_paid,
+          amount_owed: -shares[:amount_owed] * shares[:users].length
         )
-      end
-      # render json: {msg: }
-      # render json: {msg: shares}
-      render json: {
-        msg: "Raj is vegan",
-        # user: user,
-        history: recent_activity(user_paid),
-        summary: user_summary(user_paid),
-        settle: settlement(user_paid)
 
-        # history: recent_activity,
-        # summary: user_summary
-      }
+        shares[:users].each do |user|
+          # if user paid for it, then add a negative amount
+          # add positive amount for people who owe 
+          activity.shares.create(
+            user_id: user,
+            amount_owed: shares[:amount_owed] 
+            # test += user.to_s
+          )
+        end
+        # render json: {msg: }
+        # render json: {msg: shares}
+        render json: {
+          msg: "friends transaction was successful",
+          # user: user,
+          history: recent_activity(user_paid),
+          summary: user_summary(user_paid),
+          settle: settlement(user_paid)
+
+          # history: recent_activity,
+          # summary: user_summary
+        }
+      end
     else
       render json: {errors: activity.errors.full_messages}, status: :not_acceptable
     end

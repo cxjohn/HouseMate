@@ -198,5 +198,20 @@ class ApplicationController < ActionController::API
     # end
   end
 
+  def group_list(new_user_id)
+    user_id = new_user_id || session_user.id
+
+    memberships = Membership.where(user_id: user_id)
+  # now our friends list array in stored in friends.friends_list
+    groups_list = []
+    memberships && memberships.each do |membership|
+  #  # we want first_name and last_name from User table where user_id = friend
+      group_name = Group.find(membership.group_id).name
+  #     # last_name = User.find(friend).last_name
+      groups_list.push([membership.group_id, group_name])
+    end
+    # memberships
+    groups_list
+  end
 
 end

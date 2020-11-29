@@ -42,6 +42,8 @@ function GroupForm(props) {
       name: group_name
     }
 
+    return props.onGroup(groupData);
+
   }
 
   // function split() {
@@ -97,7 +99,7 @@ function GroupForm(props) {
             autoFocus
             autoComplete="off"
           /> */}
-          <Button group type="button" onClick={group} >Add Group</Button>
+          <Button group onClick={group} >Add Group</Button>
         </form>
 
     </>

@@ -19,7 +19,8 @@ function useApplicationData() {
     history: [],
     summary: {},
     settle: {},
-    friends_list: []
+    friends_list: [],
+    groups_list: []
   })
 
   // useEffect(() => {

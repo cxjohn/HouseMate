@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import Button from '../Button';
-import FriendDropdown from './FriendDropdown';
-import './TransactionForm.scss';
+//import './FriendDropdown.scss';
 import { Dropdown } from 'semantic-ui-react';
 
 
-function TransactionForm(props) {
+function FriendDropdown(props) {
   
   // add fake group data 
   // group_name && members in the group
 
+//  const groups = [
+//   { key: 1, text: "Raj's vegan friends", value: 1 },
+//   { key: 3, text: "Raj's coding friends", value: 3 },
+//   { key: 7, text: "Raj's pets", value: 7 }
+// ];
+  
+  const groups = []
+  props.groups_list.map((group) => {
 
-  const friends = []
-  props.friends_list.map((friend) => {
-
-    const friend_object = {
-      key: friend[0],
-      text: `${friend[1]} ${friend[2]}`,
-      value: friend[0]
+    const group_object = {
+      key: group[0],
+      text: `${group[1]}`,
+      value: group[0]
     };
-    friends.push(friend_object)
+    groups.push(group_object)
   })
 
   const [formState, setFormState] = useState({
@@ -28,25 +32,32 @@ function TransactionForm(props) {
   })
 
   function split() {
-    const values = document.getElementsByClassName('ui label');
-    console.log("splitzies")
-    // console.log("value array:", values)
+    const selected_group_name = document.getElementById('raj').firstChild.innerHTML;
     const users = [props.user.id];
-    for (const value of values) {
-      // console.log("name: ", value.innerText)
-      // console.log("id: ", value.attributes.value.value)
-      // console.log("desc ", formState.description)
-      // console.log("amount ", formState.amount)
-      users.push(Number(value.attributes.value.value))
-    }
+    // for (const value of values) {
+    //   // console.log("name: ", value.innerText)
+    //   // console.log("id: ", value.attributes.value.value)
+    //   // console.log("desc ", formState.description)
+    //   // console.log("amount ", formState.amount)
+    //   users.push(Number(value.attributes.value.value))
+    // }
+    // loop through  props.groups_list
+    const group = props.groups_list.filter(group => group[1] === selected_group_name)[0]
+    // console.log(`group id`, group[0]);
+    // group_id = 
+    // check where name = 'selected_group_name'
+    // get the corresponding id
+
 
     const splitData = {
       users,
       description: formState.description,
-      amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
+      amount_owed: formState.amount / users.length,
+      // amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
       amount: formState.amount,
       user_id: props.user.id,
-      is_expense: true
+      is_expense: true,
+      group_id: group[0]
     }
     console.log('vegan', splitData);
 
@@ -55,17 +66,18 @@ function TransactionForm(props) {
 
   const dropdown = () => {
     console.log('dropdown');
-    // return props.onClick();
+    return props.onClick();
   };
   
   return (
     <>
-      <section onClick={dropdown}>
-      <Button update  >Groups</Button>
-      </section>
+      
+      {/* <Button update onClick={dropdown} >Groups</Button> */}
+      <Button split onClick={dropdown} >Friends</Button>
+      <h3>Split among groups</h3>
       <span className="test form"></span>
-      {/* <form onSubmit={event => event.target.preventDefault} className="form_transaction">
-        <Dropdown className="dropdown" placeholder='Mates' fluid multiple selection options={friends} />
+      <form onSubmit={event => event.target.preventDefault} className="form_transaction">
+        <Dropdown id="raj" className="dropdown" placeholder='Groups' fluid single selection options={groups} />
 
         <span className="input"></span>
         <input
@@ -90,14 +102,14 @@ function TransactionForm(props) {
           autoComplete="off"
         />
         <Button split onClick={split} >Splitzies</Button>
-      </form> */}
+      </form>
 
     </>
   )
 
 
 };
-export default TransactionForm;
+export default FriendDropdown;
 
 
 

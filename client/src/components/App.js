@@ -19,6 +19,8 @@ import Activity from "./Dashboard/Activity";
 import TransactionForm from "./Transaction/TransactionForm";
 import SettlementForm from "./Settlement/SettlementForm";
 import GroupForm from "./Group/GroupForm";
+import FriendDropdown from "./Transaction/FriendDropdown";
+import GroupDropdown from "./Transaction/GroupDropdown";
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";
@@ -30,6 +32,8 @@ const SETTLE = "SETTLE";
 const FRIEND = "FRIEND";
 const PROFILE = "PROFILE";
 const GROUP = "GROUP";
+const FRIENDSIES = "FRIENDSIES";
+const GROUPSIES = "GROUPSIES";
 // hardcoded data
 
 function App() {
@@ -68,7 +72,8 @@ function App() {
           history: data.history,
           summary: data.summary,
           settle: data.settle,
-          friends_list: data.friends_list
+          friends_list: data.friends_list,
+          groups_list: data.groups_list
         }))
         // update state at the front end like we did for scheduler?
         
@@ -118,7 +123,8 @@ function App() {
       // send user data required to register a new user in the db
       data: { 
         activity: splitData,
-        share: splitData
+        share: splitData,
+        group: splitData
         }
       })
     .then(({ data }) => {
@@ -275,7 +281,7 @@ function App() {
   }
 
   const group = (groupData) => {
-    console.log(`group data:`,groupData);
+    console.log(`group data:`, groupData);
     transition(SAVING)
     // Promise.all([
       axios({
@@ -291,17 +297,22 @@ function App() {
     .then(({ data }) => {
       console.log("group ADDED: ", data)
 
-      // setState(prev => ({
-      //   ...prev,
-      //   // user: data.user,
-      //   history: data.history,
-      //   summary: data.summary,
-      //   settle: data.settle
-      // }))
+      setState(prev => ({
+        ...prev,
+        groups_list: data.groups_list
+      }))
       
     })
     .then(() => transition(DASHBOARD))
     .catch(error => console.log(error))
+  }
+
+  const friendsies = () => {
+    transition(FRIENDSIES)
+  }
+
+  const groupsies = () => {
+    transition(ADD)
   }
 
   return (
@@ -311,6 +322,7 @@ function App() {
         {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
         {mode === DASHBOARD && <Header />}
         {mode === ADD && <Header />}
+        {mode === FRIENDSIES && <Header />}
         {mode === SETTLE && <Header />}
         {mode === FRIEND && <Header />}
         {mode === PROFILE && <Header />}
@@ -332,11 +344,27 @@ function App() {
         {/* <section className="dashboard"> */}
           {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
           {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
-          {
+          {/* {
             mode === ADD && <TransactionForm 
               user={state.user} 
               onSplit={split}
               friends_list={state.friends_list}
+              />
+          } */}
+          {
+            mode === ADD && <GroupDropdown
+              user={state.user}
+              onSplit={split}
+              friends_list={state.friends_list}
+              onClick={friendsies}
+              />
+          }
+          {
+            mode === FRIENDSIES && <FriendDropdown
+              user={state.user}
+              onSplit={split}
+              groups_list={state.groups_list}
+              onClick={groupsies}
               />
           }
           {
@@ -367,6 +395,7 @@ function App() {
                 </AuthBar></div>}
       {mode === DASHBOARD && <Footer home onClick={event => display(event)}/>}
       {mode === ADD && <Footer add onClick={event => display(event)}/>}
+      {mode === FRIENDSIES && <Footer add onClick={event => display(event)}/>}
       {mode === SETTLE && <Footer settle onClick={event => display(event)}/>}
       {mode === FRIEND && <Footer friend onClick={event => display(event)}/>}
       {mode === PROFILE && <Footer profile onClick={event => display(event)}/>}

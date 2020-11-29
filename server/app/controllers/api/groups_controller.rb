@@ -10,7 +10,7 @@ class Api::GroupsController < ApplicationController
       # test = 'users: '
       # user who paid is the first in the array
       # user_paid = shares[:users].shift
-
+      
       # activity.shares.create(
       #   user_id: user_paid,
       #   amount_owed: -shares[:amount_owed] * shares[:users].length
@@ -26,8 +26,14 @@ class Api::GroupsController < ApplicationController
       end
       # render json: {msg: }
       # render json: {msg: shares}
+      logged_in_user = members[:users].shift
+
       render json: {
         msg: "Group created!",
+        groups_list: group_list(logged_in_user)
+        # logged_user_id: logged_in_user
+
+        # groups_list: groups_list(logged_in_user)
         # membership_data: members
         # # user: user,
         # history: recent_activity(user_paid),

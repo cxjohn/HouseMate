@@ -64,4 +64,3 @@ group3.memberships.create!({
 group3.memberships.create!({
   user_id: 10
 })
-

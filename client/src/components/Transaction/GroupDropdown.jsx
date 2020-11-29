@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import Button from '../Button';
-import FriendDropdown from './FriendDropdown';
-import './TransactionForm.scss';
+// import './GroupDowndown.scss';
 import { Dropdown } from 'semantic-ui-react';
 
 
-function TransactionForm(props) {
+function GroupDropdown(props) {
   
   // add fake group data 
   // group_name && members in the group
@@ -55,16 +54,18 @@ function TransactionForm(props) {
 
   const dropdown = () => {
     console.log('dropdown');
-    // return props.onClick();
+    return props.onClick();
   };
   
   return (
     <>
-      <section onClick={dropdown}>
-      <Button update  >Groups</Button>
-      </section>
+      
+      <Button update onClick={dropdown} >Groups</Button>
+      {/* <Button split onClick={dropdown} >Friends</Button> */}
+      <h3>Split among friends</h3>
+
       <span className="test form"></span>
-      {/* <form onSubmit={event => event.target.preventDefault} className="form_transaction">
+      <form onSubmit={event => event.target.preventDefault} className="form_transaction">
         <Dropdown className="dropdown" placeholder='Mates' fluid multiple selection options={friends} />
 
         <span className="input"></span>
@@ -90,14 +91,14 @@ function TransactionForm(props) {
           autoComplete="off"
         />
         <Button split onClick={split} >Splitzies</Button>
-      </form> */}
+      </form>
 
     </>
   )
 
 
 };
-export default TransactionForm;
+export default GroupDropdown;
 
 
 
