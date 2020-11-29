@@ -97,21 +97,30 @@ function App() {
       transition(REGISTER)
       // check if event.target contains Register text
     } else if (event.target.classList.contains("fa-angle-left")) {
-      // setState({ ...state, form: "none" })
+      setState(prev => ({...prev, visible: false, scroll: true}));
+      // window.scrollTo(0,0)
       transition(HOME)
     } else if (event.target.classList.contains("fa-plus-square")) {
+      setState(prev => ({...prev, visible: false}));
       transition(ADD)
     } else if (event.target.classList.contains("fa-handshake-o")) {
+      setState(prev => ({...prev, visible: false}));
       transition(SETTLE)
     } else if (event.target.classList.contains("fa-user-plus")) {
+      setState(prev => ({...prev, visible: false}));
       transition(FRIEND)
     } else if (event.target.classList.contains("fa-user-circle-o")) {
+      setState(prev => ({...prev, visible: false}));
       transition(PROFILE)
     } else if (event.target.classList.contains("fa-home")) {
-      setState(prev => ({...prev, visible: true}));
+      setState(prev => ({...prev, visible: false}));
       transition(DASHBOARD)
     } else if (event.target.classList.contains("fa-group")) {
+      setState(prev => ({...prev, visible: false}));
       transition(GROUP)
+    } else if (event.target.classList.contains("fa-caret-up")) {
+      setState(prev => ({...prev, visible: true}));
+      // transition(GROUP)
     }
   };
 
@@ -336,7 +345,9 @@ function App() {
           <Button back onClick={(event)  => display(event)}></Button>
         )} */}
       </header>
-      <main>
+      <main onClick={() => setState(prev => ({...prev, visible: false}))}>
+        {!state.visible && window.scrollTo(0,0)}
+
         {mode === HOME && <img id="logo" src="https://i.imgur.com/5HK16TW.png" width={150}></img>}
         {mode === REGISTER && <RegisterForm
           display={display}
@@ -345,48 +356,48 @@ function App() {
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
         {mode === SAVING && <Status message={"Saving"} />}
         {/* <section className="dashboard"> */}
-          {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
-          {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
-          {/* {
-            mode === ADD && <TransactionForm 
-              user={state.user} 
-              onSplit={split}
-              friends_list={state.friends_list}
-              />
-          } */}
-          {
-            mode === ADD && <GroupDropdown
-              user={state.user}
-              onSplit={split}
-              friends_list={state.friends_list}
-              onClick={friendsies}
-              />
-          }
-          {
-            mode === FRIENDSIES && <FriendDropdown
-              user={state.user}
-              onSplit={split}
-              groups_list={state.groups_list}
-              onClick={groupsies}
-              />
-          }
-          {
-            mode === SETTLE && <SettlementForm 
-              user={state.user}
-              settle={state.settle}
-              onSettle={settle}
-              onNotify={notify}
-              />
-          }
-          {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
-          {mode === PROFILE && <Profile onLogout={logout} user={state.user}/>}
-          {
-            mode === GROUP && <GroupForm
-              friends_list={state.friends_list}
-              user={state.user}
-              onGroup={group}
-              />
-          }
+        {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
+        {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
+        {/* {
+          mode === ADD && <TransactionForm 
+            user={state.user} 
+            onSplit={split}
+            friends_list={state.friends_list}
+            />
+        } */}
+        {
+          mode === ADD && <GroupDropdown
+            user={state.user}
+            onSplit={split}
+            friends_list={state.friends_list}
+            onClick={friendsies}
+            />
+        }
+        {
+          mode === FRIENDSIES && <FriendDropdown
+            user={state.user}
+            onSplit={split}
+            groups_list={state.groups_list}
+            onClick={groupsies}
+            />
+        }
+        {
+          mode === SETTLE && <SettlementForm 
+            user={state.user}
+            settle={state.settle}
+            onSettle={settle}
+            onNotify={notify}
+            />
+        }
+        {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
+        {mode === PROFILE && <Profile onLogout={logout} user={state.user}/>}
+        {
+          mode === GROUP && <GroupForm
+            friends_list={state.friends_list}
+            user={state.user}
+            onGroup={group}
+            />
+        }
         {/* </section> */}
         {/* {display()} */}
       </main>

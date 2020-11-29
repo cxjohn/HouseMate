@@ -9,7 +9,7 @@ function Footer(props) {
   // })
 
   const bottomFooter = classnames(
-    "dashboard_footer",
+    // "dashboard_footer",
     { 
       'visible': props.visible,
       'hidden': !props.visible
@@ -27,13 +27,13 @@ function Footer(props) {
   
   return (
     // <footer className="dashboard_footer">
-    <footer className={bottomFooter}>
-      <div class='upper_footer'>
+    <footer id="dashboard_footer" className={bottomFooter}>
+      {/* <div class='upper_footer'> */}
       <span className="mobile-bottom-bar">
         <span className="footer-link">
           <i className={`fa fa-home ${props.home ? "home_selected" : ""}`} 
-            // onClick={props.onClick}>
-            onClick={click}>
+            onClick={props.onClick}>
+            {/* onClick={click}> */}
           </i>
         </span>
         <span className="footer-link">
@@ -47,10 +47,17 @@ function Footer(props) {
           </i> 
           {/* <span className='footer-text'></span> */}
         </span>
+        { !props.visible && 
+          <span className="footer-link">
+            <i className={`fa fa-caret-up`}
+              onClick={click}>
+            </i> 
+          </span>
+        }
       </span>
-      </div>
+      {/* </div> */}
       {/* <div id="bottom_footer" className={bottomFooter}>  // this sort of worked */}
-      <div id="bottom_footer">
+      {/* <div id="bottom_footer"> */}
 
       <span className="mobile-bottom-bar">
         <span className="footer-link">
@@ -70,7 +77,7 @@ function Footer(props) {
           {/* <span className='footer-text' 	fa fa-user-plus></span> */}
         </span>
       </span>
-      </div>
+      {/* </div> */}
     </footer>
 
   )
