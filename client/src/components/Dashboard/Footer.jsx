@@ -1,23 +1,24 @@
+import { useState } from 'react';
 import './Footer.scss';
 import classnames from 'classnames';
 
 function Footer(props) {
 
-  // const footerClass = classnames(
-  //   { 
-  //     'add_selected': props.add, 
-  //     // 'home_selected': props.home,
-  //     'friend_selected': props.friend,
-  //     'settle_selected': props.settle,
-  //     'profile_selected': props.profile,
-  //     // 'group_selected': props.group
- 
-  //   }
-  // )
-  let bottomFooter = classnames("")
+  // const [state, setState] = useState({
+  //   visible: props.visible || false
+  // })
+
+  const bottomFooter = classnames(
+    "dashboard_footer",
+    { 
+      'visible': props.visible,
+      'hidden': !props.visible
+    }
+  )
 
   const click = (event) => {
-    bottomFooter = classnames("visible")
+    console.log("visible:", props.visible)
+    // setState(prev => ({...prev, visible: true}));
     return props.onClick(event)
   }
 
@@ -25,8 +26,9 @@ function Footer(props) {
 
   
   return (
-    <footer className="dashboard_footer">
-      <div id='upper_footer'>
+    // <footer className="dashboard_footer">
+    <footer className={bottomFooter}>
+      <div class='upper_footer'>
       <span className="mobile-bottom-bar">
         <span className="footer-link">
           <i className={`fa fa-home ${props.home ? "home_selected" : ""}`} 
@@ -47,7 +49,9 @@ function Footer(props) {
         </span>
       </span>
       </div>
-      <div id='bottom_footer' className={bottomFooter}>
+      {/* <div id="bottom_footer" className={bottomFooter}>  // this sort of worked */}
+      <div id="bottom_footer">
+
       <span className="mobile-bottom-bar">
         <span className="footer-link">
           <i className={`fa fa-user-circle-o ${props.profile ? "profile_selected" : ""}`}
@@ -55,7 +59,7 @@ function Footer(props) {
           </i>
         </span>
         <span className="footer-link">
-          <i className={`fa fa-group`} 
+          <i className={`fa fa-group ${props.group ? "group_selected" : ""}`} 
             onClick={props.onClick}>
           </i>
         </span>

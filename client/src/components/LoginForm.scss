@@ -1,0 +1,29 @@
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login_div {
+  position: absolute;
+  bottom: 300px;
+  margin-bottom: 1em;
+}
+
+.login_header {
+  margin-bottom: 8.5em;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+}
+
+
+.fa-angle-left {
+
+  top: -30px;
+  left: -30px;
+  padding-top: -20px;
+  margin-bottom: 20px;
+  
+}

@@ -7,14 +7,27 @@ import '../Button.scss';
 
 function SettlementFormListItem(props) {
 
-  function button () {
+  function settleCard () {
 
     if (props.amount > 0) {
-      return <p>You owe {props.first_name} {props.last_name} <p className='money_red'>${props.amount}</p> <Button settle onClick={settle}>Settle</Button></p>
+      return  <section className="card_settle">
+                <aside className="card_settle_aside">
+                  <p>You owe {props.first_name} {props.last_name}</p>
+                  <p className='money_red'>${props.amount}</p>
+                </aside>
+                <Button settle onClick={settle}>Settle</Button>
+              </section>
+    // fix the zero amount condition in the back end 
     } else if (props.amount === 0) {
       return null
     } else
-      return <p>{props.first_name} {props.last_name} owes you <p className='money_green'>${-props.amount}</p> <Button notify onClick={notify}>Notify</Button></p>
+      return  <section className="card_settle">
+                <aside className="card_settle_aside">
+                  <p>{props.first_name} {props.last_name} owes you</p>
+                  <p className='money_green'>${-props.amount}</p>
+                </aside>
+                <Button notify onClick={notify}>Notify</Button>
+              </section>
     }
 
 
@@ -33,7 +46,8 @@ function SettlementFormListItem(props) {
       amount_owed: props.amount,
       description: "settled",
       user_id: props.logged_user_id,
-      is_expense: false
+      is_expense: false,
+      group_id: null
     }
     return props.onSettle(settleData)
   }
@@ -49,7 +63,7 @@ function SettlementFormListItem(props) {
         {/* <Button split className=".button_test"></Button> */}
         <Card.Header>
           {/* {props.first_name} */}
-          {button()}
+          {settleCard()}
           {/* <Button split className=".button_test"></Button> */}
         </Card.Header>
         {/* <Card.Meta>Total balance of:</Card.Meta> */}

@@ -8,8 +8,12 @@ function ActivityListItem (props) {
   function activity () {
 
     if (props.user_id !== props.logged_user_id) {
-      
-      if (props.amount < 0) {
+
+      if (props.description === "settled") {
+        return  <span className='activity_block'>
+                  <p>{props.first_name} {props.last_name} settled up with you</p>
+                </span>
+      } else if (props.amount < 0) {
       return <span className='activity_block'>
               <p> You paid for {props.description} </p>
               <p>{props.first_name} {props.last_name} owes you 
@@ -24,12 +28,19 @@ function ActivityListItem (props) {
              </span>
       }
     } else {
+
+      if (props.description === "settled") {
+        return  <span className='activity_block'>
+                  <p> You settled with {props.first_name} {props.last_name}</p>
+                </span>
+      } else {
        return <span className='activity_block'>
                 <div className="payment">You paid for <b>{props.description}</b></div>
                 <p>You are owed 
                   <p className='money_green'>${-props.amount/100}</p>
                 </p>
               </span>
+      }
     }
   }
 

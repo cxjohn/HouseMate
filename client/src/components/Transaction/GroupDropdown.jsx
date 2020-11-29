@@ -45,7 +45,8 @@ function GroupDropdown(props) {
       amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
       amount: formState.amount,
       user_id: props.user.id,
-      is_expense: true
+      is_expense: true,
+      group_id: null
     }
     console.log('vegan', splitData);
 

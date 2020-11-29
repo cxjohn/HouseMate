@@ -3,8 +3,27 @@
 //     width: 5 rem;
 //   }
 // }
-.content .header p {
-.money_green {
+// .content .header{
+
+// }
+
+.content .header .card_settle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  .card_settle_aside {
+    display: flex;
+    flex-direction: column;
+
+    p {
+      font-weight: 400;
+    }
+
+  }
+
+  .money_green {
   color: green;
   margin-left: 5px;
   }
@@ -13,4 +32,20 @@
   color: red;
   margin-left: 5px;
   }
+
+  .button {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .button_notify {
+    width: 4em;
+
+  }
+
+  .button_settle {
+    width: 4em;
+  }
+
 }

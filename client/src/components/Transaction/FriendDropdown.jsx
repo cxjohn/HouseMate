@@ -34,12 +34,12 @@ function FriendDropdown(props) {
   function split() {
     const selected_group_name = document.getElementById('raj').firstChild.innerHTML;
     const users = [props.user.id];
-    // for (const value of values) {
+    //for (const value of values) {
     //   // console.log("name: ", value.innerText)
     //   // console.log("id: ", value.attributes.value.value)
     //   // console.log("desc ", formState.description)
     //   // console.log("amount ", formState.amount)
-    //   users.push(Number(value.attributes.value.value))
+    //  users.push(Number(value.attributes.value.value))
     // }
     // loop through  props.groups_list
     const group = props.groups_list.filter(group => group[1] === selected_group_name)[0]

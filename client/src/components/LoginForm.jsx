@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button from './Button';
-import './RegisterForm.scss';
+import './LoginForm.scss';
 
 function LoginForm(props) {
 
@@ -32,11 +32,12 @@ function LoginForm(props) {
   }
 
   return (
-    <div>
+    <section className='login_div'>
+
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className='login_header'>
           <Button back onClick={(event) => props.display(event)}>Back</Button>
-          <h1>Log In</h1>
+          <h1 className="form_title">Log In</h1>
         </div>
         <span className="input"></span>
         <input
@@ -64,7 +65,7 @@ function LoginForm(props) {
         {/* on clicking back, we should go to the previous visual state */}
         
       </form>
-    </div>
+    </section>
   )
 };
 

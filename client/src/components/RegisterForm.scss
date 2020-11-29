@@ -159,8 +159,8 @@ input:focus {
   position: relative;
   width: .25em;
   height: 3em;
-  background: $sean-theme-background;
-  // background: $col-sean-red;
+  // background: $sean-theme-background;
+  background: $col-sean-red;
   margin: 0% 0 -2em;
   z-index: 1;
 }
@@ -172,8 +172,8 @@ input:focus {
   height: 100%;
   position: absolute;
   right: -19.5em; // eyeball the number
-  background: $sean-theme-background;
-  // background: $col-sean-red;
+  // background: $sean-theme-background;
+  background: $col-sean-red;
 }
 
 // styles placeholder colour
@@ -291,22 +291,22 @@ input:focus::-ms-input-placeholder {
 // button {
 // fa-arrow-circle-o-right
 // fa-angle-left
-.fa-arrow-circle-o-right
- {
-  outline: none;
-  -webkit-appearance: none; // mobile Safari
-  border: none;
-  background: transparent;
-  color: #bbb;
-  font-size: 2.05em;
-  padding: 3% 7%;
-  cursor: pointer;
-  position: absolute;
-  // right: -6%; // slight overlap with custom rectangle that hides border
-  right: 0; // slight overlap with custom rectangle that hides border
-  bottom: 10px;
-  @include animation;
-}
+// .fa-arrow-circle-o-right
+//  {
+//   outline: none;
+//   -webkit-appearance: none; // mobile Safari
+//   border: none;
+//   background: transparent;
+//   color: #bbb;
+//   font-size: 2.05em;
+//   padding: 3% 7%;
+//   cursor: pointer;
+//   position: absolute;
+//   // right: -6%; // slight overlap with custom rectangle that hides border
+//   right: 0; // slight overlap with custom rectangle that hides border
+//   bottom: 10px;
+//   @include animation;
+// }
 
 .fa-arrow-circle-o-right {
   outline: none;
@@ -315,12 +315,13 @@ input:focus::-ms-input-placeholder {
   background: transparent;
   color: #bbb;
   font-size: 2.05em;
-  padding: 3% 7%;
+  padding: 3% 5%;
+  // margin-bottom: 20px;
   cursor: pointer;
   position: absolute;
   // right: -6%; // slight overlap with custom rectangle that hides border
   right: 0; // slight overlap with custom rectangle that hides border
-  bottom: 0%;
+  bottom: 15px;
   @include animation;
 }
 
@@ -337,8 +338,8 @@ input:focus::-ms-input-placeholder {
   // margin-bottom: 50px;
   cursor: pointer;
   position: absolute;
-  top: 0;
-  left: 6%;
+  top: 10px;
+  left: -30px;
   // bottom: 0%;
   @include animation;
 }
@@ -387,10 +388,10 @@ p {
 // }
 
 
-.twitter-share-button {
-  vertical-align: -15%;
-  margin-right: -25px !important;
-}
+// .twitter-share-button {
+//   vertical-align: -15%;
+//   margin-right: -25px !important;
+// }
 
 .back {
   display: flex;
@@ -398,5 +399,11 @@ p {
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 8.5em;
   // height: 300px;
 }
+
+.whole_thing {
+  margin-bottom: 9em;
+}
+

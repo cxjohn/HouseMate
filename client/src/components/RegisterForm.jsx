@@ -50,7 +50,7 @@ function register () {
   return(
     // <div></div>
     // <h3>Register Form</h3>
-    <>
+    <section className='whole_thing'>
       <div className='back'>
         <Button back onClick={(event) => props.display(event)}>Back</Button>
         <h1>Sign Up</h1>
@@ -116,7 +116,7 @@ function register () {
       </Button>
 
 </form>
-</>  
+</section>  
   )
   
 };

@@ -86,6 +86,7 @@ function App() {
   }, [])
 
   function display(event) {
+    
     // console.log("clicked")
     // check if event.target contains Login text
     if (event.target.innerHTML === 'Login') {
@@ -107,6 +108,7 @@ function App() {
     } else if (event.target.classList.contains("fa-user-circle-o")) {
       transition(PROFILE)
     } else if (event.target.classList.contains("fa-home")) {
+      setState(prev => ({...prev, visible: true}));
       transition(DASHBOARD)
     } else if (event.target.classList.contains("fa-group")) {
       transition(GROUP)
@@ -153,7 +155,8 @@ function App() {
       // send user data required to register a new user in the db
       data: { 
         activity: settleData,
-        share: settleData
+        share: settleData,
+        group: settleData
         }
       })
     .then(({ data }) => {
@@ -326,6 +329,7 @@ function App() {
         {mode === SETTLE && <Header />}
         {mode === FRIEND && <Header />}
         {mode === PROFILE && <Header />}
+        {mode === GROUP && <Header />}
         {/* <h2>{state.user && state.user.first_name}</h2> */}
         {/* {mode === REGISTER && ( images/housematewhite.png
         <div>
@@ -336,7 +340,6 @@ function App() {
         {mode === HOME && <img id="logo" src="https://i.imgur.com/5HK16TW.png" width={150}></img>}
         {mode === REGISTER && <RegisterForm
           display={display}
-          // register={register}
           onRegister={register}
         />}
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
@@ -393,12 +396,14 @@ function App() {
           <AuthBar register onClick={(event) => display(event)}>
             Register
                 </AuthBar></div>}
-      {mode === DASHBOARD && <Footer home onClick={event => display(event)}/>}
-      {mode === ADD && <Footer add onClick={event => display(event)}/>}
-      {mode === FRIENDSIES && <Footer add onClick={event => display(event)}/>}
-      {mode === SETTLE && <Footer settle onClick={event => display(event)}/>}
-      {mode === FRIEND && <Footer friend onClick={event => display(event)}/>}
-      {mode === PROFILE && <Footer profile onClick={event => display(event)}/>}
+      {mode === DASHBOARD && <Footer home visible={state.visible} onClick={event => display(event)}/>}
+      {mode === ADD && <Footer add visible={state.visible} onClick={event => display(event)}/>}
+      {mode === FRIENDSIES && <Footer add visible={state.visible} onClick={event => display(event)}/>}
+      {mode === SETTLE && <Footer settle visible={state.visible} onClick={event => display(event)}/>}
+      {mode === FRIEND && <Footer friend visible={state.visible} onClick={event => display(event)}/>}
+      {mode === PROFILE && <Footer profile visible={state.visible} onClick={event => display(event)}/>}
+      {mode === GROUP && <Footer group visible={state.visible} onClick={event => display(event)}/>}
+
       {/* </footer> */}
     </Fragment>
   )

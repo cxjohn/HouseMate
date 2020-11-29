@@ -16,14 +16,25 @@ class Api::ActivitiesController < ApplicationController
         # amount_owed = (group[:amount].to_i / members.length).round(2);
         amount_owed = group[:amount].to_f / members.length
         # we loop through members and add shares
+
+        user_paid = group[:user_id]
+        # we want to remove member with user_id === user_paid from members array
+
+        activity.shares.create(
+          user_id: user_paid,
+          amount_owed: -amount_owed * ( members.length - 1 )
+        )
+
         members.each do |member|
-          activity.shares.create(
-            user_id: member.user_id,
-            amount_owed: amount_owed
-          )
+          unless member.user_id == user_paid
+            activity.shares.create(
+              user_id: member.user_id,
+              amount_owed: amount_owed
+            )
+          end
         end
         
-        user_paid = group[:user_id]
+
 
         render json: {
           msg: "group transaction was successful",
