@@ -10,14 +10,14 @@ function Profile(props) {
     email: props.user.email || ""
   })
 
-  function login() {
+  // function login() {
 
-    const userData = {
-      email: formState.email,
-      password_digest: formState.password
-    }
-    return props.onLogin(userData);
-  }
+  //   const userData = {
+  //     email: formState.email,
+  //     password_digest: formState.password
+  //   }
+  //   return props.onLogin(userData);
+  // }
 
   function logout() {
 
@@ -25,13 +25,14 @@ function Profile(props) {
   }
 
   function update() {
-    console.log("update button clicked!")
+    // console.log("update button clicked!")
 
     const updateData = {
       user_id: props.user.id,
       first_name: formState.first_name,
       last_name: formState.last_name,
-      email: formState.email      
+      email: formState.email,
+      profile_pic: null
     }
 
     return props.onUpdate(updateData);
@@ -53,35 +54,19 @@ function Profile(props) {
     event.preventDefault();
   }
 
-  const camera = () => {
-    console.log("camera clicked!")
-  }
-  // const form_first_name = () => {
-  //   console.log("first name clicked!")
-  //   return (
-  //     <form onSubmit={handleSubmit}>
-  //       <span className="input"></span>
-  //       <input
-  //         className='firstName'
-  //         // placeholder='First Name'
-  //         value={formState.first_name}
-  //         onChange={event => setFormState({...formState, first_name: event.target.value })}
-  //         required
-  //         autoFocus
-  //         autoComplete="off"
-  //       />
-  //     </form>
-  //   )
-    
+  // function camera() {
+  //   console.log("camera clicked!")
+ 
+  //   return props.onClick;
   // }
 
 
   return (
     <div className="user_profile">
       <h1>Profile</h1><br/>
-      <img className='profile_pic' src="images/logo192.png" width={100} ></img>
+      <img className='profile_pic' src={props.user.profile_pic} width={100} ></img>
   
-      <Button camera className='camera' onClick={camera}></Button>
+      {/* <Button camera className='camera' onClick={camera}></Button> */}
       <form onSubmit={handleSubmit}>
 
       <span className="input"></span>

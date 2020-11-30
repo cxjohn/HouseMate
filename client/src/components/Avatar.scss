@@ -1,0 +1,30 @@
+@import '../sass/_variables';
+
+.image_update {
+  margin: 0 1em 1em 1em;
+  padding: 3px;
+}
+
+.image_selected {
+  border: 5px solid $col-sean-red;
+  border-radius: 50%;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+// .content_pics {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+#camera_icon {
+  position: absolute;
+  margin: 0 0 15rem 5.5rem;
+  font-size: 1.5rem;
+}

@@ -14,7 +14,7 @@ function useApplicationData() {
   */
  // state is an object with two keys from and data
   const [state, setState] = useState({
-    modal: false,
+    popup: false,
     visible: false,
     user: {},
     history: [],

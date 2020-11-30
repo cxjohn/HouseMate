@@ -13,6 +13,7 @@ import Button from "./Button";
 import Friend from "./Friend";
 import Profile from "./Profile";
 import Status from "./Status";
+import Avatar from "./Avatar";
 import Header from "./Dashboard/Header";
 import Footer from "./Dashboard/Footer";
 import Summary from "./Dashboard/Summary";
@@ -124,7 +125,11 @@ function App() {
     } else if (event.target.classList.contains("fa-caret-up")) {
       setState(prev => ({...prev, visible: true}));
       // transition(GROUP)
-    }
+    } 
+      // else if (event.target.classList.contains("fa-camera")) {
+      // setState(prev => ({...prev, popup: true}));
+      // transition(GROUP)
+      // }
   };
 
   const split = (splitData) => {
@@ -150,7 +155,7 @@ function App() {
         history: data.history,
         summary: data.summary,
         settle: data.settle,
-        modal: true
+        popup: true
       }))
       
       // transition(STATUS)
@@ -359,7 +364,7 @@ function App() {
         // settle: data.settle
       }))
     })
-    .then(() => transition(DASHBOARD))
+    .then(() => transition(PROFILE))
       // update state at the front end like we did for scheduler?
       // transition to user dashboard
     .catch(error => console.log(error))
@@ -370,7 +375,7 @@ function App() {
     <Fragment>
 
       <header>
-        {mode === DASHBOARD && <><Header /><Status message="splitzies worked!" modal={state.modal} visible={state.visible}/></>}
+        {mode === DASHBOARD && <><Header /><Status message="splitzies worked!" popup={state.popup} visible={state.visible}/></>}
         {/* {mode === DASHBOARD && <Header />} */}
         {mode === ADD && <Header />}
         {mode === FRIENDSIES && <Header />}
@@ -399,7 +404,7 @@ function App() {
         {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
         {/* {
           mode === ADD && <TransactionForm 
-            user={state.user} 
+            user={state.user}
             onSplit={split}
             friends_list={state.friends_list}
             />
@@ -430,11 +435,19 @@ function App() {
         }
         {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
         {
-          mode === PROFILE && <Profile 
+          mode === PROFILE && <><Profile 
             onLogout={logout}
             user={state.user}
             onUpdate={update}
+            // onClick={event => display(event)}
+            popup={state.popup}
             />
+            <Avatar 
+              onUpdate={update}
+              user={state.user}
+              popup={state.popup}
+            />
+            </>
         }
         {
           mode === GROUP && <GroupForm
@@ -468,9 +481,3 @@ function App() {
 };
 
 export default App;
-
-// let [count, setCount] = useState(0); // initialize count = 0
-// let [msg, setMsg] = useState("Hey Chris!");
-// {/* <Message text1={msg} sean={changeMessage}/> */}
-// {/*  */}
-

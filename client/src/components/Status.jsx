@@ -5,7 +5,7 @@ import { useState } from 'react';
 function Status (props) {
 
   // const open = props.visible;
-  const [open, setOpen] = useState(props.modal ? true : false)
+  const [open, setOpen] = useState(props.popup ? true : false)
   // const [open, setOpen] = useState(true)
 
   // props.modal && setOpen(false)
