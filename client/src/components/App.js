@@ -8,10 +8,11 @@ import axios from 'axios';
 import useApplicationData from "../hooks/useApplicationData";
 import { display, displayForm } from "../helpers/selectors";
 import useVisualMode from "../hooks/useVisualMode";
-import Status from "./Status";
+import Loading from "./Loading";
 import Button from "./Button";
 import Friend from "./Friend";
 import Profile from "./Profile";
+import Status from "./Status";
 import Header from "./Dashboard/Header";
 import Footer from "./Dashboard/Footer";
 import Summary from "./Dashboard/Summary";
@@ -25,7 +26,7 @@ import GroupDropdown from "./Transaction/GroupDropdown";
 const HOME = "HOME";
 const LOGIN = "LOGIN";
 const REGISTER = "REGISTER";
-const SAVING = "SAVING";
+const LOADING = "LOADING";
 const DASHBOARD = "DASHBOARD";
 const ADD = "ADD";
 const SETTLE = "SETTLE";
@@ -34,6 +35,8 @@ const PROFILE = "PROFILE";
 const GROUP = "GROUP";
 const FRIENDSIES = "FRIENDSIES";
 const GROUPSIES = "GROUPSIES";
+const STATUS = "STATUS";
+const SPLIT_SUCCESSFUL = "SPLIT_SUCCESSFUL";
 // hardcoded data
 
 function App() {
@@ -97,7 +100,7 @@ function App() {
       transition(REGISTER)
       // check if event.target contains Register text
     } else if (event.target.classList.contains("fa-angle-left")) {
-      setState(prev => ({...prev, visible: false, scroll: true}));
+      setState(prev => ({...prev, visible: false}));
       // window.scrollTo(0,0)
       transition(HOME)
     } else if (event.target.classList.contains("fa-plus-square")) {
@@ -125,7 +128,7 @@ function App() {
   };
 
   const split = (splitData) => {
-    transition(SAVING)
+    transition(LOADING)
     // Promise.all([
       axios({
       method: 'POST',
@@ -146,16 +149,23 @@ function App() {
         // user: data.user,
         history: data.history,
         summary: data.summary,
-        settle: data.settle
+        settle: data.settle,
+        modal: true
       }))
       
+      // transition(STATUS)
     })
-    .then(() => transition(DASHBOARD))
+    .then(() => {
+      // setTimeout(() => {
+        // transition(SPLIT_SUCCESSFUL)
+      // }, 2000)
+      transition(DASHBOARD)
+    })
     .catch(error => console.log(error))
   }
 
   const settle = (settleData) => {
-    transition(SAVING)
+    transition(LOADING)
     // Promise.all([
       axios({
       method: 'POST',
@@ -185,7 +195,7 @@ function App() {
   }
 
   const notify = () => {
-    transition(SAVING)
+    transition(LOADING)
 
     axios({
       method: 'POST',
@@ -202,7 +212,7 @@ function App() {
   }
 
   const friend = (friendData) => {
-    transition(SAVING)
+    transition(LOADING)
     // Promise.all([
       axios({
       method: 'POST',
@@ -226,7 +236,7 @@ function App() {
   }
 
   const register = (userData) => {
-    transition(SAVING)
+    transition(LOADING)
     axios({
       method: 'POST',
       // url: 'http://localhost:3000/api/users',
@@ -254,7 +264,7 @@ function App() {
   }
 
   const login = (userData) => {
-    transition(SAVING);
+    transition(LOADING);
     axios({
       method: 'POST',
       url: 'http://localhost:3000/api/login',
@@ -286,7 +296,7 @@ function App() {
   const logout = () => {
     localStorage.removeItem("token")
     // transition(HOME);
-    transition(SAVING);
+    transition(LOADING);
     // recieve recent activity data from the server and update state
     // transition to user dashboard
     // update state at the front end like we did for scheduler?
@@ -294,7 +304,7 @@ function App() {
 
   const group = (groupData) => {
     console.log(`group data:`, groupData);
-    transition(SAVING)
+    transition(LOADING)
     // Promise.all([
       axios({
       method: 'POST',
@@ -327,12 +337,41 @@ function App() {
     transition(ADD)
   }
 
+  const update = (updateData) => {
+    transition(LOADING)
+    axios({
+      method: 'PUT',
+      // url: 'http://localhost:3000/api/users',
+      url: `/api/users/${state.user.id}`,
+      // send user data required to register a new user in the db
+      data: { user: updateData }
+    })
+    .then(({ data }) => {
+      console.log("USER UPDATED: ", data)
+      // store token
+      // localStorage.setItem("token", data.jwt)
+      // do anything with user data?
+      setState(prev => ({ 
+        ...prev,
+        user: data.user
+        // history: data.history,
+        // summary: data.summary,
+        // settle: data.settle
+      }))
+    })
+    .then(() => transition(DASHBOARD))
+      // update state at the front end like we did for scheduler?
+      // transition to user dashboard
+    .catch(error => console.log(error))
+  }
+
+  
   return (
     <Fragment>
 
       <header>
-        {/* <h2>{state.data[0] && state.data[0].last_name}</h2> */}
-        {mode === DASHBOARD && <Header />}
+        {mode === DASHBOARD && <><Header /><Status message="splitzies worked!" modal={state.modal} visible={state.visible}/></>}
+        {/* {mode === DASHBOARD && <Header />} */}
         {mode === ADD && <Header />}
         {mode === FRIENDSIES && <Header />}
         {mode === SETTLE && <Header />}
@@ -354,7 +393,7 @@ function App() {
           onRegister={register}
         />}
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
-        {mode === SAVING && <Status message={"Saving"} />}
+        {mode === LOADING && <Loading message={"Loading"} />}
         {/* <section className="dashboard"> */}
         {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
         {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
@@ -390,7 +429,13 @@ function App() {
             />
         }
         {mode === FRIEND && <Friend user={state.user} friend={state.friend} onFriend={friend}/>}
-        {mode === PROFILE && <Profile onLogout={logout} user={state.user}/>}
+        {
+          mode === PROFILE && <Profile 
+            onLogout={logout}
+            user={state.user}
+            onUpdate={update}
+            />
+        }
         {
           mode === GROUP && <GroupForm
             friends_list={state.friends_list}
@@ -398,6 +443,7 @@ function App() {
             onGroup={group}
             />
         }
+        { mode === STATUS && <Status /> }
         {/* </section> */}
         {/* {display()} */}
       </main>

@@ -1,24 +1,104 @@
-// loading status
 import './Status.scss';
+import { Button, Header, Icon, Message, Modal } from 'semantic-ui-react'
+import { useState } from 'react';
 
 function Status (props) {
 
+  // const open = props.visible;
+  const [open, setOpen] = useState(props.modal ? true : false)
+  // const [open, setOpen] = useState(true)
+
+  // props.modal && setOpen(false)
+
+  setTimeout(() => {
+    setOpen(false)
+  }, 8000);
+
+  function status() {
+    if (open) {
+      return <p><b>Split Successful</b></p>
+    }
+  }
+
   return (
-    // <main className="status">
-    // <img
-    //   className="full granimate"
-    //   // src="images/loading.png"
-    //   src="https://i.imgur.com/4Qx0TNt.gifv"
-    //   alt="Loading"
-    // />
-    <a href="https://imgur.com/4Qx0TNt"><img src="https://i.imgur.com/4Qx0TNt.gif" title="source: imgur.com" /></a>
-    // <>
-    // <section class="full granimate"></section>
+    open && <div className='popup'>{ status() }</div>
+
+    // <Modal
+    //   id="modal_test"
+    //   className="status"
+    //   basic
+    //   onClose={() => setOpen(false)}
+    //   onOpen={() => setOpen(true)}
+    //   open={open}
+    //   size='small'
+    //   // trigger={props.visible}
+    // >
+    //   {/* <Header icon>
+    //     <Icon name='archive' />
+    //     Archive Old Messages
+    //   </Header> */}
+    //   <Modal.Content>
+    //     <p>
+    //       {props.message} You are eligible for a. Sign up now!
+    //     </p>
+    //   </Modal.Content>
+
+    // </Modal>
+
     )
   }
-  //{/* </> */}
- //{/* <iframe src="https://giphy.com/embed/mEtSQlxqBtWWA" width="480" height="284" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/sweet-penguin-penguins-mEtSQlxqBtWWA">via GIPHY</a></p> */}
-  // {/* </main> */}
-  // {/* <h1 className="text--semi-bold">{props.message}</h1> */}
 
 export default Status;
+
+
+// import React from 'react'
+// import { Message } from 'semantic-ui-react'
+
+// const MessageExamplePositive = () => (
+//   <Message positive>
+//     <Message.Header>You are eligible for a reward</Message.Header>
+//     <p>
+//       Go to your <b>special offers</b> page to see now.
+//     </p>
+//   </Message>
+// )
+
+// export default MessageExamplePositive
+
+// import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+
+// function ModalExampleBasic() {
+//   const [open, setOpen] = React.useState(false)
+
+//   return (
+//     <Modal
+//       basic
+//       onClose={() => setOpen(false)}
+//       onOpen={() => setOpen(true)}
+//       open={open}
+//       size='small'
+//       trigger={<Button>Basic Modal</Button>}
+//     >
+//       <Header icon>
+//         <Icon name='archive' />
+//         Archive Old Messages
+//       </Header>
+//       <Modal.Content>
+//         <p>
+//           Your inbox is getting full, would you like us to enable automatic
+//           archiving of old messages?
+//         </p>
+//       </Modal.Content>
+//       <Modal.Actions>
+//         <Button basic color='red' inverted onClick={() => setOpen(false)}>
+//           <Icon name='remove' /> No
+//         </Button>
+//         <Button color='green' inverted onClick={() => setOpen(false)}>
+//           <Icon name='checkmark' /> Yes
+//         </Button>
+//       </Modal.Actions>
+//     </Modal>
+//   )
+// }
+
+// export default ModalExampleBasic

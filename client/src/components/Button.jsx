@@ -18,6 +18,7 @@ function Button(props) {
       'button button_logout': props.logout,
       'button button_update': props.update,
       'button button_group': props.group,
+      'button button_camera': props.camera,
     }
   )
       
@@ -38,6 +39,14 @@ function Button(props) {
         >
         </i>
     )
+    } else if (props.camera) {
+      return (
+        <i
+          className="fa fa-camera form_icon"
+          onClick={props.onClick}
+        >
+        </i>
+    )
     } else if (props.split) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
     } else if (props.settle) {
@@ -52,7 +61,10 @@ function Button(props) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
     } else if (props.group) {
       return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
-    }         
+    } 
+    // else if (props.camera) {
+    //   return <button className={buttonClass} onClick={props.onClick}>{props.children}</button>
+    // }         
   }
 
     return icon()

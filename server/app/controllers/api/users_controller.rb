@@ -26,6 +26,17 @@ class Api::UsersController < ApplicationController
     end
   end
   # byebug
+  def update
+    user_update = params.require(:user).permit(:user_id, :first_name, :last_name, :email)
+    user = User.find(user_update[:user_id])
+    if user.update(first_name: user_update[:first_name], last_name: user_update[:last_name], email: user_update[:email])
+      render json: {
+        user: user
+      }
+    else
+      render json: {errors: user.errors.full_messages}, status: :not_acceptable
+    end
+  end
 
   private
   def user_params

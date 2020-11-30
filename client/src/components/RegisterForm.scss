@@ -157,11 +157,17 @@ input:focus {
   user-select: none;
   display: block;
   position: relative;
-  width: .25em;
+  width: .5em;
   height: 3em;
-  // background: $sean-theme-background;
-  background: $col-sean-red;
-  margin: 0% 0 -2em;
+  background: $sean-theme-background;
+  //background: $col-sean-red;
+  margin-left: -3px;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: -2em;
+  // margin: 0% 0 -2em;
+
+  // margin: 0% 0 -2em;
   z-index: 1;
 }
 
@@ -171,9 +177,9 @@ input:focus {
   width: 1em;
   height: 100%;
   position: absolute;
-  right: -19.5em; // eyeball the number
-  // background: $sean-theme-background;
-  background: $col-sean-red;
+  right: -19em; // eyeball the number
+  background: $sean-theme-background;
+  //background: $col-sean-red;
 }
 
 // styles placeholder colour

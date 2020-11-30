@@ -25,15 +25,14 @@ function Summary(props) {
               <Card.Content>
                 <Image
                   floated='right'
-                  size='mini'
-                  // width={100}
+                  //size='mini'
+                  width={50}
                   src='images/logo192.png'
                 />
                 <Card.Header>Hello there, {props.user.first_name}!</Card.Header>
                 {/* <Card.Meta>Total balance of:</Card.Meta> */}
                 <Card.Description>
                   {status()}
-                  {/* Steve wants to add you to the group <strong>best friends</strong> */}
                 </Card.Description>
               </Card.Content>
             </Card>

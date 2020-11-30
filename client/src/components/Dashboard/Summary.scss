@@ -1,9 +1,14 @@
-.dashboard_summary {
+.ui.cards.dashboard_summary {
 
   // background-color: pink;
   // display: flex;
   // justify-content: center;
   // flex-direction: column;
+
+  .ui .right .floated .image {
+    margin-bottom: 0;
+    margin-left: 0;
+  }
 
   .content .description p {
     display: flex;

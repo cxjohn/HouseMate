@@ -74,13 +74,12 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
   // transform: translate3d(0, -5rem, 0);
   transform: translate3d(0, 2.5rem, 0);
   // overflow: hidden;
-  background-color: #93C193;
-
+  background-color:  $sean-theme-background-slightly-dark;
 }
 
 #dashboard_footer.visible {
   transform: translate3d(0, 0rem, 0);
-  background-color: pink;
+  background-color: $sean-theme-background-slightly-dark;
 }
 // #bottom_footer {
 //   width: 25vw;

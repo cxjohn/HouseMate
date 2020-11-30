@@ -1,0 +1,51 @@
+.granimate {
+  // background-color: #2ecc71;
+  animation: hue 7s linear 0s infinite reverse;
+  z-index: 1000;
+}
+.granimate::before {
+  background: linear-gradient(105deg, rgba(255, 190, 0, 0), #ffbe00);
+  animation: hue 7s linear 1s infinite;
+  z-index: 1000;
+}
+
+@keyframes hue {
+  to {
+    filter: hue-rotate(1turn);
+  }
+}
+
+.full {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // width: 100vw;
+  // height: 100vh;
+  // color: white;
+  font-family: system-ui;
+  font-size: 48px;
+}
+.full::before {
+  // content: '';
+  position: absolute;
+  // width: 100vw;
+  // height: 100vh;
+}
+.full::after {
+  // content: 'HOUSEMATE';
+  position: relative;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+}
+
+.full.granimate {
+  color: linear-gradient(105deg, rgba(255, 190, 0, 0), #ffbe00);
+  animation: hue 7s linear 1s infinite;
+width: 30%;
+height: 50%;
+z-index: 1000;
+
+}

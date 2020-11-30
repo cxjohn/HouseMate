@@ -25,6 +25,19 @@ function Profile(props) {
   }
 
   function update() {
+    console.log("update button clicked!")
+
+    const updateData = {
+      user_id: props.user.id,
+      first_name: formState.first_name,
+      last_name: formState.last_name,
+      email: formState.email      
+    }
+
+    return props.onUpdate(updateData);
+  }
+
+  function updateButton() {
     if (props.user.first_name !== formState.first_name) {
       return <Button update onClick={update}>Update</Button>
     } else if (props.user.last_name !== formState.last_name) {
@@ -40,6 +53,9 @@ function Profile(props) {
     event.preventDefault();
   }
 
+  const camera = () => {
+    console.log("camera clicked!")
+  }
   // const form_first_name = () => {
   //   console.log("first name clicked!")
   //   return (
@@ -63,7 +79,9 @@ function Profile(props) {
   return (
     <div className="user_profile">
       <h1>Profile</h1><br/>
-      <img className='profile_pic' src="images/logo192.png" width={100}></img>
+      <img className='profile_pic' src="images/logo192.png" width={100} ></img>
+  
+      <Button camera className='camera' onClick={camera}></Button>
       <form onSubmit={handleSubmit}>
 
       <span className="input"></span>
@@ -101,7 +119,7 @@ function Profile(props) {
       <Button update onClick={update}>Update</Button>}
      {(props.user.email !== formState.email) &&
       <Button update onClick={update}>Update</Button>}  */}
-      { update() }
+      { updateButton() }
         {/* on clicking login, we want to receive email and password */}
         {/* and the do something with it */}
         {/* <Button update onClick={update}>Update</Button>

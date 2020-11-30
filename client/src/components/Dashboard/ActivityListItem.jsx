@@ -1,6 +1,5 @@
 import './ActivityListItem.scss';
 import { Card, Feed, Divider } from 'semantic-ui-react'
-// import React from 'react';
 import  Moment  from 'react-moment';
 
 function ActivityListItem (props) {
