@@ -7,7 +7,8 @@ function Profile(props) {
   const [formState, setFormState] = useState({
     first_name: props.user.first_name || "",
     last_name: props.user.last_name || "",
-    email: props.user.email || ""
+    email: props.user.email || "",
+    error: ""
   })
 
   // function login() {
@@ -27,15 +28,28 @@ function Profile(props) {
   function update() {
     // console.log("update button clicked!")
 
-    const updateData = {
-      user_id: props.user.id,
-      first_name: formState.first_name,
-      last_name: formState.last_name,
-      email: formState.email,
-      profile_pic: null
+    if (!formState.first_name || !formState.last_name || !formState.email) {
+
+      setFormState({...formState, error: "Please input all required particulars!" })
+      return
+
+    } else {
+
+      const updateData = {
+        user_id: props.user.id,
+        first_name: formState.first_name,
+        last_name: formState.last_name,
+        email: formState.email,
+        profile_pic: null
+      }
+  
+      setFormState({...formState, error: "" })
+
+
+      return props.onUpdate(updateData);
+
     }
 
-    return props.onUpdate(updateData);
   }
 
   function updateButton() {
@@ -68,7 +82,7 @@ function Profile(props) {
   
       {/* <Button camera className='camera' onClick={camera}></Button> */}
       <form onSubmit={handleSubmit}>
-
+      { formState.error && <p className="form_error">{formState.error}</p>  }
       <span className="input"></span>
       <input
         className='firstName'

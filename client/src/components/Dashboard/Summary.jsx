@@ -24,12 +24,16 @@ function Summary(props) {
             <Card>
               <Card.Content>
                 <Image
+                  id="summary_profile"
                   floated='right'
                   //size='mini'
-                  width={50}
+                  width={60}
                   src={props.user.profile_pic}
                 />
-                <Card.Header>Hello there, {props.user.first_name}!</Card.Header>
+                <Card.Header>
+                  Hello there,
+                  <p>{props.user.first_name}!</p>
+                </Card.Header>
                 {/* <Card.Meta>Total balance of:</Card.Meta> */}
                 <Card.Description>
                   {status()}

@@ -244,35 +244,54 @@ function App() {
 
   const register = (userData) => {
     transition(LOADING)
-    axios({
-      method: 'POST',
-      // url: 'http://localhost:3000/api/users',
-      url: '/api/users',
-      // send user data required to register a new user in the db
-      data: { user: userData }
-    })
-    .then(({ data }) => {
-      console.log("USER ADDED: ", data)
-      // store token
-      localStorage.setItem("token", data.jwt)
-      // do anything with user data?
-      setState(prev => ({ 
-        ...prev,
-        user: data.user,
-        history: data.history,
-        summary: data.summary,
-        settle: data.settle,
-        message: data.message,
-        popup: true
-      }))
-    })
-    .then(() => {
-      transition(DASHBOARD);
-      setState(prev => ({ ...prev, popup: false }));
-    })
-      // update state at the front end like we did for scheduler?
-      // transition to user dashboard
-    .catch(error => console.log(error))
+
+    if (userData.error) {
+      setState(prev => ({ ...prev, popup: true, error: true, message: userData.error}));
+      transition(REGISTER);
+      setState(prev => ({ ...prev, popup: false, error: false }));
+
+    } else {
+      axios({
+        method: 'POST',
+        // url: 'http://localhost:3000/api/users',
+        url: '/api/users',
+        // send user data required to register a new user in the db
+        data: { user: userData }
+      })
+      .then(({ data }) => {
+        // console.log("USER ADDED: ", data)
+        // store token
+        localStorage.setItem("token", data.jwt)
+        // do anything with user data?
+        setState(prev => ({ 
+          ...prev,
+          user: data.user,
+          history: data.history,
+          summary: data.summary,
+          settle: data.settle,
+          message: data.message,
+          popup: true
+        }))
+      })
+      .then(() => {
+        transition(DASHBOARD);
+        setState(prev => ({ ...prev, popup: false }));
+      })
+        // update state at the front end like we did for scheduler?
+        // transition to user dashboard
+      .catch( ({data})  => {
+        console.log(data);
+  
+        setState(prev => ({ 
+          ...prev,
+          message: data,
+          popup: true
+        }))
+  
+        transition(HOME);
+        setState(prev => ({ ...prev, popup: false }));
+      })
+    }
   }
 
   const login = (userData) => {
@@ -439,14 +458,33 @@ function App() {
       </header>
       <main onClick={() => setState(prev => ({...prev, visible: false}))}>
         {!state.visible && window.scrollTo(0,0)}
-
-        {mode === HOME && <img id="logo" src="https://i.imgur.com/5HK16TW.png" width={150}></img>}
-        {mode === REGISTER && <RegisterForm
+        {/* { mode === HOME && <Loading /> } */}
+        {
+          mode === HOME && <><img 
+              id="logo"
+              src="https://i.imgur.com/5HK16TW.png"
+              width={150}>
+            </img>
+            <Status
+              message={state.message}
+              popup={state.popup}
+            />
+            </>
+        }
+        {
+        mode === REGISTER && <><RegisterForm
           display={display}
           onRegister={register}
-        />}
+        />
+        <Status 
+          message={state.message}
+          popup={state.popup}
+          error={state.error}
+        />
+        </>
+        }
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
-        {mode === LOADING && <Loading message={"Loading"} />}
+        {mode === LOADING && <Loading user={state.user} message={"Loading"} />}
         {/* <section className="dashboard"> */}
         {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
         {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}

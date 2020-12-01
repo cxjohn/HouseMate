@@ -7,7 +7,7 @@ const Activity = (props) => (
     <Card.Content>
       <Card.Header>Recent Activity</Card.Header>
     </Card.Content>
-    <Card.Content>
+    <Card.Content id="activity_content_card">
       <Feed>
         {
           props.history.map(data =>
@@ -19,6 +19,7 @@ const Activity = (props) => (
             first_name={data[4]}
             last_name={data[5]}
             user_id={data[6]}
+            profile_pic={data[7]}
             logged_user_id={props.user_id}
           />
           )

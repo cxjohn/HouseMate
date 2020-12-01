@@ -1,51 +1,37 @@
-.granimate {
-  // background-color: #2ecc71;
-  animation: hue 7s linear 0s infinite reverse;
-  z-index: 1000;
-}
-.granimate::before {
-  background: linear-gradient(105deg, rgba(255, 190, 0, 0), #ffbe00);
-  animation: hue 7s linear 1s infinite;
-  z-index: 1000;
-}
+.loading_status {
 
-@keyframes hue {
-  to {
-    filter: hue-rotate(1turn);
-  }
-}
-
-.full {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  // width: 100vw;
-  // height: 100vh;
-  // color: white;
-  font-family: system-ui;
-  font-size: 48px;
-}
-.full::before {
-  // content: '';
-  position: absolute;
-  // width: 100vw;
-  // height: 100vh;
-}
-.full::after {
-  // content: 'HOUSEMATE';
-  position: relative;
-  text-align: center;
+
+  .loading_text {
+    font-size: 2.5rem;
+  }
+
+  .loading_image {
+    animation-duration: 1.5s;
+    animation-name: bounce-6;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease;
+
+  }
+  
 }
 
-body {
-  margin: 0;
-}
 
-.full.granimate {
-  color: linear-gradient(105deg, rgba(255, 190, 0, 0), #ffbe00);
-  animation: hue 7s linear 1s infinite;
-width: 30%;
-height: 50%;
-z-index: 1000;
+  // @keyframes bounce-1 {
+  //     0%   { transform: translateY(0); }
+  //     50%  { transform: translateY(-100px); }
+  //     100% { transform: translateY(0); }
+  //   }
 
-}
+    @keyframes bounce-6 {
+      0%   { transform: scale(1,1)      translateY(0); }
+      10%  { transform: scale(1.1,.9)   translateY(0); }
+      30%  { transform: scale(.9,1.1)   translateY(-100px); }
+      50%  { transform: scale(1.05,.95) translateY(0); }
+      57%  { transform: scale(1,1)      translateY(-7px); }
+      64%  { transform: scale(1,1)      translateY(0); }
+      100% { transform: scale(1,1)      translateY(0); }
+  }

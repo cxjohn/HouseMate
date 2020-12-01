@@ -10,7 +10,7 @@ class Api::FriendsController < ApplicationController
         id = new_friend.id
         new_mate = User.find(friendship[:user_id])
         add_friend(id, new_mate)
-# send an array back of friends list
+    # send an array back of friends list
         if list 
           render json: {
             friends_list: list,
@@ -22,13 +22,13 @@ class Api::FriendsController < ApplicationController
           
       else
         message = "You cannot add your own e-mail!"
-        render json: {error: message}, status: :not_acceptable
+        render json: {error: message}
       end
 
 
     else
         message = "This e-mail is not registered!"
-        render json: {error: message}, status: :not_acceptable
+        render json: {error: message}
     end
     # switch user_ids
   

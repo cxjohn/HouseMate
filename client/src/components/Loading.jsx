@@ -3,14 +3,23 @@ import './Loading.scss';
 
 function Loading (props) {
 
+  const loading_image = (props.user && props.user.length > 0) ? props.user.profile_pic : "images/avatars/frog.png";
+
   return (
     // <main className="status">
-    <img
-      className="full granimate"
-      src="images/housematewhite.png"
-      // src="https://i.imgur.com/4Qx0TNt.gifv"
-      alt="Loading"
-    />
+    <section className="loading_status">
+      <img
+        className="loading_image"
+        // className="full granimate"
+        src={loading_image}
+        // src="images/"
+        alt="Loading"
+        width={100}
+        height={100}
+      />
+      <p className="loading_text"> HouseMate </p>
+    </section>
+    
     // <a href="https://imgur.com/4Qx0TNt"><img src="https://i.imgur.com/4Qx0TNt.gif" title="source: imgur.com" /></a>
     // <>
     // <section class="full granimate"></section>

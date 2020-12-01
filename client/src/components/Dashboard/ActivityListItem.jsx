@@ -10,18 +10,18 @@ function ActivityListItem (props) {
 
       if (props.description === "settled") {
         return  <span className='activity_block'>
-                  <p>{props.first_name} {props.last_name} settled up with you</p>
+                  <p><b>{props.first_name} {props.last_name}</b> settled up with you</p>
                 </span>
       } else if (props.amount < 0) {
       return <span className='activity_block'>
-              <p> You paid for {props.description} </p>
-              <p>{props.first_name} {props.last_name} owes you 
+              <p><b>You</b> paid for {props.description} </p>
+              <p><b>{props.first_name} {props.last_name}</b> owes you 
                 <p className='money_green'>${-props.amount/100}</p>
               </p>
              </span>
       } else {
       return <span className='activity_block'>
-              <div className="payment">{props.first_name} {props.last_name} paid for <b>{props.description}</b></div>
+              <div className="payment"><b>{props.first_name} {props.last_name}</b> paid for <b>{props.description}</b></div>
                 <p>You owe <p className='money_red'>${props.amount/100}</p>
                 </p>
              </span>
@@ -30,11 +30,11 @@ function ActivityListItem (props) {
 
       if (props.description === "settled") {
         return  <span className='activity_block'>
-                  <p> You settled with {props.first_name} {props.last_name}</p>
+                  <p> You settled with <b>{props.first_name} {props.last_name}</b></p>
                 </span>
       } else {
        return <span className='activity_block'>
-                <div className="payment">You paid for <b>{props.description}</b></div>
+                <div className="payment"><b>You</b> paid for <b>{props.description}</b></div>
                 <p>You are owed 
                   <p className='money_green'>${-props.amount/100}</p>
                 </p>
@@ -47,7 +47,7 @@ function ActivityListItem (props) {
   return (
         <>
         <Feed.Event className="dashboard_activity">
-          <Feed.Label image='images/logo192.png' />
+          <Feed.Label image={props.profile_pic} />
           <Feed.Content>
             <Moment fromNow>{props.date}</Moment>
             <Feed.Summary>

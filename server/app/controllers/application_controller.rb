@@ -61,9 +61,11 @@ class ApplicationController < ActionController::API
       # and get the user_id who charged/paid
       first_name = User.find(transaction.user_id).first_name
       last_name = User.find(transaction.user_id).last_name
+      profile_pic = User.find(transaction.user_id).profile_pic
       history[index].push(first_name)
       history[index].push(last_name)
       history[index].push(transaction.user_id)
+      history[index].push(profile_pic)
     end
     # order by most recent
     # user id is history[index][4]

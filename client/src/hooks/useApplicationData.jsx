@@ -22,7 +22,8 @@ function useApplicationData() {
     settle: {},
     friends_list: [],
     groups_list: [],
-    message: ""
+    message: "",
+    error: false
   })
 
   // useEffect(() => {

@@ -12,6 +12,7 @@ function RegisterForm (props) {
     email: props.email || "",
     password: "",
     passwordConfirmation: "",
+    error: ""
   })
 
 
@@ -29,8 +30,17 @@ function register () {
 
   if (formState.password !== formState.passwordConfirmation) {
   // show errors on the page 
-    console.log("ERROR!")
+    // console.log("ERROR!")
+    // const userData = { error: "Passwords do not match!" }
+    setFormState({...formState, error: "Passwords do not match!" })
+    return
+  } else if (!formState.email || !formState.firstName || !formState.lastName || !formState.password) {
+  
+    // const userData = { error: "Please input all required particulars!" }
+    setFormState({...formState, error: "Please input all required particulars!" })
+    return
   } else {
+
     const userData = {
       first_name: formState.firstName,
       last_name: formState.lastName,
@@ -40,10 +50,15 @@ function register () {
       password_confirmation: formState.passwordConfirmation,
       profile_pic: "images/avatars/rabbit.png"
     }
-    // console.log("user!" , userData);
-    
+
+    setFormState({...formState, error: "" })
+
     return props.onRegister(userData)
+    //console.log("user!" , userData);
   }
+
+  // return props.onRegister(userData)
+
 }
 
 
@@ -57,6 +72,8 @@ function register () {
         <h1>Sign Up</h1>
       </div>
     <form onSubmit={handleSubmit}>
+      { formState.error && <p className="form_error">{formState.error}</p>  }
+
       <span className="input"></span>
       <input
         className='firstName' 
@@ -112,12 +129,10 @@ function register () {
       {/* on click we want to send data to the server using axios call*/}
       {/* type="submit" value="Sign Up"  */}
       {/* title="Submit form" class="icon-arrow-right" */}
-      <Button register onClick={register}>
-      
-      </Button>
+      <Button register onClick={register}></Button>
 
-</form>
-</section>  
+      </form>
+      </section>  
   )
   
 };

@@ -81,9 +81,9 @@ form {
   -webkit-animation: moveDown .3s;
   -moz-animation: moveDown .3s;
   animation: moveDown .3s;
-  -webkit-animation-fill-mode: forwards;
-  -moz-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
+  //-webkit-animation-fill-mode: forwards; // suspected for bluriness
+  //-moz-animation-fill-mode: forwards;
+  //animation-fill-mode: forwards;
 }
 
 // animates to come down
@@ -413,3 +413,9 @@ p {
   margin-bottom: 9em;
 }
 
+.form_error {
+  color: red;
+  background: #ffcccb;
+  border-radius: 3px;
+  // text-shadow: yellow 1px 0 10px;
+}
