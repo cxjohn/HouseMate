@@ -37,7 +37,8 @@ function register () {
       email: formState.email,
       // password_digest: formState.password
       password: formState.password,
-      password_confirmation: formState.passwordConfirmation
+      password_confirmation: formState.passwordConfirmation,
+      profile_pic: "images/avatars/rabbit.png"
     }
     // console.log("user!" , userData);
     

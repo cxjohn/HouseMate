@@ -1,20 +1,24 @@
 import { useState } from 'react';
 import Button from '../Button';
-//import './FriendDropdown.scss';
+// import './GroupDropdown.scss';
 import { Dropdown } from 'semantic-ui-react';
 
 
-function FriendDropdown(props) {
+function GroupDropdown(props) {
   
-  const groups = []
-  props.groups_list.map((group) => {
+  // add fake group data 
+  // group_name && members in the group
 
-    const group_object = {
-      key: group[0],
-      text: `${group[1]}`,
-      value: group[0]
+
+  const friends = []
+  props.friends_list.map((friend) => {
+
+    const friend_object = {
+      key: friend[0],
+      text: `${friend[1]} ${friend[2]}`,
+      value: friend[0]
     };
-    groups.push(group_object)
+    friends.push(friend_object)
   })
 
   const [formState, setFormState] = useState({
@@ -23,32 +27,26 @@ function FriendDropdown(props) {
   })
 
   function split() {
-    const selected_group_name = document.getElementById('raj').firstChild.innerHTML;
+    const values = document.getElementsByClassName('ui label');
+    console.log("splitzies")
+    // console.log("value array:", values)
     const users = [props.user.id];
-    //for (const value of values) {
-    //   // console.log("name: ", value.innerText)
-    //   // console.log("id: ", value.attributes.value.value)
-    //   // console.log("desc ", formState.description)
-    //   // console.log("amount ", formState.amount)
-    //  users.push(Number(value.attributes.value.value))
-    // }
-    // loop through  props.groups_list
-    const group = props.groups_list.filter(group => group[1] === selected_group_name)[0]
-    // console.log(`group id`, group[0]);
-    // group_id = 
-    // check where name = 'selected_group_name'
-    // get the corresponding id
-
+    for (const value of values) {
+      // console.log("name: ", value.innerText)
+      // console.log("id: ", value.attributes.value.value)
+      // console.log("desc ", formState.description)
+      // console.log("amount ", formState.amount)
+      users.push(Number(value.attributes.value.value))
+    }
 
     const splitData = {
       users,
       description: formState.description,
-      amount_owed: formState.amount / users.length,
-      // amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
+      amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
       amount: formState.amount,
       user_id: props.user.id,
       is_expense: true,
-      group_id: group[0]
+      group_id: null
     }
     console.log('vegan', splitData);
 
@@ -63,12 +61,13 @@ function FriendDropdown(props) {
   return (
     <>
       
-      {/* <Button update onClick={dropdown} >Groups</Button> */}
-      <Button split onClick={dropdown} >Friends</Button>
-      <h3>Split among groups</h3>
+      <Button update onClick={dropdown} >Groups</Button>
+      {/* <Button split onClick={dropdown} >Friends</Button> */}
+      <h3>Split among friends</h3>
+
       <span className="test form"></span>
       <form onSubmit={event => event.target.preventDefault} className="form_transaction">
-        <Dropdown id="raj" className="dropdown" placeholder='Groups' fluid single selection options={groups} />
+        <Dropdown className="dropdown" placeholder='Mates' fluid multiple selection options={friends} />
 
         <span className="input"></span>
         <input
@@ -100,7 +99,7 @@ function FriendDropdown(props) {
 
 
 };
-export default FriendDropdown;
+export default GroupDropdown;
 
 
 

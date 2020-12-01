@@ -154,16 +154,13 @@ function App() {
         // user: data.user,
         history: data.history,
         summary: data.summary,
-        settle: data.settle,
-        popup: true
+        settle: data.settle
+        // popup: true
       }))
       
       // transition(STATUS)
     })
     .then(() => {
-      // setTimeout(() => {
-        // transition(SPLIT_SUCCESSFUL)
-      // }, 2000)
       transition(DASHBOARD)
     })
     .catch(error => console.log(error))
@@ -233,10 +230,15 @@ function App() {
 
       setState(prev => ({ 
         ...prev,
-        friends_list: data.friends_list
+        friends_list: data.friends_list,
+        message: data.message,
+        popup: true
       }))
     })
-    .then(()=> transition(DASHBOARD))
+    .then(()=> {
+      transition(FRIEND);
+      setState(prev => ({ ...prev, popup: false }));
+    })
     .catch(error => console.log(error))
   }
 
@@ -259,10 +261,15 @@ function App() {
         user: data.user,
         history: data.history,
         summary: data.summary,
-        settle: data.settle
+        settle: data.settle,
+        message: data.message,
+        popup: true
       }))
     })
-    .then(() => transition(DASHBOARD))
+    .then(() => {
+      transition(DASHBOARD);
+      setState(prev => ({ ...prev, popup: false }));
+    })
       // update state at the front end like we did for scheduler?
       // transition to user dashboard
     .catch(error => console.log(error))
@@ -300,8 +307,8 @@ function App() {
 
   const logout = () => {
     localStorage.removeItem("token")
-    // transition(HOME);
-    transition(LOADING);
+    transition(HOME);
+    // transition(LOADING);
     // recieve recent activity data from the server and update state
     // transition to user dashboard
     // update state at the front end like we did for scheduler?
@@ -326,11 +333,16 @@ function App() {
 
       setState(prev => ({
         ...prev,
-        groups_list: data.groups_list
+        groups_list: data.groups_list,
+        message: data.message,
+        popup: true
       }))
       
     })
-    .then(() => transition(DASHBOARD))
+    .then(() => {
+      transition(GROUP);
+      setState(prev => ({ ...prev, popup: false }));
+    })
     .catch(error => console.log(error))
   }
 
@@ -356,15 +368,20 @@ function App() {
       // store token
       // localStorage.setItem("token", data.jwt)
       // do anything with user data?
-      setState(prev => ({ 
+      setState(prev => ({
         ...prev,
-        user: data.user
+        user: data.user,
+        message: data.message,
+        popup: true
         // history: data.history,
         // summary: data.summary,
         // settle: data.settle
       }))
     })
-    .then(() => transition(PROFILE))
+    .then(() => {
+      transition(PROFILE);
+      setState(prev => ({ ...prev, popup: false }));
+    })
       // update state at the front end like we did for scheduler?
       // transition to user dashboard
     .catch(error => console.log(error))
@@ -375,14 +392,45 @@ function App() {
     <Fragment>
 
       <header>
-        {mode === DASHBOARD && <><Header /><Status message="splitzies worked!" popup={state.popup} visible={state.visible}/></>}
+        {
+          mode === DASHBOARD && <><Header 
+            />
+            <Status 
+              message={state.message}
+              popup={state.popup}
+            />
+          </>
+        }
         {/* {mode === DASHBOARD && <Header />} */}
         {mode === ADD && <Header />}
         {mode === FRIENDSIES && <Header />}
         {mode === SETTLE && <Header />}
-        {mode === FRIEND && <Header />}
-        {mode === PROFILE && <Header />}
-        {mode === GROUP && <Header />}
+        {
+          mode === FRIEND && <><Header 
+          />
+          <Status 
+            message={state.message}
+            popup={state.popup}
+          />
+          </>
+        }
+        {mode === PROFILE && <><Header 
+          />
+          <Status 
+            message={state.message}
+            popup={state.popup}
+          />
+          </>
+        }
+        {
+          mode === GROUP && <><Header 
+          />
+          <Status 
+            message={state.message}
+            popup={state.popup}
+          />
+          </>
+        }
         {/* <h2>{state.user && state.user.first_name}</h2> */}
         {/* {mode === REGISTER && ( images/housematewhite.png
         <div>
@@ -414,7 +462,9 @@ function App() {
             user={state.user}
             onSplit={split}
             friends_list={state.friends_list}
-            onClick={friendsies}
+            groups_list={state.groups_list}
+
+            // onClick={friendsies}
             />
         }
         {
@@ -422,7 +472,7 @@ function App() {
             user={state.user}
             onSplit={split}
             groups_list={state.groups_list}
-            onClick={groupsies}
+            // onClick={groupsies}
             />
         }
         {

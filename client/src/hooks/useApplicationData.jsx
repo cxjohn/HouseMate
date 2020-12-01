@@ -21,7 +21,8 @@ function useApplicationData() {
     summary: {},
     settle: {},
     friends_list: [],
-    groups_list: []
+    groups_list: [],
+    message: ""
   })
 
   // useEffect(() => {

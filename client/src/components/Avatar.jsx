@@ -71,8 +71,6 @@ function Avatar (props) {
       
       trigger={<i id="camera_icon" className="fa fa-camera form_icon"></i>}
       // trigger={<Icon id="camera_icon" name='camera retro' />}
-
-
     >
       <Header icon>
          Select your profile picture
@@ -80,73 +78,109 @@ function Avatar (props) {
       <Modal.Content className='content_pics'>
         <img 
           className="image_update"
-          src="images/logo192.png"
+          src="images/avatars/bear.png"
           width={75}
           onClick={event => select(event)}
         />
         <img
           className="image_update"
-          src="images/housematelogo.png"
+          src="images/avatars/boar.png"
           width={75}
           onClick={event => select(event)}
         />
         <img
           className="image_update"
-          src="images/housematewhite.png"
+          src="images/avatars/cat.png"
           width={75}
           onClick={event => select(event)}
         />
         <img
           className="image_update"
-          src="images/housematewhite.png"
+          src="images/avatars/cow.png"
           width={75}
           onClick={event => select(event)}
         />
         <img
           className="image_update"
-          src="images/housematelogo.png"
+          src="images/avatars/deer.png"
           width={75}
           onClick={event => select(event)}
         />
         <img
           className="image_update"
-          src="images/logo192.png"
+          src="images/avatars/dog.png"
           width={75}
           onClick={event => select(event)}
         />
         <img 
           className="image_update" 
-          src="images/housematewhite.png" 
+          src="images/avatars/fox.png"
           width={75}
           onClick={event => select(event)}
         />
         <img 
           className="image_update" 
-          src="images/housematelogo.png" 
+          src="images/avatars/giraffe.png"
           width={75}
           onClick={event => select(event)}
         />
         <img 
           className="image_update" 
-          src="images/logo192.png" 
+          src="images/avatars/gorilla.png"
           width={75}
           onClick={event => select(event)}
         />
         <img 
           className="image_update" 
-          src="images/housematelogo.png"
+          src="images/avatars/hamster.png"
           width={75}
           onClick={event => select(event)}
         />
         <img 
           className="image_update" 
-          src="images/logo192.png" 
+          src="images/avatars/koala.png"
+          width={75}
+          onClick={event => select(event)}
+        />
+        <img 
+          className="image_update" 
+          src="images/avatars/lion.png" 
+          width={75}
+          onClick={event => select(event)}
+        />
+        <img 
+          className="image_update" 
+          src="images/avatars/monkey.png" 
+          width={75}
+          onClick={event => select(event)}
+        />
+        <img 
+          className="image_update" 
+          src="images/avatars/mouse.png" 
+          width={75}
+          onClick={event => select(event)}
+        />
+        <img 
+          className="image_update" 
+          src="images/avatars/pig.png" 
+          width={75}
+          onClick={event => select(event)}
+        />
+        <img 
+          className="image_update" 
+          src="images/avatars/rabbit.png"
+          width={75}
+          onClick={event => select(event)}
+        />
+        <img 
+          className="image_update" 
+          src="images/avatars/tiger.png" 
           width={75}
           onClick={event => select(event)}
         />
         <img
           className="image_update" 
-          src="images/housematewhite.png" 
+          src="images/avatars/wolf.png" 
           width={75}
           onClick={event => select(event)}
         />

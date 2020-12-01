@@ -18,7 +18,8 @@ class Api::UsersController < ApplicationController
         user_id: new_user_id,
         history: recent_activity(new_user_id),
         summary: user_summary(new_user_id),
-        settle: settlement(user.id)
+        settle: settlement(user.id),
+        message: "Welcome to the House, #{user.first_name}!"
       }
     else
       # error = "USER NOT SAVED"
@@ -32,7 +33,8 @@ class Api::UsersController < ApplicationController
     if user_update[:profile_pic]
       if user.update(profile_pic: user_update[:profile_pic])
         render json: {
-          user: user
+          user: user,
+          message: "Profile updated!"
         }
       else
         render json: {errors: user.errors.full_messages}, status: :not_acceptable
@@ -40,7 +42,8 @@ class Api::UsersController < ApplicationController
     else  
       if user.update(first_name: user_update[:first_name], last_name: user_update[:last_name], email: user_update[:email])
         render json: {
-          user: user
+          user: user,
+          message: "Profile updated!"
         }
       else
         render json: {errors: user.errors.full_messages}, status: :not_acceptable
@@ -55,7 +58,8 @@ class Api::UsersController < ApplicationController
       :last_name,
       :email,
       :password,
-      :password_confirmation
+      :password_confirmation,
+      :profile_pic
       )
   end
 end

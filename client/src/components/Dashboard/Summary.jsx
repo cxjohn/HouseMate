@@ -27,7 +27,7 @@ function Summary(props) {
                   floated='right'
                   //size='mini'
                   width={50}
-                  src='images/logo192.png'
+                  src={props.user.profile_pic}
                 />
                 <Card.Header>Hello there, {props.user.first_name}!</Card.Header>
                 {/* <Card.Meta>Total balance of:</Card.Meta> */}

@@ -3,6 +3,7 @@ import Button from '../Button';
 import FriendDropdown from './FriendDropdown';
 import './TransactionForm.scss';
 import { Dropdown } from 'semantic-ui-react';
+import './GroupDropdown.scss'
 
 
 function TransactionForm(props) {

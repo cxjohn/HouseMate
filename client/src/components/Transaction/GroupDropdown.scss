@@ -1,22 +1,49 @@
 @import '../../sass/_variables';
 
-.description {
-  width: 12.6em;
-}
-.amount {
-  width: 12.6em;
-}
-// .form_transaction {
+nav {
+  display: flex;
+  flex-direction: row;
+  //-webkit-font-smoothing: antialiased;
+  justify-content: center;
+  align-items: center;
+  width: 250px;
 
-//   // .button_split {
-//   //   // background-color: $col-sean-red;
-//   // }
 
+  span {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    // list-style: none;
+    font-size: 1.5rem;
+    width: 250px;
+  }
+
+      p {
+      // margin: 0 0 0 0;
+      opacity: 1;
+      transition: all 0.4s ease;
+      margin-bottom: 0;
+    }
+
+
+  .option_selected {
+    border-bottom: 5px solid $col-sean-purple;
+  }
+}
+
+
+
+// .image_update {
+//   margin: 0 1em 1em 1em;
+//   padding: 3px;
 // }
 
+// .image_selected {
+//   border: 5px solid $col-sean-red;
+//   border-radius: 50%;
+// }
 
-
-  // box-sizing: border-box
 
 // body{
 //   // background: #1A1E23;

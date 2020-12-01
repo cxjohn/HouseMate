@@ -34,6 +34,18 @@ function SettlementForm(props) {
         />
       )
     }
+    { 
+      props.settle.length === 0 &&
+            <Card.Content>
+              <Card.Header className='even_steven'>
+                <p>&#x1F389;  You are even-steven!  &#x1F389;</p>
+              </Card.Header>
+              {/* <Card.Description>
+                <p>You are even-steven!</p>
+              </Card.Description> */}
+          </Card.Content>
+    }      
+
     </Card>
   </Card.Group>
    </>

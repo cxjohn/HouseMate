@@ -8,13 +8,16 @@ class Api::FriendsController < ApplicationController
       list = add_friend(friendship[:user_id], new_friend)
       if new_friend.id != friendship[:user_id]
         id = new_friend.id
-        new_friend = User.find(friendship[:user_id])
-        add_friend(id, new_friend)
+        new_mate = User.find(friendship[:user_id])
+        add_friend(id, new_mate)
 # send an array back of friends list
         if list 
-          render json: {friends_list: list}
+          render json: {
+            friends_list: list,
+            message: "#{new_friend.first_name} added!"
+          }
         else
-          render json: {message: "works"}
+          render json: {error: "Sorry, error encountered while adding a friend."}
         end
           
       else

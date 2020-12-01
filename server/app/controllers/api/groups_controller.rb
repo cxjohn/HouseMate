@@ -29,8 +29,9 @@ class Api::GroupsController < ApplicationController
       logged_in_user = members[:users].shift
 
       render json: {
-        msg: "Group created!",
-        groups_list: group_list(logged_in_user)
+        # msg: "Group created!",
+        groups_list: group_list(logged_in_user),
+        message: "#{group.name} created!"
         # logged_user_id: logged_in_user
 
         # groups_list: groups_list(logged_in_user)

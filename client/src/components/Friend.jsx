@@ -25,6 +25,7 @@ function Friend(props) {
     <div>
       {/* <Button className='back-arrow' back onClick={(event) => props.displayForm(event)}>Back</Button> */}
       <form onSubmit={event => event.preventDefault()}>
+        {/* <h2 className='add_friend_text'>Add your bud</h2> */}
         <span className="input"></span>
         <input
           className='email'

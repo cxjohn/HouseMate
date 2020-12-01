@@ -28,5 +28,6 @@
 
 # Ignore .env
 .env
+.env.development
 
 random.md
