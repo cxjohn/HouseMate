@@ -3,8 +3,9 @@ import './Loading.scss';
 
 function Loading (props) {
 
-  const loading_image = (props.user && props.user.length > 0) ? props.user.profile_pic : "images/avatars/frog.png";
 
+  const loading_image = (props.user && props.user.profile_pic) ? props.user.profile_pic : "images/avatars/frog.png";
+  
   return (
     // <main className="status">
     <section className="loading_status">

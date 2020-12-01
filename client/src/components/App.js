@@ -246,9 +246,9 @@ function App() {
     transition(LOADING)
 
     if (userData.error) {
-      setState(prev => ({ ...prev, popup: true, error: true, message: userData.error}));
+      // setState(prev => ({ ...prev, popup: true, error: true, message: userData.error}));
       transition(REGISTER);
-      setState(prev => ({ ...prev, popup: false, error: false }));
+      // setState(prev => ({ ...prev, popup: false, error: false }));
 
     } else {
       axios({
@@ -484,7 +484,9 @@ function App() {
         </>
         }
         {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
-        {mode === LOADING && <Loading user={state.user} message={"Loading"} />}
+        {mode === LOADING && <Loading user={state.user} />}
+        {/* {mode === DASHBOARD && <Loading user={state.user} message={"Loading"} />} */}
+
         {/* <section className="dashboard"> */}
         {mode === DASHBOARD && <Summary user={state.user} summary={state.summary}/>}
         {mode === DASHBOARD && <Activity user_id={state.user.id} history={state.history}/>}
