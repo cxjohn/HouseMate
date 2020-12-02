@@ -16,7 +16,7 @@ function Avatar (props) {
   // )
 
   const update = () => {
-    console.log("update clicked");
+    // console.log("update clicked");
 
     const updateImage = document.getElementsByClassName("image_selected")[0].src
     setOpen(false);

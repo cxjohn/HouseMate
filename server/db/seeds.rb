@@ -64,3 +64,8 @@
 # group3.memberships.create!({
 #   user_id: 10
 # })
+
+
+Share.destroy_all
+Activity.destroy_all
+

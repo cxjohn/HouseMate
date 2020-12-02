@@ -60,16 +60,12 @@ function App() {
     if (token) {
       axios({
         method: 'GET',
-        // url: 'http://localhost:3000/api/users',
         url: 'http://localhost:3000/api/auto_login',
         // send user data required to register a new user in the db
         headers: { Authorization: `Bearer ${token}` }
       }).then(({ data }) => {
         console.log("USER FOUND: ", data)
         // store token
-        // localStorage.setItem("token", data.jwt)
-        // do anything with user data?
-        // transition to user dashboard
         setState(prev => ({ 
           ...prev,
           user: data.user,
@@ -79,8 +75,6 @@ function App() {
           friends_list: data.friends_list,
           groups_list: data.groups_list
         }))
-        // update state at the front end like we did for scheduler?
-        
       })
       .then(() => transition(DASHBOARD))
       .catch(error => console.log(error))
@@ -237,13 +231,21 @@ function App() {
       })
     .then(({ data }) => {
       // console.log("friend ADDED: ", data)
-
-      setState(prev => ({ 
-        ...prev,
-        friends_list: data.friends_list,
-        message: data.message,
-        popup: true
-      }))
+      if(data.error) {
+        setState(prev => ({ 
+          ...prev,
+          // friends_list: data.friends_list,
+          message: data.error,
+          popup: true
+        }))        
+      } else {
+        setState(prev => ({ 
+          ...prev,
+          friends_list: data.friends_list,
+          message: data.message,
+          popup: true
+        }))
+      }
     })
     .then(()=> {
       transition(FRIEND);
@@ -393,7 +395,7 @@ function App() {
       data: { user: updateData }
     })
     .then(({ data }) => {
-      console.log("USER UPDATED: ", data)
+      // console.log("USER UPDATED: ", data)
       // store token
       // localStorage.setItem("token", data.jwt)
       // do anything with user data?
@@ -401,8 +403,8 @@ function App() {
         ...prev,
         user: data.user,
         message: data.message,
-        popup: true
-        // history: data.history,
+        popup: true,
+        history: data.history
         // summary: data.summary,
         // settle: data.settle
       }))

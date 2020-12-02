@@ -34,6 +34,7 @@ class Api::UsersController < ApplicationController
       if user.update(profile_pic: user_update[:profile_pic])
         render json: {
           user: user,
+          history: recent_activity(user.id),
           message: "Profile updated!"
         }
       else
