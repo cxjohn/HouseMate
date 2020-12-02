@@ -82,12 +82,12 @@ function Avatar (props) {
           width={75}
           onClick={event => select(event)}
         />
-        <img
+        {/* <img
           className="image_update"
           src="images/avatars/boar.png"
           width={75}
           onClick={event => select(event)}
-        />
+        /> */}
         <img
           className="image_update"
           src="images/avatars/cat.png"
@@ -102,7 +102,7 @@ function Avatar (props) {
         />
         <img
           className="image_update"
-          src="images/avatars/deer.png"
+          src="images/avatars/dragon.png"
           width={75}
           onClick={event => select(event)}
         />
@@ -132,7 +132,7 @@ function Avatar (props) {
         />
         <img 
           className="image_update" 
-          src="images/avatars/hamster.png"
+          src="images/avatars/hen.png"
           width={75}
           onClick={event => select(event)}
         />
@@ -172,7 +172,7 @@ function Avatar (props) {
           width={75}
           onClick={event => select(event)}
         />
-        <img 
+        {/* <img 
           className="image_update" 
           src="images/avatars/tiger.png" 
           width={75}
@@ -183,7 +183,7 @@ function Avatar (props) {
           src="images/avatars/wolf.png" 
           width={75}
           onClick={event => select(event)}
-        />
+        /> */}
         
       </Modal.Content>
        <Modal.Actions>
