@@ -30,7 +30,7 @@ function Friend(props) {
         <input
           className='email'
           type='email'
-          placeholder="Enter Friends's Email..."
+          placeholder="Enter Friend's Email..."
           value={formState.email}
           onChange={event => setFormState({ ...formState, email: event.target.value })}
           autoFocus

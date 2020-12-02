@@ -49,6 +49,9 @@ class ApplicationController < ActionController::API
     # and get activity_id
     # and get amount_owed 
     # and get created_at
+    # user_first_name = User.find(user_id).first_name
+    # user_last_name = User.find(user_id).last_name
+
     shares.each do |share|
       activities.push([share.activity_id, share.amount_owed, share.created_at])
     end
@@ -56,17 +59,42 @@ class ApplicationController < ActionController::API
     history = activities.map(&:clone)
     activities.each_with_index do |activity, index|
       transaction = Activity.find(activity[0])
-      # and get description
-      history[index].push(transaction.description)
-      # and get the user_id who charged/paid
-      first_name = User.find(transaction.user_id).first_name
-      last_name = User.find(transaction.user_id).last_name
-      profile_pic = User.find(transaction.user_id).profile_pic
-      history[index].push(first_name)
-      history[index].push(last_name)
-      history[index].push(transaction.user_id)
-      history[index].push(profile_pic)
+    # if it is a settlement i.e. in is_expense is false in transaction
+      history[index].push(transaction.description) # new line added
+  
+      if transaction.is_expense
+        # and get description
+        # history[index].push(transaction.description) # this works
+        # and get the user_id who charged/paid
+        first_name = User.find(transaction.user_id).first_name
+        last_name = User.find(transaction.user_id).last_name
+        # profile_pic = User.find(transaction.user_id).profile_pic # this works
+        history[index].push(first_name)
+        history[index].push(last_name)
+        # history[index].push(transaction.user_id) # this works
+        # history[index].push(profile_pic) # this works
+      else
+    # then we want to get the name opposite of yours from the shares table
+        settlement_between = Share.where(activity_id: activity[0]) # new line added
+        if settlement_between[0].user_id == user_id
+          first_name = User.find(settlement_between[1].user_id).first_name
+          last_name = User.find(settlement_between[1].user_id).last_name
+          history[index].push(first_name)
+          history[index].push(last_name)
+        else
+          first_name = User.find(settlement_between[0].user_id).first_name
+          last_name = User.find(settlement_between[0].user_id).last_name
+          history[index].push(first_name)
+          history[index].push(last_name)
+        end
+      end
+
+      profile_pic = User.find(transaction.user_id).profile_pic # new line added
+      history[index].push(transaction.user_id) # new line added
+      history[index].push(profile_pic) # new line added
+      # history[index].push(settlement_between)
     end
+
     # order by most recent
     # user id is history[index][4]
     history
@@ -135,11 +163,12 @@ class ApplicationController < ActionController::API
       end
     end
     # owing
+    # we need to check wher amount owed is zero
+    # if zero do not add in the array 
     owing_array = []
     owing.each do | key, value |
       value.unshift(key)
-      
-    owing_array.push(value)
+      owing_array.push(value) unless value[1] == 0
     end
 
   owing_array

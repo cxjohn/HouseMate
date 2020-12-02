@@ -1,6 +1,7 @@
 import './ActivityListItem.scss';
 import { Card, Feed, Divider } from 'semantic-ui-react'
 import  Moment  from 'react-moment';
+import CurrencyFormat from 'react-currency-format';
 
 function ActivityListItem (props) {
 
@@ -10,19 +11,19 @@ function ActivityListItem (props) {
 
       if (props.description === "settled") {
         return  <span className='activity_block'>
-                  <p><b>{props.first_name} {props.last_name}</b> settled up with you</p>
+                  <p><b className='settle_up'>{props.first_name} {props.last_name}</b> settled up with you</p>
                 </span>
       } else if (props.amount < 0) {
       return <span className='activity_block'>
               <p><b>You</b> paid for {props.description} </p>
               <p><b>{props.first_name} {props.last_name}</b> owes you 
-                <p className='money_green'>${-props.amount/100}</p>
+                <p className='money_green'><CurrencyFormat value={-props.amount/100} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true}/></p>
               </p>
              </span>
       } else {
       return <span className='activity_block'>
               <div className="payment"><b>{props.first_name} {props.last_name}</b> paid for <b>{props.description}</b></div>
-                <p>You owe <p className='money_red'>${props.amount/100}</p>
+                <p>You owe <p className='money_red'><CurrencyFormat value={props.amount/100} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true}/></p>
                 </p>
              </span>
       }
@@ -30,13 +31,13 @@ function ActivityListItem (props) {
 
       if (props.description === "settled") {
         return  <span className='activity_block'>
-                  <p> You settled with <b>{props.first_name} {props.last_name}</b></p>
+                  <p> You settled with <b className='owe'>{props.first_name} {props.last_name}</b></p>
                 </span>
       } else {
        return <span className='activity_block'>
                 <div className="payment"><b>You</b> paid for <b>{props.description}</b></div>
                 <p>You are owed 
-                  <p className='money_green'>${-props.amount/100}</p>
+                  <p className='money_green'><CurrencyFormat value={-props.amount/100} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true}/></p>
                 </p>
               </span>
       }

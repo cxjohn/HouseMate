@@ -62,18 +62,6 @@ ActiveRecord::Schema.define(version: 2020_11_26_045029) do
     t.index ["user_id"], name: "index_shares_on_user_id"
   end
 
-  create_table "transactions", force: :cascade do |t|
-    t.string "description"
-    t.integer "amount_cents"
-    t.boolean "is_expense", default: true
-    t.bigint "user_id"
-    t.bigint "group_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_transactions_on_group_id"
-    t.index ["user_id"], name: "index_transactions_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -94,6 +82,4 @@ ActiveRecord::Schema.define(version: 2020_11_26_045029) do
   add_foreign_key "memberships", "users"
   add_foreign_key "shares", "activities"
   add_foreign_key "shares", "users"
-  add_foreign_key "transactions", "groups"
-  add_foreign_key "transactions", "users"
 end

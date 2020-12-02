@@ -3,6 +3,7 @@ import './SettlementFormListItem.scss';
 import { Card, Image } from 'semantic-ui-react';
 import Button from '../Button';
 import '../Button.scss';
+import CurrencyFormat from 'react-currency-format';
 
 
 function SettlementFormListItem(props) {
@@ -13,7 +14,7 @@ function SettlementFormListItem(props) {
       return  <section className="card_settle">
                 <aside className="card_settle_aside">
                   <p>You owe {props.first_name} {props.last_name}</p>
-                  <p className='money_red'>${props.amount}</p>
+                  <p className='money_red'><CurrencyFormat value={props.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true}/></p>
                 </aside>
                 <Button settle onClick={settle}>Settle</Button>
               </section>
@@ -24,7 +25,8 @@ function SettlementFormListItem(props) {
       return  <section className="card_settle">
                 <aside className="card_settle_aside">
                   <p>{props.first_name} {props.last_name} owes you</p>
-                  <p className='money_green'>${-props.amount}</p>
+                  <p className='money_green'><CurrencyFormat value={-props.amount} displayType={'text'} thousandSeparator={true} prefix={'$'} decimalScale={2} fixedDecimalScale={true}/></p>
+
                 </aside>
                 <Button notify onClick={notify}>Notify</Button>
               </section>

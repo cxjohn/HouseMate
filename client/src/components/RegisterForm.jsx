@@ -41,6 +41,21 @@ function register () {
     return
   } else {
 
+    const number = Math.floor(Math.random()*5)
+    let image = "images/avatars/rabbit.png"
+
+    if (number === 0) {
+      image = "images/avatars/dog.png"
+    } else if (number === 1) {
+      image = "images/avatars/fox.png"
+    } else if (number === 2) {
+      image = "images/avatars/rabbit.png"
+    } else if (number === 3) {
+      image = "images/avatars/panda.png"
+    } else if (number === 4) {
+      image = "images/avatars/cat.png"
+    }
+
     const userData = {
       first_name: formState.firstName,
       last_name: formState.lastName,
@@ -48,7 +63,7 @@ function register () {
       // password_digest: formState.password
       password: formState.password,
       password_confirmation: formState.passwordConfirmation,
-      profile_pic: "images/avatars/rabbit.png"
+      profile_pic: image
     }
 
     setFormState({...formState, error: "" })

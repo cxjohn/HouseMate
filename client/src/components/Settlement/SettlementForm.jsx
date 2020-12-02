@@ -21,8 +21,8 @@ function SettlementForm(props) {
     {/* loop over props.settle */}
     {
       props.settle.map(data => 
-                
-        <SettlementFormListItem 
+
+          <SettlementFormListItem 
           key={data[0]}
           user_id={data[0]}
           amount={data[1]/100}
@@ -32,7 +32,7 @@ function SettlementForm(props) {
           onSettle={props.onSettle}
           onNotify={props.onNotify}
         />
-      )
+        )
     }
     { 
       props.settle.length === 0 &&

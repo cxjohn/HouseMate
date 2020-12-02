@@ -50,6 +50,15 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
         font-size: 1.75em;
         vertical-align: middle;
       }
+
+      i.fa.fa-plus-square {
+        padding-left: .145em;
+      }
+
+      i.fa.fa-home {
+        font-size: 2em;
+      }
+
       i.fa.add_selected {
         color: $col-sean-red;
       }
@@ -63,6 +72,9 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
         color: $col-sean-red;
       }
       i.fa.friend_selected {
+        color: $col-sean-red;
+      }
+      i.fa.group_selected {
         color: $col-sean-red;
       }
 

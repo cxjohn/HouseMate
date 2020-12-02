@@ -24,9 +24,10 @@
 // }
 
 #camera_icon {
-  position: absolute;
+  position: sticky;
   // margin: 0 0 15rem 5.5rem;
   font-size: 1.5rem;
-  top: 15.5rem;
+  bottom: 20rem;
+  padding-bottom: 11rem;
   left: 15.5rem;
 }
