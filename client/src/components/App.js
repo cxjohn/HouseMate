@@ -181,7 +181,7 @@ function App() {
         }
       })
     .then(({ data }) => {
-      console.log("settlement ADDED: ", data)
+      // console.log("settlement ADDED: ", data)
 
       setState(prev => ({ 
         ...prev,
@@ -206,9 +206,19 @@ function App() {
     .then(({ data }) => {
 
       console.log("email: ", data)
+      setState(prev => ({ 
+        ...prev,
+        // friends_list: data.friends_list,
+        // message: data.message,
+        message: data.message,
+        popup: true
+      }))
 
     })
-    .then(()=> transition(DASHBOARD))
+    .then(()=> {
+      transition(SETTLE);
+      setState(prev => ({ ...prev, popup: false }));
+    })
     .catch(error => console.log(error))
 
   }
@@ -226,7 +236,7 @@ function App() {
         }
       })
     .then(({ data }) => {
-      console.log("friend ADDED: ", data)
+      // console.log("friend ADDED: ", data)
 
       setState(prev => ({ 
         ...prev,
@@ -423,7 +433,14 @@ function App() {
         {/* {mode === DASHBOARD && <Header />} */}
         {mode === ADD && <Header />}
         {mode === FRIENDSIES && <Header />}
-        {mode === SETTLE && <Header />}
+        {mode === SETTLE && <><Header
+          />
+          <Status 
+              message={state.message}
+              popup={state.popup}
+          />
+          </>
+        }
         {
           mode === FRIEND && <><Header 
           />
@@ -462,13 +479,13 @@ function App() {
         {
           mode === HOME && <><img 
               id="logo"
-              src="https://i.imgur.com/5HK16TW.png"
+              src="images/housematelogo.png"
               width={150}>
             </img>
-            <Status
+            {/* <Status
               message={state.message}
               popup={state.popup}
-            />
+            /> */}
             </>
         }
         {

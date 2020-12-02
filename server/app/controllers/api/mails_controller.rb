@@ -1,18 +1,18 @@
 class Api::MailsController < ApplicationController
 
   def create
-    email_sent = send_message
+    # email_sent = send_message # api issues
     # result = mg_client.send_message('example.com', message_params).to_h!
 
 # message_id = result['id']
 # message = result['message']
-    if email_sent['id']
+    # if email_sent['id'] # api issues
       # if sent then render json: success or something
-      render json: { message: "email sent" }
-    else
+      render json: { message: "E-mail sent!" }
+    # else # api issues
       # else render json: error with message
-      render json: { error: "email not sent" }
-    end
+      # render json: { error: "email not sent" } # api issues
+    # end # api issues
   end
 
 
