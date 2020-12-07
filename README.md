@@ -3,6 +3,7 @@
 <img src="https://github.com/csjohn1/HouseMate/blob/master/docs/housematelogo.png?raw=true" alt="logo" width=150/>
 
 ## Overview
+For this final group project, we created an app called HouseMate that allows users to split expenses. They can add other users and split one-time expenses with one or more users, or they can form groups for more regular expense sharing. Users can view a summary of their owed/owing status as well as recent activity on the home page. On the settlements page, they can settle any amount owed and notify any users with amounts owed to them.
 ## Getting Started
 1. Install dependencies for the rails server using ```bundle install``` inside the server folder.
 2. Install dependencies for the react client using ```npm install``` inside the client folder.
