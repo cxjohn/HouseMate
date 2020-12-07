@@ -21,3 +21,4 @@
 
 ## Acknowledgement
 ## Contributors
+[Sean Kim](https://github.com/skimmilk1172), [Chris John](https://github.com/csjohn1), [Rajdeep Ghatore](https://github.com/rghatore)
