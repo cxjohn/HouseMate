@@ -1,12 +1,5 @@
 @import '../../sass/_variables';
 
-// .footer {
-//   display: flex;
-//   width: 100%;
-//   background-color: $col-sean-lavender;
-//   color: white;
-// }
-
 $sean-theme-background-darker: darken($sean-theme-background, 100%);
 $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
 
@@ -14,23 +7,16 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
 
   display: flex;
   flex-direction: column;
-  // height: -2.5rem;
   height: -2.5rem;
   background: $sean-theme-background-slightly-dark;
   border-top: 2px solid lightgrey;
   position: sticky;
-  // bottom: -2.5em;
   width: 100%;
   bottom: 0;
-  // left: 0;
   transition: transform .3s
               cubic-bezier(0, .52, 0, 1);
-  // overflow: initial;
-  // overflow: scroll;
 
   z-index: 1000;
-  // margin-bottom: -2.5em;
-// }
  
   .mobile-bottom-bar {
     width: 100%;
@@ -83,9 +69,7 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
 }
 
 #dashboard_footer.hidden {
-  // transform: translate3d(0, -5rem, 0);
   transform: translate3d(0, 2.5rem, 0);
-  // overflow: hidden;
   background-color:  $sean-theme-background-slightly-dark;
 }
 
@@ -93,36 +77,3 @@ $sean-theme-background-slightly-dark: darken($sean-theme-background, 5%);
   transform: translate3d(0, 0rem, 0);
   background-color: $sean-theme-background-slightly-dark;
 }
-// #bottom_footer {
-//   width: 25vw;
-//   height: 25vh;
-//   background-color: #FFE600;
-//   position: fixed;
-//   bottom: 0;
-//   right: 0;
-//   transition: transform .3s
-//               cubic-bezier(0, .52, 0, 1);
-//   overflow: scroll;
-//   z-index: 1000;
-// }
- 
-// #bottom_footer.hidden {
-//   transform: translate3d(-10vh, 0, 0);
-//   background-color: lightyellow;
-// }
- 
-// #bottom_footer.visible {
-//   transform: translate3d(0vh, 0, 0);
-//   overflow: hidden;
-//   background-color: pink;
-// }
- 
-// #bottom_footer h2 a {
-//   color: #333;
-//   margin-left: 15px;
-//   text-decoration: none;
-// }
- 
-// #bottom_footer h2 a:hover {
-//   text-decoration: underline;
-// }

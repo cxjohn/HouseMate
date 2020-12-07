@@ -68,4 +68,5 @@
 
 Share.destroy_all
 Activity.destroy_all
+Membership.destroy_all
 

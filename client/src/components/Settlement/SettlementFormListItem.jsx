@@ -18,7 +18,6 @@ function SettlementFormListItem(props) {
                 </aside>
                 <Button settle onClick={settle}>Settle</Button>
               </section>
-    // fix the zero amount condition in the back end 
     } else if (props.amount === 0) {
       return null
     } else
@@ -34,9 +33,7 @@ function SettlementFormListItem(props) {
 
 
   function notify () {
-
     return props.onNotify()
-
   }
 
   function settle () {
@@ -57,21 +54,10 @@ function SettlementFormListItem(props) {
   return (
     <>
       <Card.Content>
-        {/* <Image
-          floated='right'
-          size='mini'
-          src='images/logo192.png'
-        /> */}
-        {/* <Button split className=".button_test"></Button> */}
         <Card.Header>
-          {/* {props.first_name} */}
           {settleCard()}
-          {/* <Button split className=".button_test"></Button> */}
         </Card.Header>
-        {/* <Card.Meta>Total balance of:</Card.Meta> */}
         <Card.Description>
-          {/* {status()} */}
-          {/* Steve wants to add you to the group <strong>best friends</strong> */}
         </Card.Description>
       </Card.Content>
     </>

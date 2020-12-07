@@ -25,45 +25,31 @@ function FriendDropdown(props) {
   function split() {
     const selected_group_name = document.getElementById('raj').firstChild.innerHTML;
     const users = [props.user.id];
-    //for (const value of values) {
-    //   // console.log("name: ", value.innerText)
-    //   // console.log("id: ", value.attributes.value.value)
-    //   // console.log("desc ", formState.description)
-    //   // console.log("amount ", formState.amount)
-    //  users.push(Number(value.attributes.value.value))
-    // }
+   
     // loop through  props.groups_list
     const group = props.groups_list.filter(group => group[1] === selected_group_name)[0]
-    // console.log(`group id`, group[0]);
-    // group_id = 
-    // check where name = 'selected_group_name'
-    // get the corresponding id
-
-
+   
     const splitData = {
       users,
       description: formState.description,
       amount_owed: formState.amount / users.length,
-      // amount_owed: Math.round((formState.amount / users.length) * 10000) / 10000,
+
       amount: formState.amount,
       user_id: props.user.id,
       is_expense: true,
       group_id: group[0]
     }
-    console.log('vegan', splitData);
 
     return props.onSplit(splitData);
   };
 
   const dropdown = () => {
-    console.log('dropdown');
     return props.onClick();
   };
   
   return (
     <>
       
-      {/* <Button update onClick={dropdown} >Groups</Button> */}
       <Button split onClick={dropdown} >Friends</Button>
       <h3>Split among groups</h3>
       <span className="test form"></span>

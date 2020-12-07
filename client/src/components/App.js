@@ -1,6 +1,5 @@
 import { Fragment, useEffect } from 'react';
 import './App.scss';
-// import Message from './component/Message'
 import AuthBar from './AuthBar';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -42,9 +41,6 @@ const SPLIT_SUCCESSFUL = "SPLIT_SUCCESSFUL";
 
 function App() {
 
-  // let [form, setForm] = useState(null);
-  // let [data, setData] = useState([])
-
   const {
     state,
     setState
@@ -64,7 +60,6 @@ function App() {
         // send user data required to register a new user in the db
         headers: { Authorization: `Bearer ${token}` }
       }).then(({ data }) => {
-        console.log("USER FOUND: ", data)
         // store token
         setState(prev => ({ 
           ...prev,
@@ -85,7 +80,6 @@ function App() {
 
   function display(event) {
     
-    // console.log("clicked")
     // check if event.target contains Login text
     if (event.target.innerHTML === 'Login') {
       // setState({ ...state, form: "login" })
@@ -131,7 +125,6 @@ function App() {
     // Promise.all([
       axios({
       method: 'POST',
-      // url: 'http://localhost:3000/api/users',
       url: '/api/activities',
       // send user data required to register a new user in the db
       data: { 
@@ -141,7 +134,6 @@ function App() {
         }
       })
     .then(({ data }) => {
-      console.log("transaction ADDED: ", data)
 
       setState(prev => ({
         ...prev,
@@ -165,7 +157,6 @@ function App() {
     // Promise.all([
       axios({
       method: 'POST',
-      // url: 'http://localhost:3000/api/users',
       url: '/api/activities',
       // send user data required to register a new user in the db
       data: { 
@@ -175,7 +166,6 @@ function App() {
         }
       })
     .then(({ data }) => {
-      // console.log("settlement ADDED: ", data)
 
       setState(prev => ({ 
         ...prev,
@@ -222,7 +212,6 @@ function App() {
     // Promise.all([
       axios({
       method: 'POST',
-      // url: 'http://localhost:3000/api/users',
       url: '/api/friends',
       // send user data required to register a new user in the db
       data: { 
@@ -230,7 +219,6 @@ function App() {
         }
       })
     .then(({ data }) => {
-      // console.log("friend ADDED: ", data)
       if(data.error) {
         setState(prev => ({ 
           ...prev,
@@ -258,23 +246,18 @@ function App() {
     transition(LOADING)
 
     if (userData.error) {
-      // setState(prev => ({ ...prev, popup: true, error: true, message: userData.error}));
       transition(REGISTER);
-      // setState(prev => ({ ...prev, popup: false, error: false }));
 
     } else {
       axios({
         method: 'POST',
-        // url: 'http://localhost:3000/api/users',
         url: '/api/users',
         // send user data required to register a new user in the db
         data: { user: userData }
       })
       .then(({ data }) => {
-        // console.log("USER ADDED: ", data)
         // store token
         localStorage.setItem("token", data.jwt)
-        // do anything with user data?
         setState(prev => ({ 
           ...prev,
           user: data.user,
@@ -289,7 +272,6 @@ function App() {
         transition(DASHBOARD);
         setState(prev => ({ ...prev, popup: false }));
       })
-        // update state at the front end like we did for scheduler?
         // transition to user dashboard
       .catch( ({data})  => {
         console.log(data);
@@ -310,15 +292,13 @@ function App() {
     transition(LOADING);
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/login',
-      //url: '/login',
+      url: 'api/login',
       // send user data required to register a new user in the db
       data: userData
     }).then(({ data }) => {
       console.log("USER Logged In: ", data)
       // store token
       localStorage.setItem("token", data.jwt)
-      // do anything with user data?
       setState(prev => ({ 
         ...prev,
         user: data.user,
@@ -342,7 +322,6 @@ function App() {
     // transition(LOADING);
     // recieve recent activity data from the server and update state
     // transition to user dashboard
-    // update state at the front end like we did for scheduler?
   }
 
   const group = (groupData) => {
@@ -351,7 +330,6 @@ function App() {
     // Promise.all([
       axios({
       method: 'POST',
-      // url: 'http://localhost:3000/api/users',
       url: '/api/groups',
       // send user data required to register a new user in the db
       data: { 
@@ -360,7 +338,6 @@ function App() {
         }
       })
     .then(({ data }) => {
-      console.log("group ADDED: ", data)
 
       setState(prev => ({
         ...prev,
@@ -377,28 +354,25 @@ function App() {
     .catch(error => console.log(error))
   }
 
-  const friendsies = () => {
-    transition(FRIENDSIES)
-  }
+  // const friendsies = () => {
+  //   transition(FRIENDSIES)
+  // }
 
-  const groupsies = () => {
-    transition(ADD)
-  }
+  // const groupsies = () => {
+  //   transition(ADD)
+  // }
 
   const update = (updateData) => {
     transition(LOADING)
     axios({
       method: 'PUT',
-      // url: 'http://localhost:3000/api/users',
       url: `/api/users/${state.user.id}`,
       // send user data required to register a new user in the db
       data: { user: updateData }
     })
     .then(({ data }) => {
-      // console.log("USER UPDATED: ", data)
       // store token
       // localStorage.setItem("token", data.jwt)
-      // do anything with user data?
       setState(prev => ({
         ...prev,
         user: data.user,
@@ -434,7 +408,7 @@ function App() {
         }
         {/* {mode === DASHBOARD && <Header />} */}
         {mode === ADD && <Header />}
-        {mode === FRIENDSIES && <Header />}
+        {/* {mode === FRIENDSIES && <Header />} */}
         {mode === SETTLE && <><Header
           />
           <Status 
@@ -469,11 +443,7 @@ function App() {
           />
           </>
         }
-        {/* <h2>{state.user && state.user.first_name}</h2> */}
-        {/* {mode === REGISTER && ( images/housematewhite.png
-        <div>
-          <Button back onClick={(event)  => display(event)}></Button>
-        )} */}
+       
       </header>
       <main onClick={() => setState(prev => ({...prev, visible: false}))}>
         {!state.visible && window.scrollTo(0,0)}
@@ -526,14 +496,14 @@ function App() {
             // onClick={friendsies}
             />
         }
-        {
+        {/* {
           mode === FRIENDSIES && <FriendDropdown
             user={state.user}
             onSplit={split}
             groups_list={state.groups_list}
             // onClick={groupsies}
             />
-        }
+        } */}
         {
           mode === SETTLE && <SettlementForm 
             user={state.user}
@@ -577,7 +547,7 @@ function App() {
                 </AuthBar></div>}
       {mode === DASHBOARD && <Footer home visible={state.visible} onClick={event => display(event)}/>}
       {mode === ADD && <Footer add visible={state.visible} onClick={event => display(event)}/>}
-      {mode === FRIENDSIES && <Footer add visible={state.visible} onClick={event => display(event)}/>}
+      {/* {mode === FRIENDSIES && <Footer add visible={state.visible} onClick={event => display(event)}/>} */}
       {mode === SETTLE && <Footer settle visible={state.visible} onClick={event => display(event)}/>}
       {mode === FRIEND && <Footer friend visible={state.visible} onClick={event => display(event)}/>}
       {mode === PROFILE && <Footer profile visible={state.visible} onClick={event => display(event)}/>}

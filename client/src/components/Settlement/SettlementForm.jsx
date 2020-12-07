@@ -4,8 +4,6 @@ import SettlementFormListItem from './SettlementFormListItem';
 import { Card, Image } from 'semantic-ui-react';
 import Button from '../Button';
 
-
-
 function SettlementForm(props) {
 
   const [formState, setFormState] = useState({
@@ -18,7 +16,6 @@ function SettlementForm(props) {
   <h2 className='settle_text'>Settle Here</h2>
     <Card.Group className="settlement">
     <Card>
-    {/* loop over props.settle */}
     {
       props.settle.map(data => 
 
@@ -40,9 +37,6 @@ function SettlementForm(props) {
               <Card.Header className='even_steven'>
                 <p>&#x1F389;  You are even-steven!  &#x1F389;</p>
               </Card.Header>
-              {/* <Card.Description>
-                <p>You are even-steven!</p>
-              </Card.Description> */}
           </Card.Content>
     }      
 

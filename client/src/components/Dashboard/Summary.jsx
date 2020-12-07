@@ -2,8 +2,6 @@ import './Summary.scss';
 import { Button, Card, Image } from 'semantic-ui-react';
 import CurrencyFormat from 'react-currency-format';
 
-
-
 function Summary(props) {
 
   function status () {
@@ -27,7 +25,6 @@ function Summary(props) {
                 <Image
                   id="summary_profile"
                   floated='right'
-                  //size='mini'
                   width={60}
                   src={props.user.profile_pic}
                 />
@@ -35,7 +32,6 @@ function Summary(props) {
                   Hello there,
                   <p>{props.user.first_name}!</p>
                 </Card.Header>
-                {/* <Card.Meta>Total balance of:</Card.Meta> */}
                 <Card.Description>
                   {status()}
                 </Card.Description>

@@ -48,7 +48,7 @@ function ActivityListItem (props) {
   return (
         <>
         <Feed.Event className="dashboard_activity">
-          <Feed.Label image={props.profile_pic} />
+          <Feed.Label className='activity_image' image={props.profile_pic} />
           <Feed.Content>
             <Moment fromNow>{props.date}</Moment>
             <Feed.Summary>
