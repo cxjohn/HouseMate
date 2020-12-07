@@ -1,5 +1,7 @@
 # HouseMate
+
 <img src="https://github.com/csjohn1/HouseMate/blob/master/docs/housematelogo.png?raw=true" alt="logo" width=150/>
+
 ## Overview
 ## Getting Started
 1. Install dependencies for the rails server using ```bundle install``` inside the server folder.
