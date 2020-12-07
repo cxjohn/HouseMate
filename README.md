@@ -1,6 +1,6 @@
 # HouseMate
 
-![HouseMate logo](project/client/public/images/housematelogo.png)
+![HouseMate logo](https://github.com/csjohn1/HouseMate/blob/master/docs/housematelogo.png?raw=true)
 ## Overview
 ## Getting Started
 1. Install dependencies for the rails server using ```bundle install``` inside the server folder.
