@@ -22,5 +22,11 @@ For this final group project, we created an app called HouseMate that allows use
 ## Screenshots
 
 ## Acknowledgement
+We would like to thank Lighthouse Labs for providing us with the knowledge base and skills to start this project. Mentor and staff support and encouragement helped us acheive our goals.
+
+<div>Animal avatars made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> 
+<br>
+
+  getSiblings function used for selecting all siblings for the event target provided by https://gomakethings.com/an-es6-way-to-get-all-sibling-elements-with-vanilla-js/
 ## Contributors
 [Sean Kim](https://github.com/skimmilk1172), [Chris John](https://github.com/csjohn1), [Rajdeep Ghatore](https://github.com/rghatore)
