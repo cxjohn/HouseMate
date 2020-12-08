@@ -23,6 +23,12 @@ For this final group project, we created an app called HouseMate that allows use
 * JSON Web Tokens
 
 ## Screenshots
+<img src="https://github.com/csjohn1/HouseMate/blob/master/docs/root.png?raw=true" alt="logo" width=300 align="left" />
+<img src="https://github.com/csjohn1/HouseMate/blob/master/docs/home.png?raw=true" alt="logo" width=300 align="left" />
+<img src="https://github.com/csjohn1/HouseMate/blob/master/docs/expense.png?raw=true" alt="logo" width=300 align="left" />
+<img src="https://github.com/csjohn1/HouseMate/blob/master/docs/add-group.png?raw=true" alt="logo" width=300 align="left" />
+<img src="https://github.com/csjohn1/HouseMate/blob/master/docs/add-friend.png?raw=true" alt="logo" width=300 align="left" />
+
 
 ## Acknowledgement
 We would like to thank Lighthouse Labs for providing us with the knowledge base and skills to start this project. Mentor and staff support and encouragement helped us acheive our goals.
