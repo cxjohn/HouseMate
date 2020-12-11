@@ -1,3 +1,5 @@
+//tests
+
 import { Fragment, useEffect } from 'react';
 import './App.scss';
 import AuthBar from './AuthBar';
@@ -22,6 +24,7 @@ import SettlementForm from "./Settlement/SettlementForm";
 import GroupForm from "./Group/GroupForm";
 import FriendDropdown from "./Transaction/FriendDropdown";
 import GroupDropdown from "./Transaction/GroupDropdown";
+
 
 const HOME = "HOME";
 const LOGIN = "LOGIN";

@@ -6,8 +6,20 @@ class Api::SessionsController < ApplicationController
     if user && user.authenticate(params[:password_digest])
       payload = {user_id: user.id}
       token = encode_token(payload)
+      ## remove password from user hash ##
+      clean_user = {
+        id: user.id,
+        first_name: user.first_name,
+        last_name: user.last_name,
+        email: user.email,
+        profile_pic: user.profile_pic,
+        theme: user.theme,
+        currency: user.currency,
+        default_house: user.default_house
+      }
+
       render json: {
-        user: user,
+        user: clean_user,
         jwt: token,
         history: recent_activity(user.id),
         summary: user_summary(user.id),
@@ -23,9 +35,24 @@ class Api::SessionsController < ApplicationController
   def auto_login
     if session_user
       # call recent_activity
+      # remove password_digest, created_at, updated_at from user
+      # user = { 
+        # id, first_name, last_name, email, profile_pic, theme, currency, default_house = 
+        # session_user.values_at(:id, :first_name, :last_name, :email, :profile_pic, :theme, :currency, :default_house )
+      # }
+      user = {
+        id: session_user.id,
+        first_name: session_user.first_name,
+        last_name: session_user.last_name,
+        email: session_user.email,
+        profile_pic: session_user.profile_pic,
+        theme: session_user.theme,
+        currency: session_user.currency,
+        default_house: session_user.default_house
+      }
 
       render json: {
-        user: session_user,
+        user: user,
         history: recent_activity(nil),
         summary: user_summary(nil),
         settle: settlement(nil),
