@@ -1,3 +1,5 @@
+//tests
+
 import { Fragment, useEffect } from 'react';
 import './App.scss';
 import AuthBar from './AuthBar';
