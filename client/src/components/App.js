@@ -315,20 +315,6 @@ function App() {
           friends_list: data.friends_list
         }))
       }
-      // data.jwt && localStorage.setItem("token", data.jwt)
-      /*setState(prev => ({ 
-        ...prev,
-        user: data.user,
-        history: data.history,
-        summary: data.summary,
-        settle: data.settle,
-        friends_list: data.friends_list,
-        popup: true
-      }))*/
-
-      // recieve recent activity data from the server and update state
-      // transition to user dashboard
-      // update state at the front end like we did for scheduler?
     })
     .then((error) => {
       if (error) {

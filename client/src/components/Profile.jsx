@@ -11,15 +11,6 @@ function Profile(props) {
     error: ""
   })
 
-  // function login() {
-
-  //   const userData = {
-  //     email: formState.email,
-  //     password_digest: formState.password
-  //   }
-  //   return props.onLogin(userData);
-  // }
-
   function logout() {
 
     return props.onLogout();
@@ -60,20 +51,11 @@ function Profile(props) {
     } else if (props.user.email !== formState.email) {
       return <Button update onClick={update}>Update</Button>
     }
-    
-
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
   }
-
-  // function camera() {
-  //   console.log("camera clicked!")
- 
-  //   return props.onClick;
-  // }
-
 
   return (
     <div className="user_profile">
@@ -112,22 +94,10 @@ function Profile(props) {
           required
         />
         
-      {/* { (props.user.first_name !== formState.first_name) &&
-      <Button update onClick={update}>Update</Button>}
-     {(props.user.last_name !== formState.last_name) &&
-      <Button update onClick={update}>Update</Button>}
-     {(props.user.email !== formState.email) &&
-      <Button update onClick={update}>Update</Button>}  */}
       { updateButton() }
-        {/* on clicking login, we want to receive email and password */}
-        {/* and the do something with it */}
-        {/* <Button update onClick={update}>Update</Button>
-        <Button logout onClick={logout}>Logout</Button> */}
-        {/* on clicking back, we should go to the previous visual state */}
-        {/* <Button back onClick={(event) => props.displayForm(event)}>Back</Button> */}
-      </form> 
-        <Button logout onClick={logout}>Logout</Button>
 
+      </form> 
+      <Button logout onClick={logout}>Logout</Button>
 
     </div>
   )

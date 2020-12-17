@@ -5,7 +5,6 @@ import './RegisterForm.scss';
 
 
 function RegisterForm (props) {
-  // const [firstName, setFirstName] = useState(props.name || "")
   const [formState, setFormState] = useState({
     firstName: props.firstName || "",
     lastName: props.lastName || "",
@@ -18,20 +17,12 @@ function RegisterForm (props) {
 
   const handleSubmit= (event) => {
     event.preventDefault();
-    // console.log("first name: ", formState.firstName);
-  // check if password matches password confirm and show error if not
-  // ensure fields are not empty
-  // send this data to the server
-  // show a loading bar/animation while waiting for server's response
-  // recieve a JWT - log in user
 }
 
 function register () {
 
   if (formState.password !== formState.passwordConfirmation) {
   // show errors on the page 
-    // console.log("ERROR!")
-    // const userData = { error: "Passwords do not match!" }
     setFormState({...formState, error: "Passwords do not match!" })
     return
   } else if (!formState.email || !formState.firstName || !formState.lastName || !formState.password) {
@@ -60,7 +51,6 @@ function register () {
       first_name: formState.firstName,
       last_name: formState.lastName,
       email: formState.email,
-      // password_digest: formState.password
       password: formState.password,
       password_confirmation: formState.passwordConfirmation,
       profile_pic: image
@@ -69,7 +59,6 @@ function register () {
     setFormState({...formState, error: "" })
 
     return props.onRegister(userData)
-    //console.log("user!" , userData);
   }
 
   // return props.onRegister(userData)
@@ -79,8 +68,6 @@ function register () {
 
 
   return(
-    // <div></div>
-    // <h3>Register Form</h3>
     <section className='whole_thing'>
       <div className='back'>
         <Button back onClick={(event) => props.display(event)}>Back</Button>
@@ -98,7 +85,6 @@ function register () {
         required
         autoFocus
         autoComplete="off"
-        // pattern="^\w+\s\w+$"
       />
       <span className="input"></span>
       <input 
@@ -108,7 +94,6 @@ function register () {
         onChange={event => setFormState({...formState, lastName: event.target.value })}
         required
         autoComplete="off"
-        // pattern="^\w+\s\w+$"
       />
       <span className="input"></span>
       <input 
@@ -124,7 +109,6 @@ function register () {
         className='password' 
         type='password' 
         placeholder='Password'
-        // id='password'
         value={formState.password}
         onChange={event => setFormState({...formState, password: event.target.value })}
         required
@@ -140,18 +124,11 @@ function register () {
         title="Password min 8 characters. At least one UPPERCASE and one lowercase letter" required pattern="(?=^.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$"
       />
   
-      {/* <button type='submit'>Register</button> */}
-      {/* on click we want to send data to the server using axios call*/}
-      {/* type="submit" value="Sign Up"  */}
-      {/* title="Submit form" class="icon-arrow-right" */}
       <Button register onClick={register}></Button>
 
       </form>
       </section>  
   )
-  
 };
 
-{/* <Button back onClick={(event) => props.displayForm(event)}>Back</Button> */}
 export default RegisterForm;
-
