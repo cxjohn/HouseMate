@@ -301,21 +301,44 @@ function App() {
     }).then(({ data }) => {
       console.log("USER Logged In: ", data)
       // store token
-      localStorage.setItem("token", data.jwt)
-      setState(prev => ({ 
+      if (!data.jwt) {
+        setState(prev => ({ ...prev, error: true }))
+        return true
+      } else {
+        localStorage.setItem("token", data.jwt)
+        setState(prev => ({ 
+          ...prev,
+          user: data.user,
+          history: data.history,
+          summary: data.summary,
+          settle: data.settle,
+          friends_list: data.friends_list
+        }))
+      }
+      // data.jwt && localStorage.setItem("token", data.jwt)
+      /*setState(prev => ({ 
         ...prev,
         user: data.user,
         history: data.history,
         summary: data.summary,
         settle: data.settle,
-        friends_list: data.friends_list
-      }))
+        friends_list: data.friends_list,
+        popup: true
+      }))*/
 
       // recieve recent activity data from the server and update state
       // transition to user dashboard
       // update state at the front end like we did for scheduler?
     })
-    .then(() => transition(DASHBOARD))
+    .then((error) => {
+      if (error) {
+        transition(LOGIN);
+      } else {
+        transition(DASHBOARD)
+      }
+      // state.popup ? transition(LOGIN) : transition(DASHBOARD);
+    })
+    .then(() => setState(prev => ({ ...prev, error: false })))
     .catch(error => console.log(error))
   }
 
@@ -475,7 +498,7 @@ function App() {
         />
         </>
         }
-        {mode === LOGIN && <LoginForm display={display} onLogin={login} />}
+        {mode === LOGIN && <LoginForm error={state.error} display={display} onLogin={login} />}
         {mode === LOADING && <Loading user={state.user} />}
         {/* {mode === DASHBOARD && <Loading user={state.user} message={"Loading"} />} */}
 
