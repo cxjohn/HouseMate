@@ -1,15 +1,19 @@
 import './Status.scss';
-import { Button, Header, Icon, Message, Modal } from 'semantic-ui-react'
 import { useState } from 'react';
+import classnames from 'classnames';
+
 
 function Status (props) {
 
-  // const open = props.visible;
   const [open, setOpen] = useState(props.popup ? true : false)
-  // const [open, setOpen] = useState(true)
-  
-  // props.modal && setOpen(false)
+  const [error, setError] = useState(props.error ? true : false)
 
+  const statusClass = classnames(
+    'popup',
+    { 
+      'popup_red': error
+    }
+  )
 
   setTimeout(() => {
     setOpen(false)
@@ -22,7 +26,7 @@ function Status (props) {
   }
 
   return (
-    open && <div className='popup'>{ status() }</div>
+    open && <div className={statusClass}>{ status() }</div>
     )
   }
 

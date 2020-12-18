@@ -5,8 +5,8 @@ class Api::FriendsController < ApplicationController
     friendship = params.require(:friend).permit(:user_id, :friends_list)
     new_friend = User.find_by(email: friendship[:friends_list])
     if new_friend
-      list = add_friend(friendship[:user_id], new_friend)
       if new_friend.id != friendship[:user_id]
+        list = add_friend(friendship[:user_id], new_friend)
         id = new_friend.id
         new_mate = User.find(friendship[:user_id])
         add_friend(id, new_mate)

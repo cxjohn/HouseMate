@@ -227,7 +227,8 @@ function App() {
           ...prev,
           // friends_list: data.friends_list,
           message: data.error,
-          popup: true
+          popup: true,
+          error: true
         }))        
       } else {
         setState(prev => ({ 
@@ -240,8 +241,9 @@ function App() {
     })
     .then(()=> {
       transition(FRIEND);
-      setState(prev => ({ ...prev, popup: false }));
+      // setState(prev => ({ ...prev, popup: false, error: false }));
     })
+    .then(() => setState(prev => ({ ...prev, popup: false, error: false})))
     .catch(error => console.log(error))
   }
 
@@ -435,6 +437,7 @@ function App() {
           <Status 
             message={state.message}
             popup={state.popup}
+            error={state.error}
           />
           </>
         }
