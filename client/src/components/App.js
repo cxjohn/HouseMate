@@ -115,12 +115,8 @@ function App() {
       transition(GROUP)
     } else if (event.target.classList.contains("fa-caret-up")) {
       setState(prev => ({...prev, visible: true}));
-      // transition(GROUP)
     } 
-      // else if (event.target.classList.contains("fa-camera")) {
-      // setState(prev => ({...prev, popup: true}));
-      // transition(GROUP)
-      // }
+
   };
 
   const split = (splitData) => {
@@ -138,21 +134,39 @@ function App() {
       })
     .then(({ data }) => {
 
-      setState(prev => ({
-        ...prev,
-        // user: data.user,
-        history: data.history,
-        summary: data.summary,
-        settle: data.settle
-        // popup: true
-      }))
+      // console.log("incorrect splitzies: ", data)
+      if (data.error) {
+        setState(prev => ({ 
+          ...prev,
+          message: "Please complete all fields",
+          popup: true,
+          error: true
+        }));
+
+        return true;
+      } else {
+        setState(prev => ({
+          ...prev,
+          history: data.history,
+          summary: data.summary,
+          settle: data.settle
+        }))
+      }
       
-      // transition(STATUS)
+    })
+    .then((error) => {
+      if (error) {
+        transition(ADD)
+      } else {
+        transition(DASHBOARD)
+      }
     })
     .then(() => {
-      transition(DASHBOARD)
+      setState(prev => ({ ...prev, popup: false, error: false}))
     })
-    .catch(error => console.log(error))
+    .catch(({errors}) => {
+      console.log("error: ", errors)
+    });
   }
 
   const settle = (settleData) => {
@@ -172,7 +186,6 @@ function App() {
 
       setState(prev => ({ 
         ...prev,
-        // user: data.user,
         history: data.history,
         summary: data.summary,
         settle: data.settle
@@ -421,8 +434,18 @@ function App() {
           </>
         }
         {/* {mode === DASHBOARD && <Header />} */}
-        {mode === ADD && <Header />}
+        {/* {mode === ADD && <Header />} */}
         {/* {mode === FRIENDSIES && <Header />} */}
+        {
+          mode === ADD && <><Header 
+          />
+          <Status 
+            message={state.message}
+            popup={state.popup}
+            error={state.error}
+          />
+          </>
+        }
         {mode === SETTLE && <><Header
           />
           <Status 

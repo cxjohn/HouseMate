@@ -1,10 +1,13 @@
 class Api::ActivitiesController < ApplicationController
   def create
     activity = Activity.new(activity_params)
-    if activity.save
+    shares = params.require(:share).permit(:amount_owed, users: [])
+    group = params.require(:group).permit(:group_id, :amount, :user_id)
+
+    if activity.save && (shares[:users].length > 1 || group[:group_id])
       # add shares
       # check if it's from groups or friends
-      group = params.require(:group).permit(:group_id, :amount, :user_id)
+      # group = params.require(:group).permit(:group_id, :amount, :user_id) #commenting
 
       if group[:group_id]
         # we have the group id
@@ -48,7 +51,7 @@ class Api::ActivitiesController < ApplicationController
         }
 
       else
-        shares = params.require(:share).permit(:amount_owed, users: [])
+        # shares = params.require(:share).permit(:amount_owed, users: []) # commenting
         # shares[:users] will give us an array of users
         # we will loop through this array and add a share
         # test = 'users: '
@@ -83,7 +86,8 @@ class Api::ActivitiesController < ApplicationController
         }
       end
     else
-      render json: {errors: activity.errors.full_messages}, status: :not_acceptable
+      # render json: {errors: activity.errors.full_messages}, status: :not_acceptable
+      render json: {error: activity.errors.full_messages}
     end
   end
 
